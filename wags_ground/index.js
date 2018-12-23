@@ -3,9 +3,11 @@ const path = require('path')
 const bodyParser = require('body-parser')
 // const session = require('express-session')
 const cors = require('cors')
-const mongoose = require('mongoose')
+//const mongoose = require('mongoose')
 const errorHandler = require('errorhandler')
 const config = require('../config/config')
+
+const mongo = require('mongodb')
 
 // Configure mongoose's promise to global promise
 mongoose.promise = global.Promise
@@ -25,14 +27,9 @@ app.use(express.static(path.join(__dirname, 'public')))
 if(!isProduction)
 	app.use(errorHandler())
 
-// Mongoose Config
-mongoose.connect(isProduction ? config.db_prod:config.db_dev, { useNewUrlParser: true })
-if(!isProduction)
-	mongoose.set('debug', true)
-
 // Models & Routes
-require('./models/Users')
-require('./config/passport')
+//require('./models/Users')
+//require('./config/passport')
 app.use(require('./routes'))
 
 if(!isProduction) {
