@@ -1,0 +1,28 @@
+{
+  "name": "wags_web",
+  "version": "1.0.0",
+  "description": "Wags non-profit website.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sky": "cd wags-sky && npm run start:dev",
+    "ground": "cd wags_ground && npm run start:dev",
+    "start:dev": "concurrently --kill-others \"npm run ground\" \"npm run sky\"",
+    "sky_prod": "cd wags-sky && npm run start",
+    "ground_prod": "cd wags_ground && npm run start",
+    "start": "concurrently --kill-others \"npm run ground_prod\" \"npm run sky_prod\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/b5er/wags_web.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/b5er/wags_web/issues"
+  },
+  "homepage": "https://github.com/b5er/wags_web#readme",
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
+}
