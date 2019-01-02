@@ -1,8 +1,38 @@
 
 const express = require('express');
-let PetModel = require('../../models/wags_model');
+const PetModel = require('../../models/wags_model');
+const multer = require('multer');
+let mongoose = require('mongoose');
+//All files will be stored in uploads folder
 
-var router = express.Router();
+const storage = multer.diskStorage({
+	destination: function(req, file, cb) {
+		cb(null, './uploads/');
+	},
+	filename: function(req, file, cb) {
+		cb(null, Date.now() + file.originalname);
+	}
+});
+
+const fileFilter = (req, file, cb) => {
+	//reject a file
+	if (file.mimetype == 'image/jpeg' || file.mimetype == 'image/png'
+		|| file.mimetype == 'image/gif') {
+		cb(null, true);
+	} else {
+		cb(null, false);
+	}
+};
+
+const upload = multer({
+	storage: storage,
+	limits : {
+		fileSize: 1024 * 1024 * 10
+  },
+	fileFilter: fileFilter
+});
+
+const router = express.Router();
 
 //Find All
 router.get('/findAll', (req, res) => {
@@ -41,12 +71,20 @@ router.get('/:breed', (req, res) => {
 });
 
 //Create a new pet
-router.post('/add', function(req, res) {
+router.post('/add', upload.single('petImage'), function(req, res, next) {
 	if (!req.body) {
 		return res.status(400).send('Request body is missing');
 	}
 
-	let model = new PetModel(req.body);
+	let model = new PetModel({
+		_id : new mongoose.Types.ObjectId(),
+	  name : req.body.name,
+	  gender: req.body.gender,
+	  age: req.body.age,
+	  breeds: req.body.breeds,
+	  description: req.body.description,
+	  petImage: req.file.path
+	});
 
 	model.save().then(doc => {
 		if (!doc || doc.length === 0) {
@@ -76,7 +114,7 @@ router.put('/update', function(req, res) {
 //Delete an existing pet
 router.delete('/delete', function(req, res) {
   PetModel.findOneAndRemove({
-    age: req.query.age
+    _id: req.query.id
   }).then(doc => {
     res.json(doc);
   }).catch(err => {
