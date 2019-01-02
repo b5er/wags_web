@@ -2,29 +2,38 @@
 const express = require('express');
 let PetModel = require('../../models/wags_model');
 
-
 var router = express.Router();
 
+//Find All
+router.get('/findAll', (req, res) => {
+	PetModel.find({}).then(pets => {
+		var petMap = {};
 
+		pets.forEach(function(pet) {
+			petMap[pet._id] = pet;
+		});
+
+		res.json(petMap);
+		//res.send
+	}).catch(err => {
+		res.status(500).json(err);
+	});
+});
+
+//Find One 	Ex: localhost:8000/find?name=pebz
 router.get('/find', (req, res) => {
 
-	if (req.query.name) {
-		//localhost:8000/findAll?name=pebz&age=90
-		res.send(`You have requested the name of pet ${req.query.name}`);
-	} else {
-		res.send('You have requested to find all pets');
-
-		PetModel.find({}, function(err, pets) {
-			var petMap = {};
-
-			pets.forEach(function(pet) {
-				petMap[pet._id] = pet;
-			});
-
-			res.send(petMap);
-      return;
-		});
+	if (!req.query.name) {
+		return res.status(400).send('Missing url parameter: name')
 	}
+
+	PetModel.find({
+		name : req.query.name
+	}).then(doc => {
+		res.json(doc);
+	}).catch(err => {
+		res.status(500).json(err);
+	});
 });
 
 router.get('/:breed', (req, res) => {
