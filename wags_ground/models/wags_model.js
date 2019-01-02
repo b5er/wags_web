@@ -8,6 +8,7 @@ const password = 'pebz1980';
 mongoose.connect(`mongodb://${user}:${password}@${server}/${db}`);
 
 let PetSchema = new mongoose.Schema({
+  _id : mongoose.Schema.Types.ObjectId,
   name : String,
   gender: String,
   age: Number,
