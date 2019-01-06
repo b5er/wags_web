@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+// // Set your brand colors
+$columbia-blue: #c4d4e7;
+$v-light-malachite-green: #61e786;
+$davy-grey: #5a5766;
+$pineapple: #48435c;
+$ceil: #9792e3;
+
+
+// Update some of Bulma's component variables
+// $body-background-color: $light-purple;
+// $control-border-width: 2px;
+// $input-border-color: transparent;
+// $input-shadow: none;
+
+
+// Import only what you need from Bulma
+@import 'node_modules/bulma/bulma'; 
+@import 'node_modules/bulma/sass/utilities/functions';
+@import 'node_modules/bulma-extensions/bulma-badge/src/sass/index';
+@import 'node_modules/bulma-extensions/bulma-pricingtable/src/sass/index';
+// @import 'node_modules/bulma-extensions/bulma-tooltip/dist/bulma-tooltip';
+// @import 'node_modules/bulma-extensions/bulma-switch/dist/bulma-switch';
+// @import 'node_modules/bulma-extensions/bulma-pageloader/dist/bulma-pageloader';

@@ -10,8 +10,10 @@ import client from './apollo'
 
 // Styles
 // import './styles/css/core/core.min.css'
-// import './styles/css/routes/bundle_routes.min.css'
+import './styles/css/routes/bundle_routes.min.css'
 
+// Utils
+import * as serviceWorker from './utils/serviceWorker'
 
 render(
 	(

@@ -3,7 +3,7 @@ import { Route, Router, Switch/*, Redirect*/ } from 'react-router-dom'
 import createHistory from './history'
 
 // Utils
-import { checkAuth } from './utils/checkAuth'
+// import { checkAuth } from './utils/checkAuth'
 
 // Containers
 import LandPage from './containers/LandPage'
@@ -22,7 +22,7 @@ import ErrorPage from './containers/ErrorPage'
 const Routes = () => (
 	<Router history={createHistory}>
 		<Switch>
-			<Route exact path="/" component={LandingPage} />
+			<Route exact path="/" component={LandPage} />
 			<Route exact path="/*" render={props => {
 				return <ErrorPage {...props} />
 			}}/>

@@ -3,7 +3,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { withClientState } from 'apollo-link-state'
 import { HttpLink } from 'apollo-link-http'
 import { ApolloLink } from 'apollo-link'
-import { resolvers, defaults } from './resolvers'
+import { resolvers, defaults } from './graphql/resolvers'
 
 const typeDefs = `
 
