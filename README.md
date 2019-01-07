@@ -2,9 +2,10 @@
 Wags non-profit website.
 
 ## Installation
-`npm run install_ground`
-
-`npm run install_sky`
+```
+npm run install_ground
+npm run install_sky
+```
 
 ## How to use
 `npm run start:dev`
