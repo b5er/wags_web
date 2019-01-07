@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class ErrorPage extends Component {
+class Dashboard extends Component {
   render() {
     return (
       <div />
@@ -8,4 +8,4 @@ class ErrorPage extends Component {
   }
 }
 
-export default ErrorPage
+export default Dashboard

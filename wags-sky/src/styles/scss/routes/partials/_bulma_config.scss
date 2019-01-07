@@ -1,12 +1,13 @@
 @charset "utf-8";
 
-// // Set your brand colors
+// Brand colors
 $columbia-blue: #c4d4e7;
 $v-light-malachite-green: #61e786;
 $davy-grey: #5a5766;
 $pineapple: #48435c;
 $ceil: #9792e3;
 
+$family-sans-serif: 'Noto Sans', sans-serif;
 
 // Update some of Bulma's component variables
 // $body-background-color: $light-purple;
@@ -16,7 +17,7 @@ $ceil: #9792e3;
 
 
 // Import only what you need from Bulma
-@import 'node_modules/bulma/bulma'; 
+@import 'node_modules/bulma/bulma';
 @import 'node_modules/bulma/sass/utilities/functions';
 @import 'node_modules/bulma-extensions/bulma-badge/src/sass/index';
 @import 'node_modules/bulma-extensions/bulma-pricingtable/src/sass/index';

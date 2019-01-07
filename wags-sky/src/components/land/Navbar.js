@@ -16,16 +16,16 @@ class Navbar extends Component {
 		return (
 			<nav className="navbar is-spaced" role="navigation" aria-label="main navigation">
 			  <div className="navbar-brand">
-			    <a className="navbar-item" href="https://bulma.io">
+			    <div className="navbar-item pointer">
 			      <h1 className="title">
 			      	Wags
 			      </h1>
-			    </a>
+			    </div>
 
-			    <span 
-			    	role="button" 
-			    	className={`navbar-burger ${mobile ? 'is-active':''}`} 
-			    	aria-label="menu" 
+			    <span
+			    	role="button"
+			    	className={`navbar-burger ${mobile ? 'is-active':''}`}
+			    	aria-label="menu"
 			    	aria-expanded="false"
 			    	onClick={e => {
 			    		this.setState({ mobile: !mobile })
@@ -38,19 +38,40 @@ class Navbar extends Component {
 			  </div>
 			  <div className="navbar-menu">
 			  	<div className="navbar-end">
-			  		<div 
-			  			className={`navbar-item is-tab ${item === 'donate' ? 'is-active':''}`}
-			  			onMouseEnter={() => this.setState({ item: 'donate' })}
-			  			onMouseLeave={() => this.setState({ item: '' })}
-			  		>
-			  			Donate
-			  		</div>
-			  		<div 
-			  			className={`navbar-item is-tab ${item === 'signup' ? 'is-active':''}`}
+						<div
+							className={`navbar-item is-tab ${item === 'about' ? 'is-active':''} pointer`}
+							onMouseEnter={() => this.setState({ item: 'about' })}
+							onMouseLeave={() => this.setState({ item: '' })}
+						>
+							About
+						</div>
+						<div
+							className={`navbar-item is-tab ${item === 'contact' ? 'is-active':''} pointer`}
+							onMouseEnter={() => this.setState({ item: 'contact' })}
+							onMouseLeave={() => this.setState({ item: '' })}
+						>
+							Contact
+						</div>
+						<div
+							className={`navbar-item is-tab ${item === 'adopt' ? 'is-active':''} pointer`}
+							onMouseEnter={() => this.setState({ item: 'adopt' })}
+							onMouseLeave={() => this.setState({ item: '' })}
+						>
+							Adopt
+						</div>
+			  		<div
+			  			className={`navbar-item is-tab ${item === 'signup' ? 'is-active':''} pointer`}
 			  			onMouseEnter={() => this.setState({ item: 'signup' })}
 			  			onMouseLeave={() => this.setState({ item: '' })}
 			  		>
 			  			Sign up
+			  		</div>
+						<div
+			  			className={`navbar-item ${item === 'donate' ? 'is-active':''} pointer button is-rounded is-medium`}
+			  			onMouseEnter={() => this.setState({ item: 'donate' })}
+			  			onMouseLeave={() => this.setState({ item: '' })}
+			  		>
+			  			Donate
 			  		</div>
 			  	</div>
 			  </div>

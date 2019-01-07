@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 
-// Components 
+// Components
 import Hero from './Hero'
 import Value from './Value'
 import Social from './Social'
+import Adoption from './Adoption'
+import Donate from './Donate'
 import Footer from './Footer'
 
 
@@ -14,7 +16,8 @@ class Land extends Component {
 				<Hero />
 				<Value />
 				<Social />
-			{/*<Donate />*/}
+				<Adoption />
+			  <Donate />
 				<Footer />
 			</div>
 		)

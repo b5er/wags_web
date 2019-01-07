@@ -7,12 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "install_sky": "cd wags-sky && npm install",
     "install_ground": "cd wags_ground && npm install",
-    "sky_dev": "cd wags-sky && npm run start:dev",
+    "sky_dev": "cd wags-sky && npm run start",
     "ground_dev": "cd wags_ground && npm run start:dev",
-    "start:dev": "concurrently --kill-others \"npm run ground_dev\" \"npm run sky_dev\"",
+    "start:dev": "concurrently --kill-others \"npm run sky_dev\" \"npm run ground_dev\"",
     "sky_prod": "cd wags-sky && npm run start",
     "ground_prod": "cd wags_ground && npm run start",
-    "start:prod": "concurrently --kill-others \"npm run ground_prod\" \"npm run sky_prod\""
+    "start:prod": "concurrently --kill-others \"npm run sky_prod\" \"npm run ground_prod\""
   },
   "repository": {
     "type": "git",
