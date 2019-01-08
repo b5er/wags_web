@@ -1,0 +1,11 @@
+// Value
+.icon-padding {
+  padding: 1em;
+}
+
+// Footer
+.footer-item {
+  &:hover {
+    color: $v-light-malachite-green;
+  }
+}

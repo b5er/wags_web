@@ -4,14 +4,14 @@
 
 $dog-width: 100px;
 $interval: 200ms;
-$color-gray: #EAEBEC;
+$color-gray: #eaebec;
 $easing: ease-in-out;
 
 .ball {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  margin-top: 8rem;
+  margin-top: 12rem;
   z-index: 0;
 
   &:after {
@@ -82,8 +82,8 @@ $easing: ease-in-out;
     content: '';
     display: block;
     position: absolute;
-    width: 10%;
-    height: 100%;
+    width: 11%;
+    height: 32%;
     border-radius: 50%;
     background: rgba(black, 0.03);
     transform: translateY(-30%) scale(1.5);
@@ -405,8 +405,8 @@ $easing: ease-in-out;
   border-radius: 50%;
   background: white;
   position: absolute;
-  height: 100%;
-  width: 10%;
+  height: 32%;
+  width: 11%;
 }
 
 .dog-body, .dog-torso {

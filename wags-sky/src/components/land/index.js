@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 // Components
-import Hero from './Hero'
+import Hero from './hero'
 import Value from './Value'
 import Social from './Social'
 import Adoption from './Adoption'
