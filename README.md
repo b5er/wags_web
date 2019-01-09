@@ -14,6 +14,6 @@ npm run install_sky
 UNLICENSED.
 
 ## Links & credit
-Mikhail Sorokin
-
-Brian Servia
+- Mikhail Sorokin, https://github.com/MikhailSorokin
+- Brian Servia, https://github.com/b5er
+- David Khourshid, https://codepen.io/davidkpiano/pen/kkpGWj
