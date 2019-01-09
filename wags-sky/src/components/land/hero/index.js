@@ -27,11 +27,11 @@ class Hero extends Component {
                     </figure>
 									</div>
 									<div className="column is-12 has-text-centered">
-										<h1 className="title is-size-1 has-text-pineapple">
+										<h1 className="title is-size-1 fadein has-text-pineapple">
 											Where furry friends are made.
 										</h1>
 										<button
-											className="button is-green is-large is-rounded has-text-pineapple"
+											className="button is-green is-large is-rounded fadein light-shadow has-text-pineapple"
 											style={{ borderColor: '#61e786' }}
 											onClick={e => {
 												e.preventDefault()

@@ -32,6 +32,7 @@ class Footer extends Component {
 	                            </div>
 	                            <ul className="link-list">
 	                                <li><Link className="has-text-blue footer-item" to='/'>Developers</Link></li>
+																	<li><Link className="has-text-blue footer-item" to='/'>Volunteers</Link></li>
 																	<li><Link className="has-text-blue footer-item" to='/'>Request features</Link></li>
 	                            </ul>
 	                        </div>

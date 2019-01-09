@@ -40,7 +40,7 @@ class Donate extends Component {
                         style={{ backgroundColor: '#61e786 !important' }}
                         type="checkbox"
                         name="switchDonation"
-                        className="switch"
+                        className="switch is-info"
                         checked={checked}
                         onChange={e => this.setState({ checked: !checked })}
                       />

@@ -10,8 +10,8 @@ class Social extends Component {
 	render() {
 		return (
 			<section className="section is-medium is-ceil">
-				<h1 className="title has-text-centered">
-					Owners
+				<h1 className="title is-size-1 has-text-centered has-text-isabelline">
+					Success stories
 				</h1>
 				<div className="columns is-centered">
 					<div className="column is-2">
