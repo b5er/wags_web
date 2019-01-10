@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+
 // Navbar
 .donate-button {
   border-color: $pineapple;
@@ -41,6 +43,53 @@
 // Hero
 .couch-shadow {
   filter: drop-shadow(0 0 30px #333);
+}
+
+.door {
+  width: 300px;
+  height: 20px;
+  background-color: #803300;
+  margin-left: 45%;
+  transform: translateY(200px);
+  position: absolute;
+}
+
+.door-knob-shaft-top {
+  width: 10px;
+  height: 10px;
+  background-color: yellow;
+  position: absolute;
+  margin-top: -.65em;
+  margin-left: 2.3em;
+}
+
+.door-knob-handle-top {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: yellow;
+  position: absolute;
+  margin-top: -1.5em;
+  margin-left: 2em;
+}
+
+.door-knob-shaft-btm {
+  width: 10px;
+  height: 10px;
+  background-color: yellow;
+  position: absolute;
+  margin-top: 1.25em;
+  margin-left: 2.3em;
+}
+
+.door-knob-handle-btm {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: yellow;
+  position: absolute;
+  margin-top: 1.5em;
+  margin-left: 2em;
 }
 
 // Value
@@ -95,13 +144,23 @@
 }
 
 .adopt-description {
+  font-family: 'Lato';
+  font-weight: bold;
   padding: 1em;
   position: absolute;
   z-index: 2;
 }
 
+.is-divider-vertical[data-content]::after, .is-divider[data-content]::after {
+  background-color: $ceil;
+}
+
+.is-divider, .is-divider-vertical {
+  border-top: .1rem solid $pineapple;
+}
+
 // Donation
-$switch-focus: 1px solid $grey-light;
+
 
 // Footer
 .footer-item {

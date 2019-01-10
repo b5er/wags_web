@@ -43,6 +43,12 @@ class Hero extends Component {
 								</div>
 							</div>
 						</div>
+						{/*<div className="door">
+							<div className="door-knob-shaft-top" />
+							<div className="door-knob-handle-top" />
+							<div className="door-knob-shaft-btm" />
+							<div className="door-knob-handle-btm" />
+						</div>*/}
 					</div>
 				</div>
 			</section>

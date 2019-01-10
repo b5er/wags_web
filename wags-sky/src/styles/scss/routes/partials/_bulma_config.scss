@@ -10,6 +10,7 @@ $ceil: #9792e3;
 
 // Update colors
 $info: $v-light-malachite-green;
+$link: $davy-grey;
 
 // Font
 $family-sans-serif: 'Noto Sans', sans-serif;
@@ -20,6 +21,10 @@ $family-sans-serif: 'Noto Sans', sans-serif;
 // $input-border-color: transparent;
 // $input-shadow: none;
 
+// Switch
+$switch-focus: none;
+$switch-background: $columbia-blue;
+$switch-paddle-background: $isabelline;
 
 // Import only what you need from Bulma
 @import 'node_modules/bulma/bulma';

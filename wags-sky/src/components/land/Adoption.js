@@ -23,12 +23,16 @@ class Adoption extends Component {
 		const { picture } = this.state
 
 		return (
-			<section className="section is-medium is-ceil">
+			<section className="section is-ceil">
+				<h1 className="title is-size-1 has-text-centered has-text-isabelline">
+					You can have a success too
+				</h1>
+				<br />
 				<div className="columns">
 					<div className="column is-offset-2">
-							<h1 className="title is-size-3 has-text-isabelline">
+							<h3 className="title is-size-3 has-text-pineapple">
 								Adopt your best friend.
-							</h1>
+							</h3>
 					</div>
 					<div className="column is-2">
 						<div className="control has-icons-left has-icons-right">
@@ -44,7 +48,7 @@ class Adoption extends Component {
 					<div className="column is-2" />
 					<div className="column is-2">
 						<div
-							className={`card is-small-rounded pointer v-light-shadow ${picture === 'dog1' ? 'is-overflow-hidden':'badge is-badge-small'}`} data-badge=""
+							className={`card is-small-rounded pointer v-light-shadow ${picture === 'dog1' ? 'is-overflow-hidden':'badge is-badge-info is-badge-small'}`} data-badge=""
 							onMouseEnter={() => {
 								this.setState({ picture: 'dog1' })
 							}}
@@ -56,7 +60,7 @@ class Adoption extends Component {
 								{picture === 'dog1' ?
 									<div>
 										<div className="card is-small-rounded is-isabelline adopt-img-overlay adopt-img-fadein" />
-										<p className="has-text-pineapple adopt-description">
+										<p className="has-text-pineapple is-size-7 adopt-description">
 											Labrador
 											<br /><br />
 											Large, young
@@ -75,7 +79,7 @@ class Adoption extends Component {
 					</div>
 					<div className="column is-2">
 						<div
-							className={`card is-small-rounded pointer v-light-shadow ${picture === 'dog2' ? 'is-overflow-hidden':'badge is-badge-small'}`} data-badge=""
+							className={`card is-small-rounded pointer v-light-shadow ${picture === 'dog2' ? 'is-overflow-hidden':'badge is-badge-info is-badge-small'}`} data-badge=""
 							onMouseEnter={() => {
 								this.setState({ picture: 'dog2' })
 							}}
@@ -87,7 +91,7 @@ class Adoption extends Component {
 								{picture === 'dog2' ?
 									<div>
 										<div className="card is-small-rounded is-isabelline adopt-img-overlay adopt-img-fadein" />
-										<p className="has-text-pineapple adopt-description">
+										<p className="has-text-pineapple is-size-7 adopt-description">
 											Labrador
 											<br /><br />
 											Large, young
@@ -118,7 +122,7 @@ class Adoption extends Component {
 								{picture === 'dog3' ?
 									<div>
 										<div className="card is-small-rounded is-isabelline adopt-img-overlay adopt-img-fadein" />
-										<p className="has-text-pineapple adopt-description">
+										<p className="has-text-pineapple is-size-7 adopt-description">
 											Labrador
 											<br /><br />
 											Large, young
@@ -149,7 +153,7 @@ class Adoption extends Component {
 								{picture === 'dog4' ?
 									<div>
 										<div className="card is-small-rounded is-isabelline adopt-img-overlay adopt-img-fadein" />
-										<p className="has-text-pineapple adopt-description">
+										<p className="has-text-pineapple is-size-7 adopt-description">
 											Labrador
 											<br /><br />
 											Large, young
@@ -181,7 +185,7 @@ class Adoption extends Component {
 								{picture === 'dog5' ?
 									<div>
 										<div className="card is-small-rounded is-isabelline adopt-img-overlay adopt-img-fadein" />
-										<p className="has-text-pineapple adopt-description">
+										<p className="has-text-pineapple is-size-7 adopt-description">
 											Labrador
 											<br /><br />
 											Large, young
@@ -212,7 +216,7 @@ class Adoption extends Component {
 								{picture === 'dog6' ?
 									<div>
 										<div className="card is-small-rounded is-isabelline adopt-img-overlay adopt-img-fadein" />
-										<p className="has-text-pineapple adopt-description">
+										<p className="has-text-pineapple is-size-7 adopt-description">
 											Labrador
 											<br /><br />
 											Large, young
@@ -243,7 +247,7 @@ class Adoption extends Component {
 								{picture === 'dog7' ?
 									<div>
 										<div className="card is-small-rounded is-isabelline adopt-img-overlay adopt-img-fadein" />
-										<p className="has-text-pineapple adopt-description">
+										<p className="has-text-pineapple is-size-7 adopt-description">
 											Labrador
 											<br /><br />
 											Large, young
@@ -274,7 +278,7 @@ class Adoption extends Component {
 								{picture === 'dog8' ?
 									<div>
 										<div className="card is-small-rounded is-isabelline adopt-img-overlay adopt-img-fadein" />
-										<p className="has-text-pineapple adopt-description">
+										<p className="has-text-pineapple is-size-7 adopt-description">
 											Labrador
 											<br /><br />
 											Large, young
