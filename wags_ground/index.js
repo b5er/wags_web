@@ -1,4 +1,5 @@
 const express = require('express')
+const stripe = require('stripe')
 const path = require('path')
 const bodyParser = require('body-parser')
 const session = require('express-session')
