@@ -66,9 +66,10 @@ router.get('/find', (req, res) => {
 	});
 });
 
-router.get('/:breed', (req, res) => {
+//How to do queries
+/* router.get('/:breed', (req, res) => {
 	res.send(`You have requested a breed ${req.params.breed}`)
-});
+});*/
 
 //Create a new pet
 router.post('/add', upload.single('petImage'), function(req, res, next) {
