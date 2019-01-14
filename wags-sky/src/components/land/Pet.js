@@ -14,6 +14,7 @@ class Pet extends Component {
     /* Why it wasn't working before is because we were getting: 'uploads\test.jpg'
     * instead of 'uploads/test.jpg'. Needed to replace the back-slash with a forward slash...
     */
+    let groundPath = 'http://localhost:8000/'
     let updatedPicturePath = this.props.source.petImage.toString().replace("\\", '/')
     const {picture} = this.state
 
@@ -52,7 +53,7 @@ class Pet extends Component {
         null
       }
       <figure className="image is-4by3">
-        <img src={require(`../../assets/images/${updatedPicturePath}`)} className={`is-small-rounded ${picture === 'dog'? 'is-medium-blur':''}`} alt="dog"></img>
+        <img src={`${groundPath}${updatedPicturePath}`} className={`is-small-rounded ${picture === 'dog'? 'is-medium-blur':''}`} alt="dog"></img>
       </figure>
       </div>
     </div>
