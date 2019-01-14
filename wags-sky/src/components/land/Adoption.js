@@ -2,25 +2,19 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import Pet from './Pet'
 
-import Test from '../../assets/images/1.png'
-
 class Adoption extends Component {
 	constructor() {
 		super()
 		this.state = {
-			pets: {},
-			picture: ''
+			pets: []
 		}
 		this.getImages = this.getImages.bind(this);
 	}
-
-
 
 	getImages() {
     axios.get("http://localhost:8000/api/petQuery/findAll")
     .then(response =>
 			{
-			  //console.log(response.data)
 			  this.setState({pets : response.data})
 			}
     )
@@ -33,46 +27,9 @@ class Adoption extends Component {
 
 
 	render() {
-		const { pets, picture} = this.state
+		const { pets } = this.state
 
-		function newCard(name, age, picturePath){
-			return (
-					<div className="column is-2">
-						<div
-							className={`card is-small-rounded pointer v-light-shadow ${picture === 'dog' ? 'is-overflow-hidden':'badge is-badge-info is-badge-small'}`} data-badge=""
-							onMouseEnter={() => {
-								this.setState({ picture: 'dog' })
-							}}
-							onMouseLeave={e => {
-								this.setState({ picture: '' })
-							}}
-						>
-						<div className="card-image">
-							{picture === 'dog' ?
-								<div>
-									<div className="card is-small-rounded is-isabelline adopt-img-overlay adopt-img-fadein" />
-									<p className="has-text-pineapple is-size-7 adopt-description">
-										name
-										<br /><br />
-										age
-										<br />
-										Greenbelt, MD
-									</p>
-								</div>
-								:
-								null
-							}
-							<figure className="image is-4by3">
-							<img className={`is-small-rounded ${picture === 'dog'? 'is-medium-blur':''}`} src={Test} alt="dog" />
-							{/* Why does give me a compile error???
-								<img className={`is-small-rounded ${picture === 'dog'? 'is-medium-blur':''}`} src={require(`localhost:8000/${picturePath}`)} alt="dog" />*/
-							}
-							</figure>
-						</div>
-					</div>
-				</div>
-			);
-		}
+		console.log(pets)
 
 		return (
 			<section className="section is-ceil">
@@ -99,6 +56,8 @@ class Adoption extends Component {
 				<div className="columns is-multiline is-centered">
 					<div className="column is-2" />
 
+					{/*<img src={Test} className={`is-small-rounded`} alt="ah"></img>*/}
+
 					{
 						/*Put something here that will create the following:
 
@@ -107,12 +66,14 @@ class Adoption extends Component {
 					(3) - A figure for the image*/
 				  }
 
-					{
-						Object.keys(pets).forEach(function(key) {
-						    console.log(pets[key])
-								return newCard(pets[key].name, pets[key].age, pets[key].petImage)
-						})
-				  }
+  				<div className="column is-2">
+						{
+							Object.entries(pets).map(([key, value]) => (
+									<Pet key={key} source = {value} />
+							))
+					  }
+					</div>
+
 
 				</div>
 			</section>
