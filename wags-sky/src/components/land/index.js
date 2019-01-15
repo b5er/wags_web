@@ -12,7 +12,7 @@ import Footer from './Footer'
 class Land extends Component {
 	render() {
 		return (
-			<div>
+			<div className="is-ceil">
 				<Hero />
 				<Value />
 				<Social />
