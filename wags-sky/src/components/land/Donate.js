@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import CheckoutForm from './CheckoutForm'
 
 class Donate extends Component {
   constructor() {
@@ -139,6 +140,16 @@ class Donate extends Component {
                         e.preventDefault()
                       }}
                     >
+                    {/*
+                    						<StripeProvider apiKey="pk_test_33bnQoqpY5kIRpNDBZRq0Rx9">
+                    							<div className="example">
+                    					 			<h1>React Stripe Elements Example</h1>
+                    								<Elements>
+                    									<CheckoutForm />
+                    								 </Elements>
+                    							</div>
+                    						</StripeProvider>*/
+                  }
                       <h1 className="has-text-pineapple">
                         <strong>Donate</strong>
                       </h1>
