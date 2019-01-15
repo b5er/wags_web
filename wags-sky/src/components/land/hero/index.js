@@ -20,6 +20,7 @@ class Hero extends Component {
 				<div className="hero-body">
 					<div className="container">
 
+					 {/*TODO - Need to move where this is called. Donate button*/}
 						<StripeProvider apiKey="pk_test_33bnQoqpY5kIRpNDBZRq0Rx9">
 							<div className="example">
 					 			<h1>React Stripe Elements Example</h1>
