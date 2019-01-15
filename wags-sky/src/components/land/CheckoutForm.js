@@ -15,7 +15,6 @@ class CheckoutForm extends Component {
       body: token.id
     });
 
-    console.log("HAY");
     if (response.ok) console.log("Purchase Complete!")
   }
 
