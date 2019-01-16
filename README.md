@@ -8,7 +8,9 @@ npm run install_sky
 ```
 
 ## How to use
-`npm run start:dev`
+```
+npm run start:dev
+```
 
 ## License
 UNLICENSED.
