@@ -26,12 +26,11 @@ export default class CheckoutForm extends React.Component {
 
   render() {
     return (
-
       <StripeCheckout
           token={this.submit}
           amount={ parseInt(this.props.amount * 100)}
           stripeKey="pk_test_33bnQoqpY5kIRpNDBZRq0Rx9">
-          <button className="button is-rounded is-fullwidth is-medium light-shadow is-green" style={{ borderColor: '#61e786' }}>
+          <button disabled={this.props.amount <= 0} className="button is-rounded is-fullwidth is-medium light-shadow is-green" style={{ borderColor: '#61e786' }}>
             <h1 className="has-text-pineapple">
               <strong>Donate</strong>
             </h1>
