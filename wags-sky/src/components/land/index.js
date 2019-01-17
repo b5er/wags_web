@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import Hero from './hero'
 import Value from './Value'
 import Social from './Social'
-import Adoption from './Adoption'
+import Adoption from './adoption'
 import Donate from './Donate'
 import Footer from './Footer'
 
