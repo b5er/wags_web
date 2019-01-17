@@ -1,35 +1,38 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import Pet from './Pet'
 
 class Adoption extends Component {
 	constructor() {
 		super()
 		this.state = {
-			pets: []
+			pets: [], 
+			loading: true
 		}
-		this.getImages = this.getImages.bind(this);
 	}
-
-	getImages() {
-    axios.get("http://localhost:8000/api/petQuery/findAll")
-    .then(response =>
-			{
-			  this.setState({pets : response.data})
-			}
-    )
-	}
-
 
 	componentDidMount() {
 		window.addEventListener('load', this.getImages())
 	}
 
+	getImages = async () => {
+		try {
+			const images = await fetch('http://localhost:8000/api/petQuery/findAll')
+	    	
+	    	if(!images.ok)
+	    		console.error('Unable to fetch pet images.')
+	    	
+	    	const pets = await images.json()
+	    	
+	    	this.setState({ loading: false })
+	    	this.setState({ pets })
+	    } catch(e) {
+	    	console.log(e)
+	    }
+	}
 
 	render() {
-		const { pets } = this.state
 
-		console.log(pets)
+		const { pets, loading } = this.state
 
 		return (
 			<section className="section is-ceil">
@@ -53,28 +56,26 @@ class Adoption extends Component {
 					</div>
 					<div className="column is-2" />
 				</div>
-				<div className="columns is-multiline is-centered">
-					<div className="column is-2" />
-
-					{/*<img src={Test} className={`is-small-rounded`} alt="ah"></img>*/}
-
-					{
-						/*Put something here that will create the following:
-
-					(1) - A div for the column
-					(2) - A div for the card image - will fetch url from api call
-					(3) - A figure for the image*/
-				  }
-
-  				<div className="column is-2">
-						{
-							Object.entries(pets).map(([key, value]) => (
-									<Pet key={key} source = {value} />
-							))
-					  }
+				<div className="container">
+					<div className="columns is-centered">
+					<div className="column is-10">
+							<div className="box is-ceil">
+								<div className="columns is-multiline">
+									{!loading ? 
+										pets.map((petImg, key) => {
+											return ( 
+												<div key={key} className="column is-3">
+													<Pet source={petImg} />
+												</div>
+											)
+										})
+										: 
+										null // Todo: Make cards blurry with no dogs (i.e. slack when loading)
+									}
+								</div>
+							</div>
+						</div>
 					</div>
-
-
 				</div>
 			</section>
 		)

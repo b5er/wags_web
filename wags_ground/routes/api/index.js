@@ -1,5 +1,5 @@
 const express = require('express');
-var router = express.Router();
+const router = express.Router();
 
 //router.use('/pet_pictures', require('./image_fetch'));
 router.use('/petQuery', require('./petQueries'));
