@@ -5,7 +5,7 @@ const session = require('express-session')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const errorHandler = require('errorhandler')
-const config = require('../config/config')
+const config = require('./config/dev')
 
 // Configure mongoose's promise to global promise
 mongoose.promise = global.Promise
