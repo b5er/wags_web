@@ -21,15 +21,6 @@ class Hero extends Component {
 				<div className="hero-body">
 					<div className="container">
 
-					<StripeProvider apiKey="pk_test_33bnQoqpY5kIRpNDBZRq0Rx9">
-						<div className="example">
-							<h1>React Stripe Elements Example</h1>
-							<Elements>
-								<CheckoutForm />
-							 </Elements>
-						</div>
-					</StripeProvider>
-
 						<div className="columns">
 							<div className="column is-3 is-offset-1">
 								<Dog />

@@ -6,13 +6,20 @@ class Donate extends Component {
     super()
     this.state = {
       checked: true,
-      time: 'monthly'
+      time: 'monthly',
+      amount: '0'
     }
   }
 
+  getAmount = (e => {
+    this.setState({amount: e.target.value})
+    console.log(e.target.value)
+  })
+
+
   render() {
 
-    const { checked, time } = this.state
+    const { checked, time, amount } = this.state
 
     return (
       <section className="section is-medium is-ceil">
@@ -51,6 +58,7 @@ class Donate extends Component {
                             <form>
                               <div className="field">
                                 <input
+                                  onBlur ={this.getAmount}
                                   className="input is-pineapple has-text-centered"
                                   style={{ borderBottomWidth: '2px', borderColor: '#48435c', boxShadow: 'none', borderBottomColor: '#61e786', borderRadius: '0', width: '60%', fontSize: '1.5em', fontWeight: 'bold', padding: '1em .2em 0 .2em', color: 'white' }}
                                 />
@@ -101,7 +109,6 @@ class Donate extends Component {
                     </div>
                   </div>
 
-
                   <div className="column is-4">
                     <div className="card pointer light-shadow is-small-rounded is-pineapple">
                       <div className="card-content has-text-centered" style={{ padding: '1rem' }}>
@@ -134,26 +141,7 @@ class Donate extends Component {
 
                   <div className="column is-12" />
                   <div className="column is-12">
-                    <button
-                      className="button is-rounded is-fullwidth is-medium light-shadow is-green" style={{ borderColor: '#61e786' }}
-                      onClick={e => {
-                        e.preventDefault()
-                      }}
-                    >
-                    {/* TODO - Put Here
-                    						<StripeProvider apiKey="pk_test_33bnQoqpY5kIRpNDBZRq0Rx9">
-                    							<div className="example">
-                    					 			<h1>React Stripe Elements Example</h1>
-                    								<Elements>
-                    									<CheckoutForm />
-                    								 </Elements>
-                    							</div>
-                    						</StripeProvider>*/
-                  }
-                      <h1 className="has-text-pineapple">
-                        <strong>Donate</strong>
-                      </h1>
-                    </button>
+                    <CheckoutForm amount = {parseFloat(this.state.amount)} />
                   </div>
                 </div>
               </div>
