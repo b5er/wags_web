@@ -14,7 +14,7 @@ class Adoption extends Component {
 	constructor() {
 		super()
 		this.state = {
-			picture: null
+			picture: ''
 		}
 	}
 
@@ -52,7 +52,7 @@ class Adoption extends Component {
 							onMouseEnter={() => {
 								this.setState({ picture: 'dog1' })
 							}}
-							onMouseLeave={e => {
+							onMouseLeave={() => {
 								this.setState({ picture: '' })
 							}}
 						>
@@ -60,13 +60,15 @@ class Adoption extends Component {
 								{picture === 'dog1' ?
 									<div>
 										<div className="card is-small-rounded is-isabelline adopt-img-overlay adopt-img-fadein" />
-										<p className="has-text-pineapple is-size-7 adopt-description">
-											Labrador
-											<br /><br />
-											Large, young
-											<br />
-											Greenbelt, MD
-										</p>
+											<p className="has-text-pineapple is-size-7 adopt-description">
+												Breed: Labrador
+												<br />
+												Size: Large
+												<br />
+												Age: young
+												<br /><br />
+												Found: Greenbelt, MD
+											</p>
 									</div>
 									:
 									null
@@ -91,13 +93,15 @@ class Adoption extends Component {
 								{picture === 'dog2' ?
 									<div>
 										<div className="card is-small-rounded is-isabelline adopt-img-overlay adopt-img-fadein" />
-										<p className="has-text-pineapple is-size-7 adopt-description">
-											Labrador
-											<br /><br />
-											Large, young
-											<br />
-											Greenbelt, MD
-										</p>
+											<p className="has-text-pineapple is-size-7 adopt-description">
+												Breed: Labrador
+												<br />
+												Size: Large
+												<br />
+												Age: young
+												<br /><br />
+												Found: Greenbelt, MD
+											</p>
 									</div>
 									:
 									null
@@ -122,13 +126,15 @@ class Adoption extends Component {
 								{picture === 'dog3' ?
 									<div>
 										<div className="card is-small-rounded is-isabelline adopt-img-overlay adopt-img-fadein" />
-										<p className="has-text-pineapple is-size-7 adopt-description">
-											Labrador
-											<br /><br />
-											Large, young
-											<br />
-											Greenbelt, MD
-										</p>
+											<p className="has-text-pineapple is-size-7 adopt-description">
+												Breed: Labrador
+												<br />
+												Size: Large
+												<br />
+												Age: young
+												<br /><br />
+												Found: Greenbelt, MD
+											</p>
 									</div>
 									:
 									null
@@ -153,13 +159,15 @@ class Adoption extends Component {
 								{picture === 'dog4' ?
 									<div>
 										<div className="card is-small-rounded is-isabelline adopt-img-overlay adopt-img-fadein" />
-										<p className="has-text-pineapple is-size-7 adopt-description">
-											Labrador
-											<br /><br />
-											Large, young
-											<br />
-											Greenbelt, MD
-										</p>
+											<p className="has-text-pineapple is-size-7 adopt-description">
+												Breed: Labrador
+												<br />
+												Size: Large
+												<br />
+												Age: young
+												<br /><br />
+												Found: Greenbelt, MD
+											</p>
 									</div>
 									:
 									null
@@ -185,13 +193,15 @@ class Adoption extends Component {
 								{picture === 'dog5' ?
 									<div>
 										<div className="card is-small-rounded is-isabelline adopt-img-overlay adopt-img-fadein" />
-										<p className="has-text-pineapple is-size-7 adopt-description">
-											Labrador
-											<br /><br />
-											Large, young
-											<br />
-											Greenbelt, MD
-										</p>
+											<p className="has-text-pineapple is-size-7 adopt-description">
+												Breed: Labrador
+												<br />
+												Size: Large
+												<br />
+												Age: young
+												<br /><br />
+												Found: Greenbelt, MD
+											</p>
 									</div>
 									:
 									null
@@ -216,13 +226,15 @@ class Adoption extends Component {
 								{picture === 'dog6' ?
 									<div>
 										<div className="card is-small-rounded is-isabelline adopt-img-overlay adopt-img-fadein" />
-										<p className="has-text-pineapple is-size-7 adopt-description">
-											Labrador
-											<br /><br />
-											Large, young
-											<br />
-											Greenbelt, MD
-										</p>
+											<p className="has-text-pineapple is-size-7 adopt-description">
+												Breed: Labrador
+												<br />
+												Size: Large
+												<br />
+												Age: young
+												<br /><br />
+												Found: Greenbelt, MD
+											</p>
 									</div>
 									:
 									null
@@ -247,13 +259,15 @@ class Adoption extends Component {
 								{picture === 'dog7' ?
 									<div>
 										<div className="card is-small-rounded is-isabelline adopt-img-overlay adopt-img-fadein" />
-										<p className="has-text-pineapple is-size-7 adopt-description">
-											Labrador
-											<br /><br />
-											Large, young
-											<br />
-											Greenbelt, MD
-										</p>
+											<p className="has-text-pineapple is-size-7 adopt-description">
+												Breed: Labrador
+												<br />
+												Size: Large
+												<br />
+												Age: young
+												<br /><br />
+												Found: Greenbelt, MD
+											</p>
 									</div>
 									:
 									null
@@ -278,13 +292,15 @@ class Adoption extends Component {
 								{picture === 'dog8' ?
 									<div>
 										<div className="card is-small-rounded is-isabelline adopt-img-overlay adopt-img-fadein" />
-										<p className="has-text-pineapple is-size-7 adopt-description">
-											Labrador
-											<br /><br />
-											Large, young
-											<br />
-											Greenbelt, MD
-										</p>
+											<p className="has-text-pineapple is-size-7 adopt-description">
+												Breed: Labrador
+												<br />
+												Size: Large
+												<br />
+												Age: young
+												<br /><br />
+												Found: Greenbelt, MD
+											</p>
 									</div>
 									:
 									null
