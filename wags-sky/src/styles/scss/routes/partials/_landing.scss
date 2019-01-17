@@ -97,13 +97,25 @@
   padding: 1em;
 }
 
+@mixin phone {
+  @media only screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+@include phone {
+  .phone-hide {
+    opacity: 0;
+  }
+}
+
 // Adoption
 .adopt-img-overlay {
   z-index: 1;
   position: absolute;
   filter: opacity(40%);
   width: -webkit-fill-available;
-  height: 150px;
+  height: -webkit-fill-available;
 }
 
 .adopt-img-fadein {
@@ -146,7 +158,7 @@
 .adopt-description {
   font-family: 'Lato';
   font-weight: bold;
-  padding: 1em;
+  padding: 2em;
   position: absolute;
   z-index: 2;
 }

@@ -6,7 +6,7 @@ const session = require('express-session')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const errorHandler = require('errorhandler')
-//const config = require('../config/config')
+const config = require('../config/config')
 
 // Configure mongoose's promise to global promise
 mongoose.promise = global.Promise
@@ -31,7 +31,7 @@ app.use((req, res, next) => {
 
 //Tell express to use MiddleWare
 app.use(express.static(path.join(__dirname, 'public')))
-app.use(session({ secret: 'passport-tutorial', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }))
+app.use(session({ secret: config.passportSecret, cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }))
 
 if(!isProduction)
 	app.use(errorHandler())

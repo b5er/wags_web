@@ -3,7 +3,11 @@ import { Route, Router, Switch, Redirect } from 'react-router-dom'
 import createHistory from './history'
 
 // Utils
+import withTracker from './utils/withTracker'
 import { checkAuth } from './utils/auth'
+
+// Google Analytics
+import ReactGA from 'react-ga' // update to 2.5.6
 
 // Containers
 import LandPage from './containers/LandPage'
@@ -24,13 +28,27 @@ const AuthRoute = ({ component: Component, ...rest }) => (
 	)} />
 )
 
+ReactGA.initialize('UA-132230960-1')
+
 const Routes = () => (
 	<Router history={createHistory}>
 		<Switch>
-			<Route exact path="/" component={LandPage} />
-			<Route exact path="/adopt" component={AdoptPage} />
-			<Route exact path="/donate" component={DonatePage} />
-			<AuthRoute exact path="/dashboard" component={DashPage} />
+			<Route exact path="/" render={props => {
+				const GATrackedLand = withTracker(LandPage)
+				return <GATrackedLand {...props} />
+			}} />
+			<Route exact path="/adopt" render={props => {
+				const GATrackedAdopt = withTracker(AdoptPage)
+				return <GATrackedAdopt {...props} />
+			}} />
+			<Route exact path="/donate" render={props => {
+				const GATrackedDonate = withTracker(DonatePage)
+				return <GATrackedDonate {...props} />
+			}} />
+			<AuthRoute exact path="/dashboard" render={props => {
+				const GATrackedDash = withTracker(DashPage)
+				return <GATrackedDash {...props} />
+			}} />
 			<Route exact path="/*" render={props => {
 				return <ErrorPage {...props} />
 			}}/>

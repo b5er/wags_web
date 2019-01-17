@@ -1,5 +1,5 @@
-import React from 'react';
-import { render } from 'react-dom';
+import React from 'react'
+import { render } from 'react-dom'
 
 // Routes
 import Routes from './routes'
@@ -9,7 +9,6 @@ import { ApolloProvider } from 'react-apollo'
 import client from './apollo'
 
 // Styles
-// import './styles/css/core/core.min.css'
 import './styles/css/routes/bundle_routes.min.css'
 
 // Utils
@@ -25,4 +24,4 @@ render(
 )
 
 // Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorker.unregister()
