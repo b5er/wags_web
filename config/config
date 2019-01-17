@@ -1,7 +1,0 @@
-module.exports = {
-	server: 'ds113871.mlab.com:13871',
-	db: 'wags_db',
-	user: 'wags_pets', 
-	password: 'pebz1980',
-	passportSecret: 'passport-tutorial'
-}

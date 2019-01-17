@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const { user, password, server, db } = require('../../config/config')
+const { user, password, server, db } = require('../config/dev')
 
 
 mongoose.connect(`mongodb://${user}:${password}@${server}/${db}`, { useNewUrlParser: true })

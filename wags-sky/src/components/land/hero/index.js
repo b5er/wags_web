@@ -6,9 +6,6 @@ import Dog from './Dog'
 
 import Couch from '../../../assets/images/couch.svg'
 
-import CheckoutForm from '../CheckoutForm.js'
-
-import {Elements, StripeProvider} from 'react-stripe-elements';
 
 class Hero extends Component {
 

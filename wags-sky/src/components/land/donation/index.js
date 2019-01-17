@@ -1,20 +1,15 @@
 import React, { Component } from 'react'
 import CheckoutForm from './CheckoutForm'
 
-class Donate extends Component {
+class Donation extends Component {
   constructor() {
     super()
     this.state = {
       checked: true,
       time: 'monthly',
-      amount: '0'
+      amount: ''
     }
   }
-
-  getAmount = (e => {
-    this.setState({amount: e.target.value})
-    console.log(e.target.value)
-  })
 
 
   render() {
@@ -58,8 +53,12 @@ class Donate extends Component {
                             <form>
                               <div className="field">
                                 <input
-                                  onBlur ={this.getAmount}
                                   className="input is-pineapple has-text-centered"
+                                  onChange={e => {
+                                    if(!isNaN(e.target.value))
+                                      this.setState({ amount: e.target.value })}
+                                  }
+                                  value={amount}
                                   style={{ borderBottomWidth: '2px', borderColor: '#48435c', boxShadow: 'none', borderBottomColor: '#61e786', borderRadius: '0', width: '60%', fontSize: '1.5em', fontWeight: 'bold', padding: '1em .2em 0 .2em', color: 'white' }}
                                 />
                               </div>
@@ -110,7 +109,13 @@ class Donate extends Component {
                   </div>
 
                   <div className="column is-4">
-                    <div className="card pointer light-shadow is-small-rounded is-pineapple">
+                    <div
+                      className="card pointer light-shadow is-small-rounded is-pineapple"
+                      onClick={e => {
+                        e.preventDefault()
+                        this.setState({ amount: '10' })
+                      }}
+                    >
                       <div className="card-content has-text-centered" style={{ padding: '1rem' }}>
                         <h3 className="title is-size-5 has-text-isabelline">
                           $10
@@ -120,7 +125,13 @@ class Donate extends Component {
                   </div>
 
                   <div className="column is-4">
-                    <div className="card pointer light-shadow is-small-rounded is-pineapple">
+                    <div
+                      className="card pointer light-shadow is-small-rounded is-pineapple"
+                      onClick={e => {
+                        e.preventDefault()
+                        this.setState({ amount: '50' })
+                      }}
+                    >
                       <div className="card-content has-text-centered" style={{ padding: '1rem' }}>
                         <h3 className="title is-size-5 has-text-isabelline">
                           $50
@@ -130,7 +141,13 @@ class Donate extends Component {
                   </div>
 
                   <div className="column is-4">
-                    <div className="card pointer light-shadow is-small-rounded is-pineapple">
+                    <div
+                      className="card pointer light-shadow is-small-rounded is-pineapple"
+                      onClick={e => {
+                        e.preventDefault()
+                        this.setState({ amount: '100' })
+                      }}
+                    >
                       <div className="card-content has-text-centered" style={{ padding: '1rem' }}>
                         <h3 className="title is-size-5 has-text-isabelline">
                           $100
@@ -141,7 +158,7 @@ class Donate extends Component {
 
                   <div className="column is-12" />
                   <div className="column is-12">
-                    <CheckoutForm amount = {parseFloat(this.state.amount)} />
+                    <CheckoutForm amount={ parseFloat(amount) } />
                   </div>
                 </div>
               </div>
@@ -153,4 +170,4 @@ class Donate extends Component {
   }
 }
 
-export default Donate
+export default Donation

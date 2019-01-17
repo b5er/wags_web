@@ -5,7 +5,7 @@ import Hero from './hero'
 import Value from './Value'
 import Social from './Social'
 import Adoption from './adoption'
-import Donate from './Donate'
+import Donation from './donation'
 import Footer from './Footer'
 
 
@@ -17,7 +17,7 @@ class Land extends Component {
 				<Value />
 				<Social />
 				<Adoption />
-			  <Donate />
+			  <Donation />
 				<Footer />
 			</div>
 		)

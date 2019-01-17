@@ -6,7 +6,7 @@ const session = require('express-session')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const errorHandler = require('errorhandler')
-const config = require('../config/config')
+const config = require('./config/dev')
 
 // Configure mongoose's promise to global promise
 mongoose.promise = global.Promise
@@ -19,14 +19,14 @@ const app = express()
 
 app.use(cors())
 app.use(require('morgan')('dev'))
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static('uploads'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 
 app.use((req, res, next) => {
-	console.log(`${new Date().toString()} => ${req.originalUrl}`);
-	next();
+	console.log(`${new Date().toString()} => ${req.originalUrl}`)
+	next()
 });
 
 //Tell express to use MiddleWare
