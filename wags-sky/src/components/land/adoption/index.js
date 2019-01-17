@@ -5,7 +5,7 @@ class Adoption extends Component {
 	constructor() {
 		super()
 		this.state = {
-			pets: [], 
+			pets: [],
 			loading: true
 		}
 	}
@@ -16,13 +16,13 @@ class Adoption extends Component {
 
 	getImages = async () => {
 		try {
-			const images = await fetch('http://localhost:8000/api/petQuery/findAll')
-	    	
+			const images = await fetch('http://localhost:8000/api/pet/findAll')
+
 	    	if(!images.ok)
 	    		console.error('Unable to fetch pet images.')
-	    	
+
 	    	const pets = await images.json()
-	    	
+
 	    	this.setState({ loading: false })
 	    	this.setState({ pets })
 	    } catch(e) {
@@ -61,15 +61,15 @@ class Adoption extends Component {
 					<div className="column is-10">
 							<div className="box is-ceil">
 								<div className="columns is-multiline">
-									{!loading ? 
+									{!loading ?
 										pets.map((petImg, key) => {
-											return ( 
+											return (
 												<div key={key} className="column is-3">
 													<Pet source={petImg} />
 												</div>
 											)
 										})
-										: 
+										:
 										null // Todo: Make cards blurry with no dogs (i.e. slack when loading)
 									}
 								</div>
