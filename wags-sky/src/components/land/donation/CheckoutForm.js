@@ -34,7 +34,7 @@ class CheckoutForm extends Component {
       <StripeCheckout
           token={ this.submit }
           amount={ parseInt(amount * 100, 10) }
-          stripeKey="" // TODO: Mike will put public test key here.
+          stripeKey= "pk_test_TIPbVScZzYrE42xYFkhDxGsQ"
         >
           <button
             disabled={ !amount }
