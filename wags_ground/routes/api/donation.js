@@ -7,13 +7,13 @@ const router = express.Router()
 router.post('/charge', (req, res, next) => {
   const token = req.body.stripeToken // Using Express
   const amount = req.body.amount
-  console.log(typeof amount, amount)
+
   stripe.charges.create({
     amount,
     currency: 'usd',
     description: 'Wags - Greenbelt',
     source: token
-  }, function(err, charge) {
+  }, (err, charge) => {
     if (err) {
       res.send({
         success: false,
