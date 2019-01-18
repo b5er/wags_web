@@ -5,7 +5,6 @@ import StripeCheckout from 'react-stripe-checkout'
 class CheckoutForm extends Component {
 
   submit = async token => {
-    console.log(this.props.amount, typeof this.props.amount)
     try {
       const charge = await fetch('http://localhost:8000/api/donation/charge', {
                                   method: 'POST',
@@ -20,7 +19,6 @@ class CheckoutForm extends Component {
                                 })
       if(!charge.ok)
         console.error('Was not able to charge account.') // TODO: (Brian) animate form, to let user know.
-      console.log(await charge.json())
     } catch(e) {
       console.log(e)
     }
