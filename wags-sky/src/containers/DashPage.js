@@ -1,8 +1,8 @@
 import React from 'react'
 
-// Components 
+// Components
 import Dashboard from '../components/dashboard'
 
-const DashPage = landProps => <Dashboard />
+const DashPage = dashProps => <Dashboard />
 
 export default DashPage

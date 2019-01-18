@@ -2,6 +2,10 @@
 	color: $columbia-blue;
 }
 
+.has-text-blue-important {
+	color: $columbia-blue !important;
+}
+
 .has-text-green {
 	color: $v-light-malachite-green;
 }
@@ -12,6 +16,10 @@
 
 .has-text-isabelline {
 	color: $isabelline;
+}
+
+.has-text-isabelline-important {
+	color: $isabelline !important;
 }
 
 .has-text-pineapple {
