@@ -6,7 +6,7 @@ class Donation extends Component {
     super()
     this.state = {
       checked: true,
-      time: 'monthly',
+      time: 'day',
       amount: ''
     }
   }
@@ -73,13 +73,15 @@ class Donation extends Component {
                     <div className="has-text-centered">
                       <div className="buttons has-addons">
                         <span
-                          className={`button is-size-7 has-text-pineapple ${time === 'monthly' ? 'is-green is-selected':''}`}
+                          className={`button is-size-7 has-text-pineapple ${time === 'day' ? 'is-green is-selected':''}`}
                           onClick={e => {
                             e.preventDefault()
-                            this.setState({ time: 'monthly' })
+                            //TODO - Change to 'month'
+                            /*Testing - we will do daily for now.*/
+                            this.setState({ time: 'day' })
                           }}
                         >
-                          <strong>Monthly</strong>
+                          <strong>Daily</strong>
                         </span>
                         <span
                           className={`button is-size-7 has-text-pineapple ${time === 'one-time' ? 'is-green is-selected':''}`}
@@ -158,7 +160,7 @@ class Donation extends Component {
 
                   <div className="column is-12" />
                   <div className="column is-12">
-                    <CheckoutForm amount={ parseFloat(amount) } />
+                    <CheckoutForm amount={ parseFloat(amount) } recurrence = {time} />
                   </div>
                 </div>
               </div>

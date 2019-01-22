@@ -6,19 +6,39 @@ class CheckoutForm extends Component {
 
   submit = async token => {
     try {
-      const charge = await fetch('http://localhost:8000/api/donation/charge', {
-                                  method: 'POST',
-                                  headers: {
-                                    'Accept': 'application/json',
-                                    'Content-Type': 'application/json'
-                                  },
-                                  body: JSON.stringify({
-                                          stripeToken: token.id,
-                                          amount: parseInt(this.props.amount * 100, 10)
-                                        })
-                                })
-      if(!charge.ok)
-        console.error('Was not able to charge account.') // TODO: (Brian) animate form, to let user know.
+      if ((this.props.recurrence === 'one-time')) {
+        const charge = await fetch('http://localhost:8000/api/donation/charge', {
+                                    method: 'POST',
+                                    headers: {
+                                      'Accept': 'application/json',
+                                      'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({
+                                            stripeToken: token.id,
+                                            amount: parseInt(this.props.amount * 100, 10)
+                                          })
+                                  })
+        if(!charge.ok)
+          console.error('Was not able to charge account.') // TODO: (Brian) animate form, to let user know.
+      } else {
+        console.log(this.props.recurrence)
+        //Have to make a subscription plan if we are recurring
+        const subscription = await fetch('http://localhost:8000/api/donation/createSubscriptionPlan', {
+                                    method: 'POST',
+                                    headers: {
+                                      'Accept': 'application/json',
+                                      'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({
+                                            stripeToken: token.id,
+                                            amount: parseInt(this.props.amount * 100, 10),
+                                            interval: this.props.recurrence
+                                          })
+                                  })
+        if(!subscription.ok)
+          console.error('Was not able to charge account.') // TODO: (Brian) animate form, to let user know.
+      }
+
     } catch(e) {
       console.log(e)
     }

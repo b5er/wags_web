@@ -30,4 +30,36 @@ router.post('/charge', (req, res, next) => {
   })
 })
 
+router.post('/createSubscriptionPlan', (req, res, next) => {
+  console.log(req.body)
+  const token = req.body.stripeToken // Using Express
+  const amount = req.body.amount
+  const interval = 'day'
+
+  console.log(amount)
+  console.log(interval)
+
+  stripe.plans.create({
+    amount,
+    interval,
+    product: {
+      name: "Wags Special"
+    },
+    currency: "usd",
+  }, (err, plan) => {
+    console.log(plan)
+    if (err) {
+      res.send({
+        success: false,
+        message: 'Error'
+      })
+    } else {
+      res.send({
+        success: true,
+        message: 'Success'
+      })
+    }
+  })
+})
+
 module.exports = router
