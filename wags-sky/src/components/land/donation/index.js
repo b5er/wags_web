@@ -6,7 +6,7 @@ class Donation extends Component {
     super()
     this.state = {
       checked: true,
-      time: 'day',
+      interval: 'one-time',
       amount: ''
     }
   }
@@ -14,7 +14,7 @@ class Donation extends Component {
 
   render() {
 
-    const { checked, time, amount } = this.state
+    const { checked, interval, amount } = this.state
 
     return (
       <section className="section is-medium is-ceil">
@@ -73,24 +73,24 @@ class Donation extends Component {
                     <div className="has-text-centered">
                       <div className="buttons has-addons">
                         <span
-                          className={`button is-size-7 has-text-pineapple ${time === 'day' ? 'is-green is-selected':''}`}
+                          className={`button is-size-7 has-text-pineapple ${interval === 'month' ? 'is-green is-selected':''}`}
                           onClick={e => {
                             e.preventDefault()
                             //TODO - Change to 'month'
                             /*Testing - we will do daily for now.*/
-                            this.setState({ time: 'day' })
+                            this.setState({ interval: 'month' })
                           }}
                         >
-                          <strong>Daily</strong>
+                          <strong>Monthly</strong>
                         </span>
                         <span
-                          className={`button is-size-7 has-text-pineapple ${time === 'one-time' ? 'is-green is-selected':''}`}
+                          className={`button is-size-7 has-text-pineapple ${interval === 'one-time' ? 'is-green is-selected':''}`}
                           onClick={e => {
                             e.preventDefault()
-                            this.setState({ time: 'one-time' })
+                            this.setState({ interval: 'one-time' })
                           }}
                         >
-                          <strong>One-time</strong>
+                          <strong>One-Time</strong>
                         </span>
                       </div>
                     </div>
@@ -160,7 +160,7 @@ class Donation extends Component {
 
                   <div className="column is-12" />
                   <div className="column is-12">
-                    <CheckoutForm amount={ parseFloat(amount) } recurrence = {time} />
+                    <CheckoutForm amount={ parseFloat(amount) } interval = {interval} />
                   </div>
                 </div>
               </div>

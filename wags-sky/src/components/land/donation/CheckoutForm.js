@@ -6,7 +6,8 @@ class CheckoutForm extends Component {
 
   submit = async token => {
     try {
-      if ((this.props.recurrence === 'one-time')) {
+      const interval = this.props.interval
+      if ((interval === 'one-time')) {
         const charge = await fetch('http://localhost:8000/api/donation/charge', {
                                     method: 'POST',
                                     headers: {
@@ -21,7 +22,6 @@ class CheckoutForm extends Component {
         if(!charge.ok)
           console.error('Was not able to charge account.') // TODO: (Brian) animate form, to let user know.
       } else {
-        console.log(this.props.recurrence)
         //Have to make a subscription plan if we are recurring
         const subscription = await fetch('http://localhost:8000/api/donation/createSubscriptionPlan', {
                                     method: 'POST',
@@ -32,9 +32,9 @@ class CheckoutForm extends Component {
                                     body: JSON.stringify({
                                             stripeToken: token.id,
                                             amount: parseInt(this.props.amount * 100, 10),
-                                            interval: this.props.recurrence
-                                          })
-                                  })
+                                            interval
+                                    })
+                            })
         if(!subscription.ok)
           console.error('Was not able to charge account.') // TODO: (Brian) animate form, to let user know.
       }

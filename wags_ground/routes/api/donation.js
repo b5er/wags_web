@@ -22,10 +22,9 @@ router.post('/charge', (req, res, next) => {
     } else {
       res.send({
         success: true,
+        //body: JSON.stringify(plan),
         message: 'Success'
       })
-
-      // TODO: going to do something with charge soon.
     }
   })
 })
@@ -34,7 +33,7 @@ router.post('/createSubscriptionPlan', (req, res, next) => {
   console.log(req.body)
   const token = req.body.stripeToken // Using Express
   const amount = req.body.amount
-  const interval = 'day'
+  const interval = req.body.interval
 
   console.log(amount)
   console.log(interval)
@@ -47,7 +46,6 @@ router.post('/createSubscriptionPlan', (req, res, next) => {
     },
     currency: "usd",
   }, (err, plan) => {
-    console.log(plan)
     if (err) {
       res.send({
         success: false,
@@ -56,6 +54,7 @@ router.post('/createSubscriptionPlan', (req, res, next) => {
     } else {
       res.send({
         success: true,
+        //body: JSON.stringify(plan),
         message: 'Success'
       })
     }
