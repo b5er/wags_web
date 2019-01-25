@@ -109,7 +109,7 @@ class Navbar extends Component {
 							onClick={async e => {
 								e.preventDefault()
 								try {
-									await showAuth({ variables: { auth: true } })
+									await showAuth({ variables: { show: true, type: 'signup' } })
 								} catch(e) {
 									console.log(e)
 								}

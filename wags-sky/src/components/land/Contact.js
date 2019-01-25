@@ -12,13 +12,15 @@ class Contact extends Component {
     this.state = {
       name: '',
       email: '',
-      message: ''
+      message: '',
+      submit: false,
+      isLoading: false
     }
   }
 
   render() {
 
-    const { name, email, message } = this.state
+    const { name, email, message, submit, isLoading } = this.state
     const { getContact, showContact } = this.props
 
     return (
@@ -32,13 +34,14 @@ class Contact extends Component {
             } catch(e) {
               console.log(e)
             }
+            this.setState({ submit: false, isLoading: false })
           }}
         />
         <div className="modal-content">
           <div className="card is-pineapple is-small-rounded">
-            <div className="card-header light-shadow" style={{ backgroundColor: '#f1f7ed', borderRadius: '4px 4px 0 0', padding: '1em' }}>
+            <div className="card-header modal-header">
               <h1 className="title has-text-pineapple">
-                Reach out!
+                Contact us
               </h1>
             </div>
             <div className="card-content">
@@ -47,7 +50,11 @@ class Contact extends Component {
                     <form
                       onSubmit={e => {
                         e.preventDefault()
-                        
+                        this.setState({ submit: true })
+                        if(!name || !email || !message)
+                          return
+
+                        this.setState({ isLoading: false })
                       }}
                     >
                       <div className="field">
@@ -56,13 +63,21 @@ class Contact extends Component {
                         </label>
                         <div className="control">
                           <input
-                            className="input"
+                            className={`input ${name.length > 0 ? 'is-success':''} ${submit && !name ? 'is-danger':''}`}
                             type="text"
                             placeholder="John Doe"
                             onChange={e => this.setState({ name: e.target.value })}
                             value={name}
                           />
                         </div>
+                        {
+                          submit && !name ?
+                          <p className="help is-danger">
+                            A name is required
+                          </p>
+                          :
+                          null
+                        }
                       </div>
 
                       <div className="field">
@@ -71,7 +86,7 @@ class Contact extends Component {
                         </label>
                         <div className="control has-icons-left has-icons-right">
                           <input
-                            className="input is-danger"
+                            className={`input ${email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/) ? 'is-success':''} ${submit && !email ? 'is-danger':''}`}
                             type="email"
                             placeholder="john@gmail.com"
                             onChange={e => this.setState({ email: e.target.value })}
@@ -80,13 +95,31 @@ class Contact extends Component {
                           <span className="icon is-small is-left">
                             <i className="fas fa-envelope" />
                           </span>
-                          <span className="icon is-small is-right">
-                            <i className="fas fa-exclamation-triangle" />
-                          </span>
+                          {
+                            submit && (!email || !email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) ?
+                            <span className="icon is-small is-right">
+                              <i className="fas fa-exclamation-triangle has-text-danger" />
+                            </span>
+                            :
+                            null
+                          }
                         </div>
-                        <p className="help is-danger">
-                          This email is invalid
-                        </p>
+                        {
+                          submit && !email ?
+                          <p className="help is-danger">
+                            An email is required
+                          </p>
+                          :
+                          null
+                        }
+                        {
+                          submit && !email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/) && email.length > 0 ?
+                          <p className="help is-danger">
+                            This email is invalid
+                          </p>
+                          :
+                          null
+                        }
                       </div>
 
                       <div className="field">
@@ -95,17 +128,32 @@ class Contact extends Component {
                         </label>
                         <div className="control">
                           <textarea
-                            className="textarea"
+                            className={`textarea ${message.length > 0 ? 'is-success':''} ${submit && !message ? 'is-danger':''}`}
                             placeholder="How can we help you?"
                             onChange={e => this.setState({ message: e.target.value })}
                             value={message}
                           />
                         </div>
+                        {
+                          submit && !message ?
+                          <p className="help is-danger">
+                            A message is required
+                          </p>
+                          :
+                          null
+                        }
                       </div>
 
                       <div className="field">
                         <div className="control">
-                          <button className="button is-link">
+                          <button
+                            className={`button ${isLoading ? 'is-loading':''} is-link`}
+                            onClick={e => {
+                              if(!name || !email || !message)
+                                return
+                              this.setState({ isLoading: true })
+                            }}
+                          >
                             Submit
                           </button>
                         </div>
@@ -126,6 +174,7 @@ class Contact extends Component {
             } catch(e) {
               console.log(e)
             }
+            this.setState({ submit: false, isLoading: false })
           }}
         />
       </div>

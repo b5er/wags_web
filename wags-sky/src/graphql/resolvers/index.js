@@ -4,7 +4,11 @@
 export const defaults = {
 	about: false,
 	contact: false,
-	auth: false
+	auth: {
+		show: false,
+		type: 'login',
+		__typename: 'auth'
+	}
 }
 
 export const resolvers = {
@@ -17,7 +21,11 @@ export const resolvers = {
 			cache.writeData({ data: { contact } })
 			return null
 		},
-		toggleAuth: (_, { auth }, { cache }) => {
+		toggleAuth: (_, showAuth, { cache }) => {
+			const auth = {
+				...showAuth,
+				__typename: 'auth'
+			}
 			cache.writeData({ data: { auth } })
 			return null
 		}

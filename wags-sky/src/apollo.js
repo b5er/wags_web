@@ -16,13 +16,14 @@ const typeDefs = `
 	}
 
 	type Auth {
-		auth: Boolean!
+		show: Boolean!
+		type: String!
 	}
 
 	type Mutation {
 		toggleAbout(about: Boolean!): About
 		toggleContact(contact: Boolean!): Contact
-		toggleAuth(auth: Boolean!): Auth
+		toggleAuth(auth: Boolean!, type: String!): Auth
 	}
 
 	type Query {

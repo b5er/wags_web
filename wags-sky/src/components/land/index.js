@@ -10,7 +10,7 @@ import Footer from './Footer'
 
 import About from './About'
 import Contact from './Contact'
-import Auth from './Auth'
+import Auth from './auth'
 
 
 class Land extends Component {

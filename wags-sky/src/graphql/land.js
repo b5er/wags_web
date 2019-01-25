@@ -25,13 +25,16 @@ export const GET_CONTACT = gql`
 `
 
 export const SHOW_AUTH = gql`
-	mutation toggleAuth($auth: Boolean!) {
-		toggleAuth(auth: $auth) @client
+	mutation toggleAuth($show: Boolean!, $type: String!) {
+		toggleAuth(show: $show, type: $type) @client
 	}
 `
 
 export const GET_AUTH = gql`
 	{
-		auth @client
+		auth @client {
+			show
+			type
+		}
 	}
 `

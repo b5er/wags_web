@@ -25,7 +25,7 @@ class About extends Component {
         />
         <div className="modal-content">
           <div className="card is-pineapple is-small-rounded">
-            <div className="card-header light-shadow" style={{ backgroundColor: '#f1f7ed', borderRadius: '4px 4px 0 0', padding: '1em' }}>
+            <div className="card-header modal-header">
               <h1 className="title has-text-pineapple">
                 Who we are
               </h1>
