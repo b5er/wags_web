@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
 
+// Apollo
+import { compose, graphql } from 'react-apollo'
+import { SHOW_ABOUT, SHOW_CONTACT, SHOW_AUTH } from '../../../graphql/land'
+
+
 class Navbar extends Component {
 	constructor() {
 		super()
@@ -29,6 +34,7 @@ class Navbar extends Component {
 	render() {
 
 		const { item, mobile, scrollBeyond } = this.state
+		const { showAbout, showContact, showAuth } = this.props
 
 		return (
 			<nav
@@ -63,6 +69,14 @@ class Navbar extends Component {
 							className={`navbar-item is-tab ${scrollBeyond ? 'tab-fixed':''} ${item === 'about' ? 'is-active':''} pointer has-text-grey`}
 							onMouseEnter={() => this.setState({ item: 'about' })}
 							onMouseLeave={() => this.setState({ item: '' })}
+							onClick={async e => {
+								e.preventDefault()
+								try {
+									await showAbout({ variables: { about: true } })
+								} catch(e) {
+									console.log(e)
+								}
+							}}
 						>
 							About us
 						</div>
@@ -70,6 +84,14 @@ class Navbar extends Component {
 							className={`navbar-item is-tab ${scrollBeyond ? 'tab-fixed':''} ${item === 'contact' ? 'is-active':''} pointer has-text-grey`}
 							onMouseEnter={() => this.setState({ item: 'contact' })}
 							onMouseLeave={() => this.setState({ item: '' })}
+							onClick={async e => {
+								e.preventDefault()
+								try {
+									await showContact({ variables: { contact: true } })
+								} catch(e) {
+									console.log(e)
+								}
+							}}
 						>
 							Contact
 						</div>
@@ -84,7 +106,15 @@ class Navbar extends Component {
 			  			className={`navbar-item is-tab ${scrollBeyond ? 'tab-fixed':''} ${item === 'signup' ? 'is-active':''} pointer has-text-grey`}
 			  			onMouseEnter={() => this.setState({ item: 'signup' })}
 			  			onMouseLeave={() => this.setState({ item: '' })}
-			  		>
+							onClick={async e => {
+								e.preventDefault()
+								try {
+									await showAuth({ variables: { auth: true } })
+								} catch(e) {
+									console.log(e)
+								}
+							}}
+						>
 			  			Sign up
 			  		</div>
 						<div className="navbar-item" />
@@ -114,4 +144,8 @@ class Navbar extends Component {
 }
 
 
-export default Navbar
+export default compose(
+	graphql(SHOW_ABOUT, { name: 'showAbout' }),
+	graphql(SHOW_CONTACT, { name: 'showContact' }),
+	graphql(SHOW_AUTH, { name: 'showAuth' })
+)(Navbar)

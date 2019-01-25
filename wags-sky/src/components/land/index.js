@@ -8,17 +8,28 @@ import Adoption from './adoption'
 import Donation from './donation'
 import Footer from './Footer'
 
+import About from './About'
+import Contact from './Contact'
+import Auth from './Auth'
+
 
 class Land extends Component {
 	render() {
 		return (
 			<div className="is-ceil">
+
 				<Hero />
 				<Value />
 				<Social />
 				<Adoption />
 			  <Donation />
 				<Footer />
+
+				{/* Modals triggered by components above */}
+				<About />
+				<Contact />
+				<Auth />
+
 			</div>
 		)
 	}
