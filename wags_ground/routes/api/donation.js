@@ -22,7 +22,7 @@ router.post('/charge', (req, res, next) => {
     } else {
       res.send({
         success: true,
-        //body: JSON.stringify(plan),
+        //body: JSON.stringify(plan), - TODO - Send something to front-end to display (Mike)
         message: 'Success'
       })
     }
@@ -30,13 +30,9 @@ router.post('/charge', (req, res, next) => {
 })
 
 router.post('/createSubscriptionPlan', (req, res, next) => {
-  console.log(req.body)
   const token = req.body.stripeToken // Using Express
   const amount = req.body.amount
   const interval = req.body.interval
-
-  console.log(amount)
-  console.log(interval)
 
   stripe.plans.create({
     amount,
@@ -54,7 +50,7 @@ router.post('/createSubscriptionPlan', (req, res, next) => {
     } else {
       res.send({
         success: true,
-        //body: JSON.stringify(plan),
+        //body: JSON.stringify(plan), - TODO - Send something to front-end to display (Mike)
         message: 'Success'
       })
     }
