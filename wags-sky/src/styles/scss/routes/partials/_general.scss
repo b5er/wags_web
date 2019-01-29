@@ -79,8 +79,23 @@
     to   { opacity: 1; }
 }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+.has-right-small-padding {
+  padding-right: 1.5em;
+}
+
+.no-highlight {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+.right-paddingless {
+  padding-right: 0;
+}
+
+.small-left-padding {
+  padding-left: .25rem;
 }

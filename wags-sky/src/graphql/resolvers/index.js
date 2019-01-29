@@ -8,7 +8,8 @@ export const defaults = {
 		show: false,
 		type: 'login',
 		__typename: 'auth'
-	}
+	},
+	item: 'home'
 }
 
 export const resolvers = {
@@ -27,6 +28,10 @@ export const resolvers = {
 				__typename: 'auth'
 			}
 			cache.writeData({ data: { auth } })
+			return null
+		},
+		updateItem: (_, { item }, { cache }) => {
+			cache.writeData({ data: { item } })
 			return null
 		}
 	}

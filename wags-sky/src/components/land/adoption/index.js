@@ -18,16 +18,14 @@ class Adoption extends Component {
 		try {
 			const images = await fetch('http://localhost:8000/api/pet/findAll')
 
-	    	if(!images.ok)
-	    		console.error('Unable to fetch pet images.')
+	    if(!images.ok)
+	    	console.error('Unable to fetch pet images.')
 
-	    	const pets = await images.json()
-
-	    	this.setState({ loading: false })
-	    	this.setState({ pets })
-	    } catch(e) {
-	    	console.log(e)
-	    }
+	    const pets = await images.json()
+	    this.setState({ loading: false, pets })
+	  } catch(e) {
+	  	console.log(e)
+	  }
 	}
 
 	render() {
@@ -70,7 +68,7 @@ class Adoption extends Component {
 											)
 										})
 										:
-										null // Todo: Make cards blurry with no dogs (i.e. slack when loading)
+										null // TODO: Make cards blurry with no dogs (i.e. slack when loading)
 									}
 								</div>
 							</div>
