@@ -1,4 +1,5 @@
 const express = require('express')
+const stripe = require('stripe')
 const path = require('path')
 const bodyParser = require('body-parser')
 const session = require('express-session')
@@ -18,14 +19,14 @@ const app = express()
 
 app.use(cors())
 app.use(require('morgan')('dev'))
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static('uploads'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 
 app.use((req, res, next) => {
-	console.log(`${new Date().toString()} => ${req.originalUrl}`);
-	next();
+	console.log(`${new Date().toString()} => ${req.originalUrl}`)
+	next()
 });
 
 //Tell express to use MiddleWare

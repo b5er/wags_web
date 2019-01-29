@@ -40,6 +40,49 @@
   padding: 0 2rem !important;
 }
 
+  // Modal
+  .modal-header {
+    background-color: $isabelline;
+    border-radius: 4px 4px 0 0;
+    padding: 1em;
+  }
+
+  // About Modal
+
+  // Contact Us Modal
+
+  // Signup Modal
+  .modal-header-auth {
+    background-color: $isabelline;
+    border-radius: 4px 4px 0 0;
+    padding: 1em 1em 0 0;
+  }
+
+  .auth-tabs {
+    display: flex;
+    align-Items: center;
+    cursor: pointer;
+    border-bottom-color: $isabelline;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    justify-content: center;
+    margin-bottom: -1px;
+    padding: .5em 1em;
+    vertical-align: top;
+
+    &:hover {
+      font-weight: bold;
+      border-bottom-color: $davy-grey;
+      color: $davy-grey;
+    }
+
+    &.is-active {
+      font-weight: bold;
+      border-bottom-color: $davy-grey;
+      color: $davy-grey;
+    }
+  }
+
 // Hero
 .couch-shadow {
   filter: drop-shadow(0 0 30px #333);

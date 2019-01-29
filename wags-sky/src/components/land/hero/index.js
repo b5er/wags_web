@@ -6,7 +6,9 @@ import Dog from './Dog'
 
 import Couch from '../../../assets/images/couch.svg'
 
+
 class Hero extends Component {
+
 	render() {
 		return (
 			<section className="hero is-fullheight is-blue">
@@ -15,6 +17,7 @@ class Hero extends Component {
 				</div>
 				<div className="hero-body">
 					<div className="container">
+
 						<div className="columns">
 							<div className="column is-3 is-offset-1">
 								<Dog />

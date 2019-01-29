@@ -1,17 +1,20 @@
 import React, { Component } from 'react'
+import CheckoutForm from './CheckoutForm'
 
-class Donate extends Component {
+class Donation extends Component {
   constructor() {
     super()
     this.state = {
       checked: true,
-      time: 'monthly'
+      interval: 'one-time',
+      amount: ''
     }
   }
 
+
   render() {
 
-    const { checked, time } = this.state
+    const { checked, interval, amount } = this.state
 
     return (
       <section className="section is-medium is-ceil">
@@ -51,6 +54,11 @@ class Donate extends Component {
                               <div className="field">
                                 <input
                                   className="input is-pineapple has-text-centered"
+                                  onChange={e => {
+                                    if(!isNaN(e.target.value))
+                                      this.setState({ amount: e.target.value })}
+                                  }
+                                  value={amount}
                                   style={{ borderBottomWidth: '2px', borderColor: '#48435c', boxShadow: 'none', borderBottomColor: '#61e786', borderRadius: '0', width: '60%', fontSize: '1.5em', fontWeight: 'bold', padding: '1em .2em 0 .2em', color: 'white' }}
                                 />
                               </div>
@@ -65,22 +73,24 @@ class Donate extends Component {
                     <div className="has-text-centered">
                       <div className="buttons has-addons">
                         <span
-                          className={`button is-size-7 has-text-pineapple ${time === 'monthly' ? 'is-green is-selected':''}`}
+                          className={`button is-size-7 has-text-pineapple ${interval === 'month' ? 'is-green is-selected':''}`}
                           onClick={e => {
                             e.preventDefault()
-                            this.setState({ time: 'monthly' })
+                            //TODO - Change to 'month'
+                            /*Testing - we will do daily for now.*/
+                            this.setState({ interval: 'month' })
                           }}
                         >
                           <strong>Monthly</strong>
                         </span>
                         <span
-                          className={`button is-size-7 has-text-pineapple ${time === 'one-time' ? 'is-green is-selected':''}`}
+                          className={`button is-size-7 has-text-pineapple ${interval === 'one-time' ? 'is-green is-selected':''}`}
                           onClick={e => {
                             e.preventDefault()
-                            this.setState({ time: 'one-time' })
+                            this.setState({ interval: 'one-time' })
                           }}
                         >
-                          <strong>One-time</strong>
+                          <strong>One-Time</strong>
                         </span>
                       </div>
                     </div>
@@ -100,9 +110,14 @@ class Donate extends Component {
                     </div>
                   </div>
 
-
                   <div className="column is-4">
-                    <div className="card pointer light-shadow is-small-rounded is-pineapple">
+                    <div
+                      className="card pointer light-shadow is-small-rounded is-pineapple"
+                      onClick={e => {
+                        e.preventDefault()
+                        this.setState({ amount: '10' })
+                      }}
+                    >
                       <div className="card-content has-text-centered" style={{ padding: '1rem' }}>
                         <h3 className="title is-size-5 has-text-isabelline">
                           $10
@@ -112,7 +127,13 @@ class Donate extends Component {
                   </div>
 
                   <div className="column is-4">
-                    <div className="card pointer light-shadow is-small-rounded is-pineapple">
+                    <div
+                      className="card pointer light-shadow is-small-rounded is-pineapple"
+                      onClick={e => {
+                        e.preventDefault()
+                        this.setState({ amount: '50' })
+                      }}
+                    >
                       <div className="card-content has-text-centered" style={{ padding: '1rem' }}>
                         <h3 className="title is-size-5 has-text-isabelline">
                           $50
@@ -122,7 +143,13 @@ class Donate extends Component {
                   </div>
 
                   <div className="column is-4">
-                    <div className="card pointer light-shadow is-small-rounded is-pineapple">
+                    <div
+                      className="card pointer light-shadow is-small-rounded is-pineapple"
+                      onClick={e => {
+                        e.preventDefault()
+                        this.setState({ amount: '100' })
+                      }}
+                    >
                       <div className="card-content has-text-centered" style={{ padding: '1rem' }}>
                         <h3 className="title is-size-5 has-text-isabelline">
                           $100
@@ -133,16 +160,7 @@ class Donate extends Component {
 
                   <div className="column is-12" />
                   <div className="column is-12">
-                    <button
-                      className="button is-rounded is-fullwidth is-medium light-shadow is-green" style={{ borderColor: '#61e786' }}
-                      onClick={e => {
-                        e.preventDefault()
-                      }}
-                    >
-                      <h1 className="has-text-pineapple">
-                        <strong>Donate</strong>
-                      </h1>
-                    </button>
+                    <CheckoutForm amount={ parseFloat(amount) } interval = {interval} />
                   </div>
                 </div>
               </div>
@@ -154,4 +172,4 @@ class Donate extends Component {
   }
 }
 
-export default Donate
+export default Donation

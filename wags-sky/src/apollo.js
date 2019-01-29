@@ -7,12 +7,29 @@ import { resolvers, defaults } from './graphql/resolvers'
 
 const typeDefs = `
 
-	type Mutation {
+	type About {
+		about: Boolean!
+	}
 
+	type Contact {
+		contact: Boolean!
+	}
+
+	type Auth {
+		show: Boolean!
+		type: String!
+	}
+
+	type Mutation {
+		toggleAbout(about: Boolean!): About
+		toggleContact(contact: Boolean!): Contact
+		toggleAuth(auth: Boolean!, type: String!): Auth
 	}
 
 	type Query {
-
+		about: About
+		contact: Contact
+		auth: Auth
 	}
 
 `

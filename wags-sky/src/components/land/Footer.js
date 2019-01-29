@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
+// Apollo
+import { compose, graphql } from 'react-apollo'
+import { SHOW_ABOUT, SHOW_CONTACT } from '../../graphql/land'
+
+
 class Footer extends Component {
 	render() {
+
+		const { showAbout, showContact } = this.props
+
 		return (
 			<footer className="footer is-pineapple">
 	            <div className="container">
@@ -18,10 +26,44 @@ class Footer extends Component {
 	                                <h3 className="has-text-ceil">Organization</h3>
 	                            </div>
 	                            <ul className="link-list">
-																	<li><Link className="has-text-blue footer-item" to='/'>About us</Link></li>
-	                                <li><Link className="has-text-blue footer-item" to='/'>Adopt</Link></li>
-																	<li><Link className="has-text-blue footer-item" to='/'>Donate</Link></li>
-																	<li><Link className="has-text-blue footer-item" to='/'>Contact</Link></li>
+																	<li
+																		onClick={async e => {
+																			e.preventDefault()
+																			try {
+																				await showAbout({ variables: { about: true } })
+																			} catch(e) {
+																				console.log(e)
+																			}
+																		}}
+																	>
+																		<span className="has-text-blue footer-item pointer">
+																			About us
+																		</span>
+																	</li>
+	                                <li>
+																		<Link className="has-text-blue footer-item" to='/'>
+																			Adopt
+																		</Link>
+																	</li>
+																	<li
+																		onClick={async e => {
+																			e.preventDefault()
+																			try {
+																				await showContact({ variables: { contact: true } })
+																			} catch(e) {
+																				console.log(e)
+																			}
+																		}}
+																	>
+																		<span className="has-text-blue footer-item pointer">
+																			Contact
+																		</span>
+																	</li>
+																	<li>
+																		<Link className="has-text-blue footer-item" to='/'>
+																			Donate
+																		</Link>
+																	</li>
 	                            </ul>
 	                        </div>
 	                    </div>
@@ -31,9 +73,21 @@ class Footer extends Component {
 	                                <h3 className="has-text-ceil">Team</h3>
 	                            </div>
 	                            <ul className="link-list">
-	                                <li><Link className="has-text-blue footer-item" to='/'>Developers</Link></li>
-																	<li><Link className="has-text-blue footer-item" to='/'>Volunteers</Link></li>
-																	<li><Link className="has-text-blue footer-item" to='/'>Request features</Link></li>
+	                                <li>
+																		<Link className="has-text-blue footer-item" to='/'>
+																			Developers
+																		</Link>
+																	</li>
+																	<li>
+																		<Link className="has-text-blue footer-item" to='/'>
+																			Request features
+																		</Link>
+																	</li>
+																	<li>
+																		<Link className="has-text-blue footer-item" to='/'>
+																			Volunteers
+																		</Link>
+																	</li>
 	                            </ul>
 	                        </div>
 	                    </div>
@@ -43,9 +97,16 @@ class Footer extends Component {
 	                                <h3 className="has-text-ceil">Media</h3>
 	                            </div>
 	                            <ul className="link-list">
-	                                <li><Link className="has-text-blue footer-item" to='/'>Latest news</Link></li>
-																	<li><Link className="has-text-blue footer-item" to='/'>Events</Link></li>
-	                                <li><Link className="has-text-blue footer-item" to='/'>Blog</Link></li>
+																	<li>
+																		<Link className="has-text-blue footer-item" to='/'>
+																			Blog
+																		</Link>
+																	</li>
+	                                <li>
+																		<Link className="has-text-blue footer-item" to='/'>
+																			Events
+																		</Link>
+																	</li>
 	                            </ul>
 	                        </div>
 	                    </div>
@@ -77,7 +138,6 @@ class Footer extends Component {
 	                                        </a>
 	                                    </div>
 	                                </nav>
-
 	                            </div>
 	                        </div>
 	                    </div>
@@ -89,4 +149,7 @@ class Footer extends Component {
 }
 
 
-export default Footer
+export default compose(
+	graphql(SHOW_ABOUT, { name: 'showAbout' }),
+	graphql(SHOW_CONTACT, { name: 'showContact' })
+)(Footer)
