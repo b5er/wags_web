@@ -5,9 +5,9 @@ import StripeCheckout from 'react-stripe-checkout'
 class CheckoutForm extends Component {
 
   submit = async token => {
-    try {
-      const interval = this.props.interval
-      if ((interval === 'one-time')) {
+    const { interval } = this.props
+    if (interval === 'one-time') {
+      try {
         const charge = await fetch('http://localhost:8000/api/donation/charge', {
                                     method: 'POST',
                                     headers: {
@@ -21,8 +21,12 @@ class CheckoutForm extends Component {
                                   })
         if(!charge.ok)
           console.error('Was not able to charge account.') // TODO: (Brian) animate form, to let user know.
-      } else {
-        //Have to make a subscription plan if we are recurring
+      } catch(e) {
+        console.log(e)
+      }
+    } else {
+      //Have to make a subscription plan if we are recurring
+      try {
         const subscription = await fetch('http://localhost:8000/api/donation/createSubscriptionPlan', {
                                     method: 'POST',
                                     headers: {
@@ -37,10 +41,9 @@ class CheckoutForm extends Component {
                             })
         if(!subscription.ok)
           console.error('Was not able to charge account.') // TODO: (Brian) animate form, to let user know.
+      } catch(e) {
+        console.log(e)
       }
-
-    } catch(e) {
-      console.log(e)
     }
   }
 
@@ -55,9 +58,9 @@ class CheckoutForm extends Component {
           stripeKey= "pk_test_TIPbVScZzYrE42xYFkhDxGsQ"
         >
           <button
+            id="checkout-button"
             disabled={ !amount }
             className="button is-rounded is-fullwidth is-medium light-shadow is-green"
-            style={{ borderColor: '#61e786' }}
           >
             <h1 className="has-text-pineapple">
               <strong>Donate</strong>

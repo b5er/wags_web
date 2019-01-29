@@ -3,9 +3,9 @@ import React, { Component } from 'react'
 class Dog extends Component {
   render() {
     return (
-      <div className="dog phone-hide" style={{ marginTop: '10em' }}>
+      <div className="dog phone-hide">
 
-        <div className="dog-body"  style={{ marginTop: '19em' }}>
+        <div className="dog-body">
           <div className="dog-tail">
             <div className="dog-tail">
               <div className="dog-tail">
@@ -23,7 +23,7 @@ class Dog extends Component {
           </div>
         </div>
 
-        <div className="dog-torso"  style={{ marginTop: '14em' }} />
+        <div className="dog-torso" />
         <div className="dog-head">
           <div className="dog-ears">
             <div className="dog-ear" />

@@ -42,24 +42,23 @@ class Donation extends Component {
                 <div className="columns is-multiline">
                   <div className="column is-12">
                     <div className="card med-heavy-shadow is-small-rounded is-pineapple">
-                      <div className="card-content" style={{ paddingTop: '0' }}>
+                      <div className="card-content no-top-padding">
                         <div className="columns">
                           <div className="column is-1 is-offset-2">
-                            <h1 className="subtitle is-size-5 has-text-isabelline" style={{ position: 'absolute', zIndex: '1', marginLeft: '.5em', marginTop: '.8em'}}>
+                            <h1 className="subtitle is-size-5 dollar-sign has-text-isabelline">
                               $
                             </h1>
                           </div>
-                          <div className="column" style={{ paddingTop: '0' }}>
+                          <div className="column no-top-padding">
                             <form>
                               <div className="field">
                                 <input
-                                  className="input is-pineapple has-text-centered"
+                                  className="input is-pineapple donation-input has-text-centered"
                                   onChange={e => {
                                     if(!isNaN(e.target.value))
                                       this.setState({ amount: e.target.value })}
                                   }
                                   value={amount}
-                                  style={{ borderBottomWidth: '2px', borderColor: '#48435c', boxShadow: 'none', borderBottomColor: '#61e786', borderRadius: '0', width: '60%', fontSize: '1.5em', fontWeight: 'bold', padding: '1em .2em 0 .2em', color: 'white' }}
                                 />
                               </div>
                             </form>
@@ -118,7 +117,7 @@ class Donation extends Component {
                         this.setState({ amount: '10' })
                       }}
                     >
-                      <div className="card-content has-text-centered" style={{ padding: '1rem' }}>
+                      <div className="card-content donation-options has-text-centered">
                         <h3 className="title is-size-5 has-text-isabelline">
                           $10
                         </h3>
@@ -134,7 +133,7 @@ class Donation extends Component {
                         this.setState({ amount: '50' })
                       }}
                     >
-                      <div className="card-content has-text-centered" style={{ padding: '1rem' }}>
+                      <div className="card-content donation-options has-text-centered">
                         <h3 className="title is-size-5 has-text-isabelline">
                           $50
                         </h3>
@@ -150,7 +149,7 @@ class Donation extends Component {
                         this.setState({ amount: '100' })
                       }}
                     >
-                      <div className="card-content has-text-centered" style={{ padding: '1rem' }}>
+                      <div className="card-content donation-options has-text-centered">
                         <h3 className="title is-size-5 has-text-isabelline">
                           $100
                         </h3>
