@@ -1,3 +1,4 @@
+// Navbar
 .dashboard-navbar {
   background: $davy-grey !important;
   padding: 0 2rem 0 3rem !important;
@@ -14,6 +15,58 @@
   }
 }
 
-.menu-list a {
-  border-radius: 2px 0 0 2px;
+.navbar-message {
+  padding: 0 1em;
+}
+
+.navbar-notification {
+  padding: 0 2em 0 1em;
+}
+
+// Menu
+.menu-column {
+  height: 100vh;
+}
+
+.menu-list {
+  padding-left: 2rem;
+  a {
+    border-radius: 2px 0 0 2px;
+    &:hover {
+      background-color: $davy-grey;
+    }
+    &.is-active {
+      border-right-style: solid;
+      border-right-width: 3px;
+      border-right-color: $v-light-malachite-green;
+      font-weight: bold;
+    }
+  }
+}
+
+.menu-item-offset {
+  padding: .5em .75em .5em .45em !important;
+}
+
+  // Profile
+  .menu-profile-img {
+    padding-top: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .profile-img-size {
+    height: 120px !important;
+    width: 120px !important;
+  }
+
+  .profile-name {
+    display: flex;
+    justify-content: center;
+    padding: 1em 0 1.5em 0;
+  }
+
+// Content
+.dashboard-content {
+  padding: 3rem 3rem 1rem 3rem;
 }
