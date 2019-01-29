@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 class Value extends Component {
 	render() {
 		return (
-			<section className="section is-medium is-ceil">
+			<section className="section is-medium is-ceil" data-test="value-proposition">
 				<div className="columns">
 					<div className="column is-5 is-offset-2">
 						<div className="columns is-multiline">

@@ -1,4 +1,8 @@
-#Local Lock files created
-
+# Local Lock File
 package-lock.json
+
+# Node
 node_modules/
+
+# Testing React
+__snapshots__/

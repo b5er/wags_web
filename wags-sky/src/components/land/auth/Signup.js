@@ -24,6 +24,9 @@ class Signup extends Component {
       rmStorageItem
     } = this.props
 
+    if(!auth)
+      return null // TODO: something went wrong animation.
+
     return (
       <form
         id="signup-tab"

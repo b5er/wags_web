@@ -63,6 +63,7 @@ class Adoption extends Component {
 								<div className="columns is-multiline">
 									{!loading ?
 										pets.map((petImg, key) => {
+											console.log(petImg)
 											return (
 												<div key={key} className="column is-3">
 													<Pet source={petImg} />
