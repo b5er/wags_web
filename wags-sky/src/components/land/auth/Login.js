@@ -23,6 +23,9 @@ class Login extends Component {
       rmStorageItem
     } = this.props
 
+    if(!auth)
+      return null // TODO: Something went wrong animation.
+
     return (
         <form
           id="login-tab"
