@@ -264,7 +264,12 @@
   font-size: 1.5em;
   font-weight: bold;
   padding: 1em .2em 0 .2em;
-  color: white;
+  color: $isabelline;
+  &:hover, &:focus {
+    box-shadow: none;
+    border-color: $pineapple;
+    border-bottom-color: $v-light-malachite-green;
+  }
 }
 
 .donation-options {
