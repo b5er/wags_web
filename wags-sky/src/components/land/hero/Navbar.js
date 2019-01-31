@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 // Apollo
 import { compose, graphql } from 'react-apollo'
-import { SHOW_ABOUT, SHOW_CONTACT, SHOW_AUTH } from '../../../graphql/land'
+import { SHOW_ABOUT, SHOW_CONTACT, SHOW_ADOPT, SHOW_AUTH } from '../../../graphql/land'
 
 
 class Navbar extends Component {
@@ -34,7 +34,7 @@ class Navbar extends Component {
 	render() {
 
 		const { item, mobile, scrollBeyond } = this.state
-		const { showAbout, showContact, showAuth } = this.props
+		const { showAbout, showContact, showAdopt, showAuth } = this.props
 
 		return (
 			<nav
@@ -99,6 +99,14 @@ class Navbar extends Component {
 							className={`navbar-item is-tab ${scrollBeyond ? 'tab-fixed':''} ${item === 'adopt' ? 'is-active':''} pointer has-text-grey`}
 							onMouseEnter={() => this.setState({ item: 'adopt' })}
 							onMouseLeave={() => this.setState({ item: '' })}
+							onClick={async e => {
+								e.preventDefault()
+								try {
+									await showAdopt({ variables: { adopt: true } })
+								} catch(e) {
+									console.log(e)
+								}
+							}}
 						>
 							Adopt
 						</div>
@@ -147,5 +155,6 @@ class Navbar extends Component {
 export default compose(
 	graphql(SHOW_ABOUT, { name: 'showAbout' }),
 	graphql(SHOW_CONTACT, { name: 'showContact' }),
+	graphql(SHOW_ADOPT, { name : 'showAdopt'}),
 	graphql(SHOW_AUTH, { name: 'showAuth' })
 )(Navbar)
