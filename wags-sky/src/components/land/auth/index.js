@@ -16,7 +16,13 @@ import { checkAuth } from '../../../utils/auth'
 class Auth extends Component {
   render() {
 
-    const { getAuth: { auth }, showAuth } = this.props
+    const { getAuth, getAuth: { auth }, showAuth } = this.props
+
+    if(getAuth.loading)
+      return <h1>Loading</h1> // TODO: loading animation.
+
+    if(!auth)
+      return null // TODO: error animation.
 
     return (
       <div className={`modal ${auth.show ? 'is-active':''}`}>

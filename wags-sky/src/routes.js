@@ -45,7 +45,7 @@ const Routes = () => (
 				const GATrackedDonate = withTracker(DonatePage)
 				return <GATrackedDonate {...props} />
 			}} />
-			<AuthRoute exact path="/dashboard" render={props => {
+			<Route exact path="/dashboard" render={props => {
 				const GATrackedDash = withTracker(DashPage)
 				return <GATrackedDash {...props} />
 			}} />

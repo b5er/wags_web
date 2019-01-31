@@ -20,16 +20,22 @@ const typeDefs = `
 		type: String!
 	}
 
+	type Item {
+		item: String!
+	}
+
 	type Mutation {
 		toggleAbout(about: Boolean!): About
 		toggleContact(contact: Boolean!): Contact
 		toggleAuth(auth: Boolean!, type: String!): Auth
+		updateItem(item: String!): Item
 	}
 
 	type Query {
 		about: About
 		contact: Contact
 		auth: Auth
+		item: Item
 	}
 
 `
