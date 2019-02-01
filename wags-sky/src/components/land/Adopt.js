@@ -14,7 +14,7 @@ class Adopt extends Component {
 			age: 0,
 			breeds: [],
 			description: '',
-			petImage: '',
+			petImage: null,
 
       submit: false
     }
@@ -23,20 +23,21 @@ class Adopt extends Component {
 
 	addImage = async () => {
 		try {
+      let formData = new FormData()
+      formData.append(this.state.petImage)
+      formData.append(this.state.name)
+      formData.append(this.state.gender)
+      formData.append(this.state.age)
+      formData.append(this.state.breeds)
+      formData.append(this.state.description)
+
 			const addStatus = await fetch('http://localhost:8000/api/pet/add', {
 																	method: 'POST',
 																	headers: {
 																		'Accept': 'application/json',
-																		'Content-Type': 'application/json'
+																		'Content-Type': 'multipart/form-data'
 																	},
-																	body: JSON.stringify({
-																					name : this.state.name,
-																				  gender: this.state.gender,
-																				  age: this.state.age,
-																				  breeds: this.state.breeds,
-																				  description: this.state.description,
-																				  petImage: this.state.petImage
-																				})
+																  body: formData
 																})
 
 			if (!addStatus.ok)
@@ -116,7 +117,11 @@ class Adopt extends Component {
                         <div class="select">
 
                           <div className="control">
-                            <select>
+                            <select onChange = {
+                              e => {
+                                var option = e.target.value;
+                                this.setState({gender: option})
+                              }}>
                               <option>Male</option>
                               <option>Female</option>
                               <option>Other</option>
@@ -153,7 +158,19 @@ class Adopt extends Component {
                         <label className="label has-text-isabelline">
                           Breeds (Can select multiple) - Replace somehow
                         </label>
-                        <select multiple size="2">
+                        <select multiple size="2" onChange = {
+                          e => {
+                            var options = e.target.options;
+                            var values = [];
+                            for (var i = 0, l = options.length; i < l; i++) {
+                              if (options[i].selected) {
+                                console.log(options[i].value)
+                                values.push(options[i].value);
+                              }
+                            }
+                            this.setState({breeds: values})
+                          }
+                        }>
                           <option value="Argentina">Argentina</option>
                           <option value="Bolivia">Bolivia</option>
                           <option value="Brazil">Brazil</option>
@@ -174,7 +191,9 @@ class Adopt extends Component {
                           Description
                         </label>
                         <div class="control">
-                          <textarea class="textarea is-primary" placeholder="Gucci gang gucci gang"></textarea>
+                          <textarea onChange = {
+                            e => { this.setState({description: e.target.value}) }
+                          } class="textarea is-primary" placeholder="Gucci gang gucci gang"></textarea>
                         </div>
                     </div>
 
@@ -182,8 +201,11 @@ class Adopt extends Component {
                         <div class="file is-primary">
                           <label class="file-label">
                             <input class="file-input" type="file" name="resume"
-                             onChange ={e => {this.setState({petImage: e.target.value})
-                              console.log(e.target.value)
+                             onChange ={e => {
+                               this.setState({
+                               petImage: e.target.files[0]
+                             })
+
                               //TODO - Make it so that we check for errors and that we remove the C:/fakepath/ and just include the image for the post request
                             }}
                              value={petImage}
@@ -207,6 +229,8 @@ class Adopt extends Component {
                             onClick={e => {
                               if(!name)
                                 return
+
+                               {this.addImage()}
                             }}
                           >
                             Submit
