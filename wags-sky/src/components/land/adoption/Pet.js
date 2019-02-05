@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+const moment = require('moment')
 
 class Pet extends Component {
 	constructor() {
@@ -6,6 +7,13 @@ class Pet extends Component {
 		this.state = {
 			picture: ''
 		}
+	}
+
+	checkTimeHrs = (item) => {
+		var currentTime = moment()
+		var timeStore = moment(item.created)
+
+		return currentTime.diff(timeStore, 'h')
 	}
 
 	render() {
@@ -16,7 +24,7 @@ class Pet extends Component {
     return (
     <div
 			//TODO - Add the green button to 'isoverflow-hidden' attribute when fixed jittering: (badge is-badge-info is-badge-small)
-      className={`card is-small-rounded pointer v-light-shadow ${picture === 'active' ? 'is-overflow-hidden':''}`}
+      className={`card is-small-rounded pointer v-light-shadow ${checkTimeHrs(source.created) < 24 ? 'is-overflow-hidden badge is-badge-info is-badge-small': ''}`}
       data-badge=""
       onMouseEnter={() => {
         this.setState({ picture: 'active' })

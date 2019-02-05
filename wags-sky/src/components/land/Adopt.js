@@ -14,6 +14,7 @@ class Adopt extends Component {
 			age: 0,
 			breeds: ['Yolo'],
 			description: 'Test test',
+      created: null,
 			petImage: null,
 
       submit: false
@@ -30,6 +31,7 @@ class Adopt extends Component {
       formData.append('age', this.state.age)
       formData.append('breeds', this.state.breeds)
       formData.append('description', this.state.description)
+      formData.append('created', this.state.created)
 
 			const addStatus = await fetch('http://localhost:8000/api/pet/add', {
 																	method: 'POST',
@@ -137,7 +139,7 @@ class Adopt extends Component {
                           <input
                             className={`input ${gender.length > 0 ? 'is-success':''} ${submit && !age ? 'is-danger':''}`}
                             type ="text"
-                            placeholder="70 Nigga"
+                            placeholder="70"
                             onChange ={e => this.setState({age: e.target.value})}
                             value={age}
                           />
