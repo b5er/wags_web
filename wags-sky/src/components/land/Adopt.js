@@ -204,10 +204,7 @@ class Adopt extends Component {
                                this.setState({
                                petImage: e.target.files[0]
                              })
-
-                              //TODO - Make it so that we check for errors and that we remove the C:/fakepath/ and just include the image for the post request
-                            }}
-
+                           }}
                              />
                             <span class="file-cta">
                               <span class="file-icon">

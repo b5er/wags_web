@@ -73,9 +73,6 @@ router.post('/add', upload.single('petImage'), async (req, res, next) => {
 
 	const { body, file } = req
 
-	console.log(body)
-	console.log(file)
-
 	const model = new PetModel({
 	  _id : new mongoose.Types.ObjectId(),
 	  name : body.name,
