@@ -77,6 +77,7 @@ $easing: ease-in-out;
   width: $dog-width;
   height: $dog-width;
   z-index: 1;
+  margin-top: 10em;
 
   &:before {
     content: '';
@@ -97,6 +98,7 @@ $easing: ease-in-out;
 .dog-body {
   top: -50%;
   animation: dog-body $interval $easing infinite alternate;
+  margin-top: 19em;
 
   &:before {
     content: '';
@@ -158,6 +160,7 @@ $easing: ease-in-out;
 .dog-torso {
   top: -20%;
   animation: dog-torso $interval $easing infinite alternate-reverse;
+  margin-top: 14em;
 
   @keyframes dog-torso {
     from {

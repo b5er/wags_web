@@ -48,6 +48,9 @@
   }
 
   // About Modal
+  .about-paragraph {
+    padding: 2em 0;
+  }
 
   // Contact Us Modal
 
@@ -135,6 +138,10 @@
   margin-left: 2em;
 }
 
+#hero-button {
+  border-color: $v-light-malachite-green;
+}
+
 // Value
 .icon-padding {
   padding: 1em;
@@ -150,6 +157,31 @@
   .phone-hide {
     opacity: 0;
   }
+}
+
+.value-prop-icon {
+  border-radius: 50%;
+  width: 50em;
+  height: 3em;
+}
+
+// Social
+.social-img {
+  display: flex;
+  justify-content: center;
+  margin: 1em 0;
+}
+
+.value-calendar-icon {
+  padding: 1rem .82rem;
+}
+
+.value-plane-icon {
+  padding: 1rem .7rem;
+}
+
+.value-syringe-icon {
+  padding: 1rem .7rem;
 }
 
 // Adoption
@@ -215,7 +247,38 @@
 }
 
 // Donation
+.dollar-sign {
+  position: absolute;
+  z-index: 1;
+  margin-left: .5em;
+  margin-top: .8em;
+}
 
+.donation-input {
+  border-bottom-width: 2px;
+  border-color: $pineapple;
+  box-shadow: none;
+  border-bottom-color: $v-light-malachite-green;
+  border-radius: 0;
+  width: 60%;
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 1em .2em 0 .2em;
+  color: $isabelline;
+  &:hover, &:focus {
+    box-shadow: none;
+    border-color: $pineapple;
+    border-bottom-color: $v-light-malachite-green;
+  }
+}
+
+.donation-options {
+  padding: 1rem;
+}
+
+#checkout-button {
+  border-color: $v-light-malachite-green;
+}
 
 // Footer
 .footer-item {

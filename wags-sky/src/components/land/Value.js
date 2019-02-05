@@ -35,9 +35,9 @@ class Value extends Component {
 
 						<div className="columns is-multiline">
 							<div className="column is-1">
-								<div className="card is-ceil phone-hide" style={{ borderRadius: '50%', width: '50em', height: '3em' }}>
+								<div className="card is-ceil value-prop-icon phone-hide">
 									<div className="card-body">
-										<i className="far fa-calendar-check fa-lg has-text-pineapple" style={{ padding: '1rem .82rem' }} />
+										<i className="far fa-calendar-check value-calendar-icon fa-lg has-text-pineapple" />
 									</div>
 								</div>
 							</div>
@@ -53,9 +53,9 @@ class Value extends Component {
 							</div>
 							<div className="column is-7" />
 							<div className="column is-1">
-								<div className="card is-ceil phone-hide" style={{ borderRadius: '50%', width: '50em', height: '3em' }}>
+								<div className="card is-ceil value-prop-icon phone-hide">
 									<div className="card-body">
-										<i className="far fa-paper-plane fa-lg has-text-pineapple" style={{ padding: '1rem .7rem' }} />
+										<i className="far fa-paper-plane value-plane-icon fa-lg has-text-pineapple" />
 									</div>
 								</div>
 							</div>
@@ -71,9 +71,9 @@ class Value extends Component {
 							</div>
 							<div className="column is-7" />
 							<div className="column is-1">
-								<div className="card is-ceil phone-hide" style={{ borderRadius: '50%', width: '50em', height: '3em' }}>
+								<div className="card is-ceil value-prop-icon phone-hide">
 									<div className="card-body">
-										<i className="fas fa-syringe fa-lg has-text-pineapple" style={{ padding: '1rem .7rem' }} />
+										<i className="fas fa-syringe value-syringe-icon fa-lg has-text-pineapple" />
 									</div>
 								</div>
 							</div>
