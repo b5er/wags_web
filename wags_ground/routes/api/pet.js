@@ -48,9 +48,9 @@ router.get('/findAll', async (req, res) => {
 //Find One 	Ex: localhost:8000/find?name=pebz
 router.get('/find', (req, res) => {
 
-	if (!req.query.name) 
+	if (!req.query.name)
 		return res.status(400).send('Missing url parameter: name')
-	
+
 
 	PetModel.find({
 		name : req.query.name
@@ -72,6 +72,9 @@ router.post('/add', upload.single('petImage'), async (req, res, next) => {
 		return res.status(400).send('Request body is missing')
 
 	const { body, file } = req
+
+	console.log(body)
+	console.log(file)
 
 	const model = new PetModel({
 	  _id : new mongoose.Types.ObjectId(),

@@ -9,11 +9,11 @@ class Adopt extends Component {
     super()
     this.state = {
       //add
-			name: '',
-			gender: '',
+			name: 'Lil Pup',
+			gender: 'Male',
 			age: 0,
-			breeds: [],
-			description: '',
+			breeds: ['Yolo'],
+			description: 'Test test',
 			petImage: null,
 
       submit: false
@@ -24,18 +24,17 @@ class Adopt extends Component {
 	addImage = async () => {
 		try {
       let formData = new FormData()
-      formData.append(this.state.petImage)
-      formData.append(this.state.name)
-      formData.append(this.state.gender)
-      formData.append(this.state.age)
-      formData.append(this.state.breeds)
-      formData.append(this.state.description)
+      formData.append('petImage', this.state.petImage)
+      formData.append('name', this.state.name)
+      formData.append('gender', this.state.gender)
+      formData.append('age', this.state.age)
+      formData.append('breeds', this.state.breeds)
+      formData.append('description', this.state.description)
 
 			const addStatus = await fetch('http://localhost:8000/api/pet/add', {
 																	method: 'POST',
 																	headers: {
-																		'Accept': 'application/json',
-																		'Content-Type': 'multipart/form-data'
+																		'Accept': 'application/json'
 																	},
 																  body: formData
 																})
@@ -208,7 +207,7 @@ class Adopt extends Component {
 
                               //TODO - Make it so that we check for errors and that we remove the C:/fakepath/ and just include the image for the post request
                             }}
-                             value={petImage}
+
                              />
                             <span class="file-cta">
                               <span class="file-icon">
