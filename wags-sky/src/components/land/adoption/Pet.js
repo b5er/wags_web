@@ -10,11 +10,9 @@ class Pet extends Component {
 	}
 
 	checkTimeHrs = (item) => {
-		var currentTime = moment()
-		var timeStore = moment(item.created)
-
-		console.log(currentTime.diff(timeStore, 'h'))
-
+		let currentTime = moment()
+	  let timeStore = moment(item.created)
+		
 		return currentTime.diff(timeStore, 'h')
 	}
 
@@ -26,7 +24,7 @@ class Pet extends Component {
     return (
     <div
 			//TODO - Add the green button to 'isoverflow-hidden' attribute when fixed jittering: (badge is-badge-info is-badge-small)
-      className={`card is-small-rounded pointer v-light-shadow ${ this.checkTimeHrs(source) < 24 ? 'is-overflow-hidden': 'badge is-badge-info is-badge-small'}`}
+      className={`card is-small-rounded pointer v-light-shadow ${ this.checkTimeHrs(source) >= 24 ? 'is-overflow-hidden': 'badge is-badge-info is-badge-small'}`}
       data-badge=""
       onMouseEnter={() => {
         this.setState({ picture: 'active' })
