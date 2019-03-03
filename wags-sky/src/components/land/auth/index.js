@@ -33,6 +33,7 @@ class Auth extends Component {
             try {
               await showAuth({ variables: { show: false, type: 'login' } })
             } catch(e) {
+              //TODO: add animation or user-friendly error
               console.log(e)
             }
           }}
@@ -49,6 +50,7 @@ class Auth extends Component {
                             try {
                               await showAuth({ variables: { show: true, type: 'login' } })
                             } catch(e) {
+                              //TODO: add animation or user-friendly error
                               console.log(e)
                             }
                           }}
@@ -64,6 +66,7 @@ class Auth extends Component {
                             try {
                               await showAuth({ variables: { show: true, type: 'signup' } })
                             } catch(e) {
+                              //TODO: add animation or user-friendly error
                               console.log(e)
                             }
                           }}
@@ -109,6 +112,7 @@ class Auth extends Component {
             try {
               await showAuth({ variables: { show: false, type: 'login' } })
             } catch(e) {
+              //TODO: add animation or user-friendly error
               console.log(e)
             }
           }}

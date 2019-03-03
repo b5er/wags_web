@@ -40,6 +40,7 @@ class CheckoutForm extends Component {
       }
 
     } catch(e) {
+      //TODO: add animation or user-friendly error
       console.log(e)
     }
   }

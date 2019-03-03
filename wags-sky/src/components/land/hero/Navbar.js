@@ -74,6 +74,7 @@ class Navbar extends Component {
 								try {
 									await showAbout({ variables: { about: true } })
 								} catch(e) {
+					        //TODO: add animation or user-friendly error
 									console.log(e)
 								}
 							}}
@@ -89,6 +90,7 @@ class Navbar extends Component {
 								try {
 									await showContact({ variables: { contact: true } })
 								} catch(e) {
+						      //TODO: add animation or user-friendly error
 									console.log(e)
 								}
 							}}
@@ -104,6 +106,7 @@ class Navbar extends Component {
 								try {
 									await showAdopt({ variables: { adopt: true } })
 								} catch(e) {
+						      //TODO: add animation or user-friendly error
 									console.log(e)
 								}
 							}}
@@ -119,6 +122,7 @@ class Navbar extends Component {
 								try {
 									await showAuth({ variables: { show: true, type: 'signup' } })
 								} catch(e) {
+						      //TODO: add animation or user-friendly error
 									console.log(e)
 								}
 							}}

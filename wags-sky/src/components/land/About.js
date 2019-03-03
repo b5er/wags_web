@@ -19,6 +19,7 @@ class About extends Component {
             try {
               await showAbout({ variables: { about: false } })
             } catch(e) {
+              //TODO: add animation or user-friendly error
               console.log(e)
             }
           }}
@@ -53,6 +54,7 @@ class About extends Component {
             try {
               await showAbout({ variables: { about: false } })
             } catch(e) {
+              //TODO: add animation or user-friendly error
               console.log(e)
             }
           }}

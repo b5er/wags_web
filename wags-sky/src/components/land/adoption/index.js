@@ -17,6 +17,7 @@ class Adoption extends Component {
 
 	getImages = async () => {
 		try {
+			//TODO - Need to change the path in production
 			const images = await fetch('http://localhost:8000/api/pet/findAll')
 
 	    if(!images.ok)
@@ -25,6 +26,7 @@ class Adoption extends Component {
 	    const pets = await images.json()
 	    this.setState({ loading: false, pets })
 	  } catch(e) {
+      //TODO: add animation or user-friendly error
 	  	console.log(e)
 	  }
 	}
@@ -62,7 +64,6 @@ class Adoption extends Component {
 								<div className="columns is-multiline">
 									{!loading ?
 										pets.map((petImg, key) => {
-											console.log(petImg)
 											return (
 												<div key={key} className="column is-3">
 													<Pet source={petImg} />

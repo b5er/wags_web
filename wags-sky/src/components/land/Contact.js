@@ -32,6 +32,7 @@ class Contact extends Component {
             try {
               await showContact({ variables: { contact: false } })
             } catch(e) {
+              //TODO: add animation or user-friendly error
               console.log(e)
             }
             this.setState({ submit: false, isLoading: false })
@@ -172,6 +173,7 @@ class Contact extends Component {
             try {
               await showContact({ variables: { contact: false } })
             } catch(e) {
+              //TODO: add animation or user-friendly error
               console.log(e)
             }
             this.setState({ submit: false, isLoading: false })

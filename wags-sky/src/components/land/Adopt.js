@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
-import {compose, graphql} from 'react-apollo'
-import {GET_ADOPT, SHOW_ADOPT} from '../../graphql/land'
+import { compose, graphql } from 'react-apollo'
+import { GET_ADOPT, SHOW_ADOPT } from '../../graphql/land'
 
 class Adopt extends Component {
 
@@ -9,11 +9,11 @@ class Adopt extends Component {
     super()
     this.state = {
       //add
-			name: 'Lil Pup',
+			name: '',
 			gender: 'Male',
-			age: 0,
-			breeds: ['Yolo'],
-			description: 'Test test',
+			age: 1,
+			breeds: [''],
+			description: '',
 			petImage: null,
 
       submit: false
@@ -41,8 +41,9 @@ class Adopt extends Component {
 
 			if (!addStatus.ok)
 				console.error('Could not create a pet in the database. You are missing some fields.')
-			//else //rerender somehow
+			//TODO: add animation or user-friendly error
 		} catch(e) {
+      //TODO: add animation or user-friendly error
 			console.log(e)
 		}
 	}
@@ -61,6 +62,7 @@ class Adopt extends Component {
             try {
               await showAdopt({variables: {adopt: false} })
             } catch(e) {
+              //TODO: add animation or user-friendly error
               console.log(e)
             }
             this.setState( {submit: false})
@@ -94,7 +96,6 @@ class Adopt extends Component {
                           <input
                             className={`input ${name.length > 0 ? 'is-success':''} ${submit && !name ? 'is-danger':''}`}
                             type ="text"
-                            placeholder="Lil Pup"
                             onChange ={e => this.setState({name: e.target.value})}
                             value={name}
                           />
@@ -116,11 +117,13 @@ class Adopt extends Component {
                         <div class="select">
 
                           <div className="control">
-                            <select onChange = {
-                              e => {
-                                var option = e.target.value;
-                                this.setState({gender: option})
-                              }}>
+                            <select
+                              onChange = {
+                                e => {
+                                  let option = e.target.value
+                                  this.setState({gender: option})
+                                }
+                              }>
                               <option>Male</option>
                               <option>Female</option>
                               <option>Other</option>
@@ -137,7 +140,6 @@ class Adopt extends Component {
                           <input
                             className={`input ${gender.length > 0 ? 'is-success':''} ${submit && !age ? 'is-danger':''}`}
                             type ="text"
-                            placeholder="70 Nigga"
                             onChange ={e => this.setState({age: e.target.value})}
                             value={age}
                           />
@@ -157,31 +159,27 @@ class Adopt extends Component {
                         <label className="label has-text-isabelline">
                           Breeds (Can select multiple) - Replace somehow
                         </label>
-                        <select multiple size="2" onChange = {
-                          e => {
-                            var options = e.target.options;
-                            var values = [];
-                            for (var i = 0, l = options.length; i < l; i++) {
-                              if (options[i].selected) {
-                                console.log(options[i].value)
-                                values.push(options[i].value);
+                        <select multiple size="2"
+                          onChange = {
+                            e => {
+                              let options = e.target.options
+                              let values = []
+                              for (let i = 0, l = options.length; i < l; i++) {
+                                if (options[i].selected) {
+                                  values.push(options[i].value)
+                                }
                               }
+                              this.setState({breeds: values})
                             }
-                            this.setState({breeds: values})
-                          }
-                        }>
-                          <option value="Argentina">Argentina</option>
-                          <option value="Bolivia">Bolivia</option>
-                          <option value="Brazil">Brazil</option>
-                          <option value="Chile">Chile</option>
-                          <option value="Colombia">Colombia</option>
-                          <option value="Ecuador">Ecuador</option>
-                          <option value="Guyana">Guyana</option>
-                          <option value="Paraguay">Paraguay</option>
-                          <option value="Peru">Peru</option>
-                          <option value="Suriname">Suriname</option>
-                          <option value="Uruguay">Uruguay</option>
-                          <option value="Venezuela">Venezuela</option>
+                          }>
+                          <option value="Poddle">Poodle</option>
+                          <option value="Golden Retriever">Golden Retriever</option>
+                          <option value="Shitzu">Shitzu</option>
+                          <option value="Nova Scotia Duck Tolling Retriever">Nova Scotia Duck Tolling Retriever</option>
+                          <option value="Cane Corso">Cane Corso</option>
+                          <option value="American Bulldog">American Bulldog</option>
+                          <option value="American Staffordshire Terrier">American Staffordshire Terrier</option>
+                          <option value="Dalmation">Dalmation</option>
                         </select>
                       </div>
 
@@ -190,9 +188,8 @@ class Adopt extends Component {
                           Description
                         </label>
                         <div class="control">
-                          <textarea onChange = {
-                            e => { this.setState({description: e.target.value}) }
-                          } class="textarea is-primary" placeholder="Gucci gang gucci gang"></textarea>
+                          <textarea onChange = {e => { this.setState({description: e.target.value}) }}
+                          class="textarea is-primary"></textarea>
                         </div>
                     </div>
 
@@ -200,11 +197,12 @@ class Adopt extends Component {
                         <div class="file is-primary">
                           <label class="file-label">
                             <input class="file-input" type="file" name="resume"
-                             onChange ={e => {
-                               this.setState({
-                               petImage: e.target.files[0]
-                             })
-                           }}
+                             onChange ={
+                               e => {
+                                 this.setState({
+                                 petImage: e.target.files[0]
+                               })
+                            }}
                              />
                             <span class="file-cta">
                               <span class="file-icon">
@@ -249,6 +247,7 @@ class Adopt extends Component {
             try {
               await showAdopt({ variables: { adopt: false } })
             } catch(e) {
+              //TODO: add animation or user-friendly error
               console.log(e)
             }
           }}

@@ -27,6 +27,7 @@ class Menu extends Component {
                   try {
                     await updateItem({ variables: { item: 'home' } })
                   } catch(e) {
+                    //TODO: add animation or user-friendly error
                     console.log(e)
                   }
                 }}
@@ -43,6 +44,7 @@ class Menu extends Component {
                   try {
                     await updateItem({ variables: { item: 'medical' } })
                   } catch(e) {
+                    //TODO: add animation or user-friendly error
                     console.log(e)
                   }
                 }}
@@ -59,6 +61,7 @@ class Menu extends Component {
                   try {
                     await updateItem({ variables: { item: 'appointment' } })
                   } catch(e) {
+                    //TODO: add animation or user-friendly error
                     console.log(e)
                   }
                 }}
@@ -75,6 +78,7 @@ class Menu extends Component {
                   try {
                     await updateItem({ variables: { item: 'orders' } })
                   } catch(e) {
+                    //TODO: add animation or user-friendly error
                     console.log(e)
                   }
                 }}
@@ -91,6 +95,7 @@ class Menu extends Component {
                   try {
                     await updateItem({ variables: { item: 'community' } })
                   } catch(e) {
+                    //TODO: add animation or user-friendly error
                     console.log(e)
                   }
                 }}
