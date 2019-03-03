@@ -32,7 +32,7 @@ class Adopt extends Component {
       formData.append('description', this.state.description)
 
 			const addStatus = await fetch('http://localhost:8000/api/pet/add', {
-																	method: 'POST',
+																	method: 'PUT',
 																	headers: {
 																		'Accept': 'application/json'
 																	},
@@ -114,7 +114,7 @@ class Adopt extends Component {
                         <label className="label has-text-isabelline">
                           Gender
                         </label>
-                        <div class="select">
+                        <div className="select">
 
                           <div className="control">
                             <select
@@ -155,7 +155,7 @@ class Adopt extends Component {
                       </div>
 
 
-                      <div class="select is-multiple">
+                      <div className="select is-multiple">
                         <label className="label has-text-isabelline">
                           Breeds (Can select multiple) - Replace somehow
                         </label>
@@ -172,7 +172,7 @@ class Adopt extends Component {
                               this.setState({breeds: values})
                             }
                           }>
-                          <option value="Poddle">Poodle</option>
+                          <option value="Poodle">Poodle</option>
                           <option value="Golden Retriever">Golden Retriever</option>
                           <option value="Shitzu">Shitzu</option>
                           <option value="Nova Scotia Duck Tolling Retriever">Nova Scotia Duck Tolling Retriever</option>
@@ -183,20 +183,20 @@ class Adopt extends Component {
                         </select>
                       </div>
 
-                      <div class="field">
+                      <div className="field">
                         <label className="label has-text-isabelline">
                           Description
                         </label>
-                        <div class="control">
+                        <div className="control">
                           <textarea onChange = {e => { this.setState({description: e.target.value}) }}
-                          class="textarea is-primary"></textarea>
+                          className="textarea is-primary"></textarea>
                         </div>
                     </div>
 
-                      <div class="field">
-                        <div class="file is-primary">
-                          <label class="file-label">
-                            <input class="file-input" type="file" name="resume"
+                      <div className="field">
+                        <div className="file is-primary">
+                          <label className="file-label">
+                            <input className="file-input" type="file" name="resume"
                              onChange ={
                                e => {
                                  this.setState({
@@ -204,11 +204,11 @@ class Adopt extends Component {
                                })
                             }}
                              />
-                            <span class="file-cta">
-                              <span class="file-icon">
-                                <i class="fas fa-upload"></i>
+                            <span className="file-cta">
+                              <span className="file-icon">
+                                <i className="fas fa-upload"></i>
                               </span>
-                              <span class="file-label">
+                              <span className="file-label">
                                 Pet Image
                               </span>
                             </span>

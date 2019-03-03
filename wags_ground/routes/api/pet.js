@@ -67,21 +67,23 @@ router.get('/find', (req, res) => {
 });*/
 
 //Create a new pet
-router.post('/add', upload.single('petImage'), async (req, res, next) => {
+router.put('/add', upload.single('petImage'), async (req, res, next) => {
 	if (!req.body)
 		return res.status(400).send('Request body is missing')
 
 	const { body, file } = req
 
-	const model = new PetModel({
-	  _id : new mongoose.Types.ObjectId(),
-	  name : body.name,
-	  gender: body.gender,
-	  age: body.age,
-	  breeds: body.breeds,
-	  description: body.description,
-	  petImage: file.path
-	})
+
+		const model = new PetModel({
+		  _id : new mongoose.Types.ObjectId(),
+		  name : body.name,
+		  gender: body.gender,
+		  age: body.age,
+		  breeds: body.breeds,
+		  description: body.description,
+		  petImage: file.path
+		})
+
 
 	try {
 		const doc = await model.save()
