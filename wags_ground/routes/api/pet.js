@@ -2,7 +2,19 @@ const express = require('express')
 const PetModel = require('../../models/wags_model')
 const multer = require('multer')
 const mongoose = require('mongoose')
-//All files will be stored in uploads folder
+
+/* For Future Reference (mainly for Mike),
+ * here are some type of expansion calls that one could do:
+
+	 Find One -	Ex: localhost:8000/find?name=pebz
+
+   How to send something back to the front-end
+	 router.get('/:breed', (req, res) => {
+	 	res.send(`You have requested a breed ${req.params.breed}`)
+		});
+*/
+
+//All image files will be stored in uploads folder
 
 const storage = multer.diskStorage({
 	destination: function(req, file, cb) {
@@ -33,7 +45,7 @@ const upload = multer({
 
 const router = express.Router()
 
-//Find All
+//Find all pets in the database (used for image fetching)
 router.get('/findAll', async (req, res) => {
 	try {
 		const pets = await PetModel.find({})
@@ -44,27 +56,6 @@ router.get('/findAll', async (req, res) => {
 		res.status(500).json(e)
 	}
 })
-
-//Find One 	Ex: localhost:8000/find?name=pebz
-router.get('/find', (req, res) => {
-
-	if (!req.query.name)
-		return res.status(400).send('Missing url parameter: name')
-
-
-	PetModel.find({
-		name : req.query.name
-	}).then(doc => {
-		res.json(doc);
-	}).catch(err => {
-		res.status(500).json(err);
-	});
-});
-
-//How to do queries
-/* router.get('/:breed', (req, res) => {
-	res.send(`You have requested a breed ${req.params.breed}`)
-});*/
 
 //Create a new pet
 router.post('/add', upload.single('petImage'), async (req, res, next) => {
@@ -92,19 +83,6 @@ router.post('/add', upload.single('petImage'), async (req, res, next) => {
 		res.status(500).json(e)
 	}
 })
-
-//Update an existing pet
-router.put('/update', function(req, res) {
-  PetModel.findOneAndUpdate({
-    description: req.query.description
-  }, req.body, {
-    new: true
-  }).then(doc => {
-    res.json(doc);
-  }).catch(err => {
-    res.status(500).json(err);
-  });
-});
 
 //Delete an existing pet
 router.delete('/delete', function(req, res) {
