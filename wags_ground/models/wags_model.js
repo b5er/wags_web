@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const moment = require('moment')
 
 const { user, password, server, db } = require('../config/dev')
 
@@ -14,7 +13,7 @@ let PetSchema = new mongoose.Schema({
   breeds: [mongoose.Schema.Types.Mixed],
   description: String,
   petImage: String,
-  created : {type: Date, default: moment() }
+  created : {type: Date }
 })
 
 module.exports = mongoose.model('Pet', PetSchema)

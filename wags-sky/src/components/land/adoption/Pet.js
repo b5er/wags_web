@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import moment from 'moment'
 
 class Pet extends Component {
 	constructor() {
@@ -10,10 +9,13 @@ class Pet extends Component {
 	}
 
 	checkTimeHrs = (item) => {
-		let currentTime = moment()
-	  let timeStore = moment(item.created)
-		
-		return currentTime.diff(timeStore, 'h')
+		if (item.created) {
+			const createdDate = new Date(item.created)
+			const today = new Date()
+			/*Time is returned in ms in getTime(), so get the difference
+			and divide by 1000 ms to get seconds and 60 twice to get hours*/
+			return ((today.getTime() - createdDate.getTime()) / 1000) / (60 * 60)
+		}
 	}
 
 	render() {
