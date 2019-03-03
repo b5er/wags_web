@@ -11,7 +11,7 @@ const mongoose = require('mongoose')
    How to send something back to the front-end
 	 router.get('/:breed', (req, res) => {
 	 	res.send(`You have requested a breed ${req.params.breed}`)
-		});
+		})
 */
 
 //All image files will be stored in uploads folder
@@ -89,10 +89,10 @@ router.delete('/delete', function(req, res) {
   PetModel.findOneAndRemove({
     _id: req.query.id
   }).then(doc => {
-    res.json(doc);
+    res.json(doc)
   }).catch(err => {
-    res.status(500).json(err);
-  });
-});
+    res.status(500).json(err)
+  })
+})
 
-module.exports = router;
+module.exports = router
