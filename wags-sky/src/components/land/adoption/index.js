@@ -5,8 +5,9 @@ class Adoption extends Component {
 	constructor() {
 		super()
 		this.state = {
+			//get
 			pets: [],
-			loading: true
+			loading: true,
 		}
 	}
 

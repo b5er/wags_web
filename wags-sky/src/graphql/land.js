@@ -18,11 +18,25 @@ export const SHOW_CONTACT = gql`
 	}
 `
 
+
 export const GET_CONTACT = gql`
 	{
 		contact @client
 	}
 `
+
+export const SHOW_ADOPT = gql`
+	mutation toggleAdopt($adopt: Boolean!) {
+		toggleAdopt(adopt: $adopt) @client
+	}
+`
+
+export const GET_ADOPT = gql`
+	{
+		adopt @client
+	}
+`
+
 
 export const SHOW_AUTH = gql`
 	mutation toggleAuth($show: Boolean!, $type: String!) {
