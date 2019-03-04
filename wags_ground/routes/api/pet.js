@@ -73,7 +73,7 @@ router.put('/add', upload.single('petImage'), async (req, res, next) => {
 
 	const { body, file } = req
 
-
+	try {
 		const model = new PetModel({
 		  _id : new mongoose.Types.ObjectId(),
 		  name : body.name,
@@ -85,7 +85,6 @@ router.put('/add', upload.single('petImage'), async (req, res, next) => {
 		})
 
 
-	try {
 		const doc = await model.save()
 		if(!doc || doc.length === 0)
 			return res.status(500).send(doc)
