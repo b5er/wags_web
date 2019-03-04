@@ -42,15 +42,9 @@ class CheckoutForm extends Component {
         if(!subscription.ok)
           console.error('Was not able to charge account.') // TODO: (Brian) animate form, to let user know.
       } catch(e) {
+        // TODO: user-friendly animation or message.
         console.log(e)
       }
-<<<<<<< HEAD
-
-    } catch(e) {
-      //TODO: add animation or user-friendly error
-      console.log(e)
-=======
->>>>>>> master
     }
   }
 
