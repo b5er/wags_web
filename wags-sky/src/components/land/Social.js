@@ -29,7 +29,7 @@ class Social extends Component {
 								Thanks so much for bringing her
 								into my life.
 							</p>
-							<div className="" style={{ display: 'flex', justifyContent: 'center', margin: '1em 0' }}>
+							<div className="social-img">
 								<figure className="image is-128x128">
 									<img className="is-rounded" src={personOne} alt="" />
 								</figure>
@@ -54,7 +54,7 @@ class Social extends Component {
 								he rescued me! Separately, thank you
 								for all that you do! Wags is amazing!
 							</p>
-							<div className="" style={{ display: 'flex', justifyContent: 'center', margin: '1em 0' }}>
+							<div className="social-img">
 								<figure className="image is-128x128">
 									<img className="is-rounded" src={personTwo} alt="" />
 								</figure>
@@ -79,7 +79,7 @@ class Social extends Component {
 								him from a much gloomier fate in
 								Greenbelt! We love him!
 							</p>
-							<div className="" style={{ display: 'flex', justifyContent: 'center', margin: '1em 0' }}>
+							<div className="social-img">
 								<figure className="image is-128x128">
 									<img className="is-rounded" src={personThree} alt="" />
 								</figure>

@@ -34,7 +34,7 @@ class About extends Component {
             <div className="card-content">
                 <div className="columns is-centered">
                   <div className="column is-8">
-                    <p className="subtitle has-text-isabelline" style={{ padding: '2em 0'}}>
+                    <p className="subtitle about-paragraph has-text-isabelline">
                       WAGS is a non-profit organization
                       which is raising funds towards
                       completing special improvement

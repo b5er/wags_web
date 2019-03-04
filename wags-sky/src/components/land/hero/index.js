@@ -34,8 +34,8 @@ class Hero extends Component {
 											Where furry friends are made.
 										</h1>
 										<button
+											id="hero-button"
 											className="button is-green is-large is-rounded fadein light-shadow has-text-pineapple"
-											style={{ borderColor: '#61e786' }}
 											onClick={e => {
 												e.preventDefault()
 											}}
