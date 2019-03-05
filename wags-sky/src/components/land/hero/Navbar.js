@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 
 // Apollo
 import { compose, graphql } from 'react-apollo'
@@ -34,7 +35,7 @@ class Navbar extends Component {
 	render() {
 
 		const { item, mobile, scrollBeyond } = this.state
-		const { showAbout, showContact, showAdopt, showAuth } = this.props
+		const { showAbout, showContact, showAdopt, showAuth, history } = this.props
 
 		return (
 			<nav
@@ -144,6 +145,7 @@ class Navbar extends Component {
 			  			onMouseLeave={() => this.setState({ item: '' })}
 							onClick={e => {
 								e.preventDefault()
+								history.push('/donate')
 							}}
 			  		>
 			  			Donate
@@ -161,4 +163,4 @@ export default compose(
 	graphql(SHOW_CONTACT, { name: 'showContact' }),
 	graphql(SHOW_ADOPT, { name : 'showAdopt'}),
 	graphql(SHOW_AUTH, { name: 'showAuth' })
-)(Navbar)
+)(withRouter(Navbar))

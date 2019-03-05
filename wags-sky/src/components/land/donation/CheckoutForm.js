@@ -54,19 +54,19 @@ class CheckoutForm extends Component {
 
     return (
       <StripeCheckout
-          token={ this.submit }
-          amount={ parseInt(amount * 100, 10) }
-          stripeKey= "pk_test_TIPbVScZzYrE42xYFkhDxGsQ"
+        token={ this.submit }
+        amount={ parseInt(amount * 100, 10) }
+        stripeKey= "pk_test_TIPbVScZzYrE42xYFkhDxGsQ"
+      >
+        <button
+          id="checkout-button"
+          disabled={ !amount }
+          className="button is-rounded is-fullwidth is-medium light-shadow is-green"
         >
-          <button
-            id="checkout-button"
-            disabled={ !amount }
-            className="button is-rounded is-fullwidth is-medium light-shadow is-green"
-          >
-            <h1 className="has-text-pineapple">
-              <strong>Donate</strong>
-            </h1>
-          </button>
+          <h1 className="has-text-pineapple">
+            <strong>Donate</strong>
+          </h1>
+        </button>
       </StripeCheckout>
     )
   }

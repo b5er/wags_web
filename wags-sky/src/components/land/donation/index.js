@@ -75,8 +75,6 @@ class Donation extends Component {
                           className={`button is-size-7 has-text-pineapple ${interval === 'month' ? 'is-green is-selected':''}`}
                           onClick={e => {
                             e.preventDefault()
-                            //TODO - Change to 'month'
-                            /*Testing - we will do daily for now.*/
                             this.setState({ interval: 'month' })
                           }}
                         >
@@ -159,7 +157,7 @@ class Donation extends Component {
 
                   <div className="column is-12" />
                   <div className="column is-12">
-                    <CheckoutForm amount={ parseFloat(amount) } interval = {interval} />
+                    <CheckoutForm amount={ parseFloat(amount) } interval={interval} />
                   </div>
                 </div>
               </div>

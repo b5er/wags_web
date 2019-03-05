@@ -1,8 +1,8 @@
 import React from 'react'
 
-// Components (TODO: create right path)
-import Donate from '../components/dashboard'
+// Components
+import Donate from '../components/donate'
 
-const DonatePage = landProps => <Donate />
+const DonatePage = donateProps => <Donate />
 
 export default DonatePage
