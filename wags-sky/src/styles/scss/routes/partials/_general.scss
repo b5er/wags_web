@@ -2,6 +2,10 @@
   cursor: pointer;
 }
 
+.is-hidden {
+  visibility: hidden;
+}
+
 .is-medium-blur {
   filter: blur(5px);
 }

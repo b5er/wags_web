@@ -188,9 +188,9 @@
 .adopt-img-overlay {
   z-index: 1;
   position: absolute;
-  filter: opacity(40%);
-  width: -webkit-fill-available;
-  height: -webkit-fill-available;
+  filter: opacity(80%);
+  width: 100%;
+  height: 100%;
 }
 
 .adopt-img-fadein {
@@ -233,9 +233,11 @@
 .adopt-description {
   font-family: 'Lato';
   font-weight: bold;
-  padding: 2em;
+  padding: 1em;
   position: absolute;
   z-index: 2;
+  width: 100%;
+  height: 100%;
 }
 
 .is-divider-vertical[data-content]::after, .is-divider[data-content]::after {

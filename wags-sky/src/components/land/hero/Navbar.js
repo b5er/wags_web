@@ -51,7 +51,7 @@ class Navbar extends Component {
 
 			    <span
 			    	role="button"
-			    	className={`navbar-burger ${mobile ? 'is-active':''}`}
+			    	className={`navbar-burger ${mobile && !scrollBeyond ? 'is-active':''} ${scrollBeyond ? 'is-hidden':''}`}
 			    	aria-label="menu"
 			    	aria-expanded="false"
 			    	onClick={e => {
@@ -63,7 +63,7 @@ class Navbar extends Component {
 			      <span aria-hidden="true" />
 			    </span>
 			  </div>
-			  <div className={`navbar-menu ${mobile ? 'is-active':''}`}>
+			  <div className={`navbar-menu ${mobile && !scrollBeyond ? 'is-active':''}`}>
 			  	<div className="navbar-end">
 						<div
 							className={`navbar-item is-tab ${scrollBeyond ? 'tab-fixed':''} ${item === 'about' ? 'is-active':''} pointer has-text-grey`}
