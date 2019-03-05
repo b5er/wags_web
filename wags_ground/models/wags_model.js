@@ -13,7 +13,7 @@ let PetSchema = new mongoose.Schema({
   breeds: [mongoose.Schema.Types.Mixed],
   description: String,
   petImage: String,
-  created : {type: Date }
+  created : { type: Date }
 })
 
 module.exports = mongoose.model('Pet', PetSchema)
