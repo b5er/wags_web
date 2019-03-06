@@ -60,7 +60,7 @@ class Footer extends Component {
 																		</span>
 																	</li>
 																	<li>
-																		<Link className="has-text-blue footer-item" to='/'>
+																		<Link className="has-text-blue footer-item" to='/donate'>
 																			Donate
 																		</Link>
 																	</li>
