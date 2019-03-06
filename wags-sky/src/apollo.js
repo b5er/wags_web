@@ -15,6 +15,10 @@ const typeDefs = `
 		contact: Boolean!
 	}
 
+	type Adopt {
+		contact: Boolean!
+	}
+
 	type Auth {
 		show: Boolean!
 		type: String!
@@ -27,6 +31,7 @@ const typeDefs = `
 	type Mutation {
 		toggleAbout(about: Boolean!): About
 		toggleContact(contact: Boolean!): Contact
+		toggleAdopt(adopt: Boolean!): Adopt
 		toggleAuth(auth: Boolean!, type: String!): Auth
 		updateItem(item: String!): Item
 	}
@@ -34,6 +39,7 @@ const typeDefs = `
 	type Query {
 		about: About
 		contact: Contact
+		adopt: Adopt
 		auth: Auth
 		item: Item
 	}

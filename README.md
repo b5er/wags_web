@@ -16,8 +16,10 @@ npm run start:dev
 ## License
 UNLICENSED.
 
-## Links & credit
+## Developers
 - Mikhail Sorokin, https://github.com/MikhailSorokin
 - Brian Servia, https://github.com/b5er
-- Sean Brown, https://github.com/seanbrhn3
+
+## Links & credit
 - David Khourshid, https://codepen.io/davidkpiano/pen/kkpGWj
+- Narendra N Shetty, https://codepen.io/narendrashetty/pen/YwypNo

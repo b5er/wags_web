@@ -1,0 +1,32 @@
+.steps .step-item .step-marker {
+  border: 0;
+  background-color: $davy-grey;
+}
+
+.steps .step-item.is-active .step-marker {
+  background-color: #00d1b2;
+}
+
+.steps .step-item::before {
+  background: linear-gradient(to left,$davy-grey 50%,#00d1b2 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+}
+
+
+// Confirmation
+.confirmation-message {
+  position: absolute;
+  margin-top: 5em;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  right: 0;
+}
+
+.receipt-button {
+  position: absolute;
+  margin-top: 8rem;
+  left: 44%;
+  right: 45%;
+}
