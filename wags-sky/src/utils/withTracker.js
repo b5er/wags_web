@@ -22,7 +22,6 @@ export default function withTracker(WrappedComponent, options = {}) {
 
       if(currentPage !== nextPage)
         trackPage(nextPage)
-
     }
 
     render() {
