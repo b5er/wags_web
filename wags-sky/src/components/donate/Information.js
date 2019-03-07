@@ -139,7 +139,7 @@ class Information extends Component {
                   onChange={async e => {
                     const updatedPhone = e.target.value.replace(/[\(\)\s-]+/g, '')
                     this.setState({ phone: updatedPhone })
-                    
+
                     try {
                       if (updatedPhone.match(regex.phone))
                         await updateCheckout({ variables: { ...checkout, phone: updatedPhone } })

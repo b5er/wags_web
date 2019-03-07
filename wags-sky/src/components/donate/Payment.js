@@ -7,10 +7,49 @@ import { GET_CHECKOUT, UPDATE_CHECKOUT } from '../../graphql/donate'
 // Input Mask
 import InputMask from 'react-input-mask'
 
+// Stripe
+import { CardNumberElement, CardExpiryElement, CardCVCElement, injectStripe } from 'react-stripe-elements'
+
 // Utils
 import { regex } from '../../utils/regex'
 import { getStorageItem, setStorageItem } from '../../utils/storage'
 
+const createOptions = (padding: ?string) => {
+  return {
+    style: {
+      base: {
+        fontSize: '1rem',
+        borderColor: '#dbdbdbdb',
+        color: '#363636',
+        boxShadow: 'inset 1px 2px rgba(10,10,10,.1)',
+        maxWidth: '100%',
+        width: '100%',
+        // '-webkit-appearance': 'none',
+        alignItems: 'center',
+        border: '1px solid transparent',
+        borderRadius: '4px',
+        display: 'inline-flex',
+        height: '2.25em',
+        justifyContent: 'flex-start',
+        lineHeight: '1.5',
+        paddingBottom: 'calc(.375em - 1px)',
+        paddingLeft: 'calc(.625em - 1px)',
+        paddingRight: 'calc(.625em - 1px)',
+        paddingTop: 'calc(.375em - 1px)',
+        position: 'relative',
+        verticalAlign: 'top',
+        fontFamily: 'Lato',
+        '::placeholder': {
+          color: '#aab7c4',
+        },
+        ...(padding ? {padding} : {}),
+      },
+      invalid: {
+        color: '#9e2146',
+      },
+    },
+  };
+};
 
 class Payment extends Component {
 
@@ -24,6 +63,7 @@ class Payment extends Component {
       cvc: ''
     }
   }
+
 
   render() {
 
@@ -118,7 +158,10 @@ class Payment extends Component {
               <i className="fab fa-cc-diners-club fa-sm" />
             </div>
           </div>
-          <div className="control has-icons-left">
+
+          <CardNumberElement {...createOptions()} />
+
+          {/*<div className="control has-icons-left">
             <InputMask
               className={`input ${card.match(regex.card) ? 'is-success':''} ${submit && !card.match(regex.card) ? 'is-danger':''}`}
               type="text"
@@ -139,6 +182,7 @@ class Payment extends Component {
               mask="9999 9999 9999 9999"
               maskChar={null}
             />
+
             <span className="icon is-small is-left">
               <i className="fas fa-credit-card" />
             </span>
@@ -158,7 +202,7 @@ class Payment extends Component {
             </p>
             :
             null
-          }
+          }*/}
         </div>
         <div className="field is-horizontal">
           <div className="field-body">
@@ -166,7 +210,8 @@ class Payment extends Component {
               <label className="label has-text-pineapple">
                 Expiration
               </label>
-              <div className="control">
+              <CardExpiryElement />
+              {/*<div className="control">
                 <InputMask
                   className={`input ${expiration.match(regex.exp) ? 'is-success':''} ${submit && !expiration.match(regex.exp) ? 'is-danger':''}`}
                   type="text"
@@ -195,7 +240,7 @@ class Payment extends Component {
                 </p>
                 :
                 null
-              }
+              }*/}
             </div>
             <div className="field">
               <label className="label has-text-pineapple">
@@ -204,7 +249,8 @@ class Payment extends Component {
                   <i className="fas fa-question-circle fa-xs info-cvc-icon"/>
                 </span>
               </label>
-              <div className="control">
+              <CardCVCElement />
+              {/*<div className="control">
                 <InputMask
                   className={`input ${cvc.match(regex.cvc) ? 'is-success':''} ${submit && !cvc.match(regex.cvc) ? 'is-danger':''}`}
                   type="text"
@@ -233,7 +279,7 @@ class Payment extends Component {
                 </p>
                 :
                 null
-              }
+              }*/}
             </div>
           </div>
         </div>
@@ -245,4 +291,4 @@ class Payment extends Component {
 export default compose(
   graphql(UPDATE_CHECKOUT, { name: 'updateCheckout' }),
   graphql(GET_CHECKOUT, { name: 'getCheckout' })
-)(Payment)
+)(injectStripe(Payment))
