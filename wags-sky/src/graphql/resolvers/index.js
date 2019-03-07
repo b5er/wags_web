@@ -10,6 +10,17 @@ export const defaults = {
 		type: 'login',
 		__typename: 'auth'
 	},
+	checkout: {
+		name: '',
+		email: '',
+		phone: '',
+		zip: '',
+		amount: false,
+		card: false,
+		expiration: false,
+		cvc: false,
+		__typename: 'checkout'
+	},
 	item: 'home'
 }
 
@@ -24,7 +35,7 @@ export const resolvers = {
 			return null
 		},
 		toggleAdopt: (_, { adopt }, { cache })  => {
-			cache.writeData( { data: { adopt } })
+			cache.writeData({ data: { adopt } })
 			return null
 		},
 		toggleAuth: (_, showAuth, { cache }) => {
@@ -33,6 +44,15 @@ export const resolvers = {
 				__typename: 'auth'
 			}
 			cache.writeData({ data: { auth } })
+			return null
+		},
+		updateCheckout: (_, checkout, { cache }) => {
+			const newCheckout = {
+				...checkout,
+				__typename: 'checkout'
+			}
+			console.log(newCheckout)
+			cache.writeData({ data: { checkout: newCheckout } })
 			return null
 		},
 		updateItem: (_, { item }, { cache }) => {

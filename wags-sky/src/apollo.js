@@ -24,6 +24,17 @@ const typeDefs = `
 		type: String!
 	}
 
+	type Checkout {
+		name: String!,
+		email: String!,
+		phone: String!,
+		zip: String!,
+		amount: Boolean!,
+		card: Boolean!,
+		expiration: Boolean!,
+		cvc: Boolean!
+	}
+
 	type Item {
 		item: String!
 	}
@@ -33,6 +44,7 @@ const typeDefs = `
 		toggleContact(contact: Boolean!): Contact
 		toggleAdopt(adopt: Boolean!): Adopt
 		toggleAuth(auth: Boolean!, type: String!): Auth
+		updateCheckout(name: String!, email: String!, phone: String!, zip: String!, amount: Boolean!, card: Boolean!, expiration: Boolean!, cvc: Boolean!): Checkout
 		updateItem(item: String!): Item
 	}
 
@@ -41,6 +53,7 @@ const typeDefs = `
 		contact: Contact
 		adopt: Adopt
 		auth: Auth
+		checkout: Checkout
 		item: Item
 	}
 

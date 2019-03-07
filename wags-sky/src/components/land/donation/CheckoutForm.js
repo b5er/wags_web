@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import StripeCheckout from 'react-stripe-checkout'
 
+// Utils
+import { setStorageItem } from '../../../utils/storage'
+
 
 class CheckoutForm extends Component {
 
   submit = async token => {
-    const { interval } = this.props
-    if (interval === 'one-time') {
+    const { amount, interval } = this.props
+    if (interval === 'once') {
       try {
         const charge = await fetch('http://localhost:8000/api/donation/charge', {
                                     method: 'POST',
@@ -16,7 +19,7 @@ class CheckoutForm extends Component {
                                     },
                                     body: JSON.stringify({
                                             stripeToken: token.id,
-                                            amount: parseInt(this.props.amount * 100, 10)
+                                            amount
                                           })
                                   })
         if(!charge.ok)
@@ -35,7 +38,7 @@ class CheckoutForm extends Component {
                                     },
                                     body: JSON.stringify({
                                             stripeToken: token.id,
-                                            amount: parseInt(this.props.amount * 100, 10),
+                                            amount,
                                             interval
                                     })
                             })
@@ -50,18 +53,22 @@ class CheckoutForm extends Component {
 
   render() {
 
-    const { amount } = this.props
+    const { amount, interval } = this.props
 
     return (
       <StripeCheckout
-        token={ this.submit }
-        amount={ parseInt(amount * 100, 10) }
-        stripeKey= "pk_test_TIPbVScZzYrE42xYFkhDxGsQ"
+        token={this.submit}
+        amount={parseInt(amount * 10)}
+        stripeKey="pk_test_TIPbVScZzYrE42xYFkhDxGsQ"
       >
         <button
           id="checkout-button"
-          disabled={ !amount }
+          disabled={!amount}
           className="button is-rounded is-fullwidth is-medium light-shadow is-green"
+          onClick={e => {
+            setStorageItem('amount', amount)
+            setStorageItem('interval', interval)
+          }}
         >
           <h1 className="has-text-pineapple">
             <strong>Donate</strong>

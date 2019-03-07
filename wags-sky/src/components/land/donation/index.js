@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import CheckoutForm from './CheckoutForm'
 
+
 class Donation extends Component {
   constructor() {
     super()
     this.state = {
       checked: true,
-      interval: 'one-time',
+      interval: 'Once',
       amount: ''
     }
   }
@@ -72,22 +73,22 @@ class Donation extends Component {
                     <div className="has-text-centered">
                       <div className="buttons has-addons">
                         <span
-                          className={`button is-size-7 has-text-pineapple ${interval === 'month' ? 'is-green is-selected':''}`}
+                          className={`button is-size-7 has-text-pineapple ${interval === 'Monthly' ? 'is-green is-selected':''}`}
                           onClick={e => {
                             e.preventDefault()
-                            this.setState({ interval: 'month' })
+                            this.setState({ interval: 'Monthly' })
                           }}
                         >
                           <strong>Monthly</strong>
                         </span>
                         <span
-                          className={`button is-size-7 has-text-pineapple ${interval === 'one-time' ? 'is-green is-selected':''}`}
+                          className={`button is-size-7 has-text-pineapple ${interval === 'Once' ? 'is-green is-selected':''}`}
                           onClick={e => {
                             e.preventDefault()
-                            this.setState({ interval: 'one-time' })
+                            this.setState({ interval: 'Once' })
                           }}
                         >
-                          <strong>One-Time</strong>
+                          <strong>Once</strong>
                         </span>
                       </div>
                     </div>
@@ -157,7 +158,7 @@ class Donation extends Component {
 
                   <div className="column is-12" />
                   <div className="column is-12">
-                    <CheckoutForm amount={ parseFloat(amount) } interval={interval} />
+                    <CheckoutForm amount={amount} interval={interval} />
                   </div>
                 </div>
               </div>

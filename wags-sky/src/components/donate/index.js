@@ -7,6 +7,10 @@ import Payment from './Payment'
 import Confirmation from './Confirmation'
 import Foot from './Foot'
 
+// Apollo
+import { compose, graphql } from 'react-apollo'
+import { GET_CHECKOUT } from '../../graphql/donate'
+
 
 class Donate extends Component {
 
@@ -14,13 +18,16 @@ class Donate extends Component {
     super()
     this.state = {
       active: 'info',
-      completed: 0
+      completed: 0,
+      infoSubmit: false,
+      paySubmit: false
     }
   }
 
   render() {
 
-    const { active, completed } = this.state
+    const { active, completed, infoSubmit, paySubmit } = this.state
+    const { getCheckout: { checkout } } = this.props
 
     return (
       <section className="hero is-fullheight is-blue">
@@ -70,10 +77,10 @@ class Donate extends Component {
                     <div className="columns is-centered">
                       <div className="column is-6">
                         <div className={`step-content ${active === 'info' ? 'is-active':''}`}>
-                          <Information />
+                          <Information submit={infoSubmit} />
                         </div>
                         <div className={`step-content ${active === 'pay' ? 'is-active':''}`}>
-                          <Payment />
+                          <Payment submit={paySubmit} />
                         </div>
                         <div className={`step-content ${active === 'confirm' ? 'is-active':''}`}>
                           <Confirmation />
@@ -82,7 +89,8 @@ class Donate extends Component {
                     </div>
                   </div>
                   <div className="steps-actions">
-                    { active === 'pay' ?
+                    {
+                      active === 'pay' ?
                         (<div className="steps-action">
                           <span
                             className="button is-light"
@@ -96,7 +104,8 @@ class Donate extends Component {
                         :
                         null
                     }
-                    { active === 'confirm' ?
+                    {
+                      active === 'confirm' ?
                         (<div className="steps-action">
                           <span
                             className="button receipt-button"
@@ -112,12 +121,18 @@ class Donate extends Component {
                             onClick={e => {
                               switch(active) {
                                 case 'pay':
-                                  // If inputs are valid do this
-                                  this.setState({ active: 'confirm', completed: 2 })
+                                  const { amount, card, expiration, cvc } = checkout
+                                  if (amount && card && expiration && cvc)
+                                    this.setState({ active: 'confirm', completed: 2 })
+                                  else
+                                    this.setState({ paySubmit: true })
                                   break
                                 default:
-                                  // If inputs are valid do this
-                                  this.setState({ active: 'pay', completed: 1 })
+                                  // const { name, email, phone, zip } = checkout
+                                  // if (name && email && phone && zip)
+                                    this.setState({ active: 'pay', completed: 1 })
+                                  // else
+                                  //   this.setState({ infoSubmit: true })
                                   break
                               }
                             }}
@@ -138,4 +153,6 @@ class Donate extends Component {
   }
 }
 
-export default Donate
+export default compose(
+  graphql(GET_CHECKOUT, { name: 'getCheckout' })
+)(Donate)
