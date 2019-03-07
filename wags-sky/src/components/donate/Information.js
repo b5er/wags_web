@@ -4,6 +4,9 @@ import React, { Component } from 'react'
 import { compose, graphql } from 'react-apollo'
 import { GET_CHECKOUT, UPDATE_CHECKOUT } from '../../graphql/donate'
 
+// Input Mask
+import InputMask from 'react-input-mask'
+
 // Utils
 import { regex } from '../../utils/regex'
 
@@ -18,6 +21,23 @@ class Information extends Component {
       phone: '',
       zip: ''
     }
+  }
+
+  beforeMaskedValueChange = (newState, oldState, userInput) => {
+    let { value } = newState
+    let selection = newState.selection
+    let cursorPosition = selection ? selection.start:null
+
+    // Keep dash if entered by user
+    if (value.endsWith('-') && userInput !== '-' && !this.state.zip.endsWith('-')) {
+      if (cursorPosition === value.length) {
+        cursorPosition--
+        selection = { start: cursorPosition, end: cursorPosition }
+      }
+      value = value.slice(0, -1)
+    }
+
+    return { value, selection }
   }
 
   render() {
@@ -113,12 +133,13 @@ class Information extends Component {
                 Phone
               </label>
               <div className="control">
-                <input
+                <InputMask
                   className={`input ${phone.match(regex.phone) ? 'is-success':''}  ${submit && !phone ? 'is-danger':''}`}
                   type="text"
                   onChange={async e => {
-                    const updatedPhone = e.target.value
+                    const updatedPhone = e.target.value.replace(/[\(\)\s-]+/g, '')
                     this.setState({ phone: updatedPhone })
+                    
                     try {
                       if (updatedPhone.match(regex.phone))
                         await updateCheckout({ variables: { ...checkout, phone: updatedPhone } })
@@ -128,6 +149,8 @@ class Information extends Component {
                   }}
                   value={phone}
                   placeholder="(214) 123-1234"
+                  mask="(999) 999-9999"
+                  maskChar=" "
                 />
               </div>
               {
@@ -144,7 +167,7 @@ class Information extends Component {
                 Zip
               </label>
               <div className="control">
-                <input
+                <InputMask
                   className={`input ${zip.match(regex.zip) ? 'is-success':''}  ${submit && !zip ? 'is-danger':''}`}
                   type="text"
                   onChange={async e => {
@@ -159,6 +182,9 @@ class Information extends Component {
                   }}
                   value={zip}
                   placeholder="12345"
+                  beforeMaskedValueChange={this.beforeMaskedValueChange}
+                  mask="99999-9999"
+                  maskChar={null}
                 />
               </div>
               {

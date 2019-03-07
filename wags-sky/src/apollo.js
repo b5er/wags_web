@@ -29,7 +29,7 @@ const typeDefs = `
 		email: String!,
 		phone: String!,
 		zip: String!,
-		amount: Boolean!,
+		amount: String!,
 		card: Boolean!,
 		expiration: Boolean!,
 		cvc: Boolean!
@@ -44,7 +44,7 @@ const typeDefs = `
 		toggleContact(contact: Boolean!): Contact
 		toggleAdopt(adopt: Boolean!): Adopt
 		toggleAuth(auth: Boolean!, type: String!): Auth
-		updateCheckout(name: String!, email: String!, phone: String!, zip: String!, amount: Boolean!, card: Boolean!, expiration: Boolean!, cvc: Boolean!): Checkout
+		updateCheckout(name: String!, email: String!, phone: String!, zip: String!, amount: String!, card: Boolean!, expiration: Boolean!, cvc: Boolean!): Checkout
 		updateItem(item: String!): Item
 	}
 

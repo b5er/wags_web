@@ -15,7 +15,7 @@ export const defaults = {
 		email: '',
 		phone: '',
 		zip: '',
-		amount: false,
+		amount: '',
 		card: false,
 		expiration: false,
 		cvc: false,
@@ -51,7 +51,6 @@ export const resolvers = {
 				...checkout,
 				__typename: 'checkout'
 			}
-			console.log(newCheckout)
 			cache.writeData({ data: { checkout: newCheckout } })
 			return null
 		},

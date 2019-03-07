@@ -128,11 +128,11 @@ class Donate extends Component {
                                     this.setState({ paySubmit: true })
                                   break
                                 default:
-                                  // const { name, email, phone, zip } = checkout
-                                  // if (name && email && phone && zip)
+                                  const { name, email, phone, zip } = checkout
+                                  if (name && email && phone && zip)
                                     this.setState({ active: 'pay', completed: 1 })
-                                  // else
-                                  //   this.setState({ infoSubmit: true })
+                                  else
+                                    this.setState({ infoSubmit: true })
                                   break
                               }
                             }}

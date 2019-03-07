@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import CheckoutForm from './CheckoutForm'
 
+// Input Mask
+import InputMask from 'react-input-mask'
+
 
 class Donation extends Component {
   constructor() {
@@ -53,13 +56,14 @@ class Donation extends Component {
                           <div className="column no-top-padding">
                             <form>
                               <div className="field">
-                                <input
+                                <InputMask
                                   className="input is-pineapple donation-input has-text-centered"
                                   onChange={e => {
-                                    if(!isNaN(e.target.value))
-                                      this.setState({ amount: e.target.value })}
+                                    this.setState({ amount: e.target.value })}
                                   }
                                   value={amount}
+                                  mask="999999"
+                                  maskChar={null}
                                 />
                               </div>
                             </form>

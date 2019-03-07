@@ -13,6 +13,21 @@
   background-position: right bottom;
 }
 
+// Payment
+.accepted-cards {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.icon-margin-right {
+  margin-right: .1em;
+}
+
+.info-cvc-icon {
+  position: absolute;
+  margin-top: .5em;
+  margin-left: .4em;
+}
 
 // Confirmation
 .confirmation-message {
