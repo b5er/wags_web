@@ -14,38 +14,21 @@ import { CardNumberElement, CardExpiryElement, CardCVCElement, injectStripe } fr
 import { regex } from '../../utils/regex'
 import { getStorageItem, setStorageItem } from '../../utils/storage'
 
+
 const createOptions = (padding: ?string) => {
   return {
     style: {
       base: {
-        fontSize: '1rem',
-        borderColor: '#dbdbdbdb',
+        fontSize: '16px',
         color: '#363636',
-        boxShadow: 'inset 1px 2px rgba(10,10,10,.1)',
-        maxWidth: '100%',
-        width: '100%',
-        // '-webkit-appearance': 'none',
-        alignItems: 'center',
-        border: '1px solid transparent',
-        borderRadius: '4px',
-        display: 'inline-flex',
-        height: '2.25em',
-        justifyContent: 'flex-start',
-        lineHeight: '1.5',
-        paddingBottom: 'calc(.375em - 1px)',
-        paddingLeft: 'calc(.625em - 1px)',
-        paddingRight: 'calc(.625em - 1px)',
-        paddingTop: 'calc(.375em - 1px)',
-        position: 'relative',
-        verticalAlign: 'top',
-        fontFamily: 'Lato',
+        fontFamily: '"Noto Sans", Lato',
         '::placeholder': {
           color: '#aab7c4',
         },
         ...(padding ? {padding} : {}),
       },
       invalid: {
-        color: '#9e2146',
+        color: '#ff3860',
       },
     },
   };
@@ -58,16 +41,27 @@ class Payment extends Component {
     this.state = {
       amount: getStorageItem('amount') ? `${getStorageItem('amount')}`:'',
       interval: getStorageItem('interval') ? `${getStorageItem('interval')}`:'Once',
-      card: '',
-      expiration: '',
-      cvc: ''
+      cardNumberEmpty: true,
+      cardExpEmpty: true,
+      cardCVCEmpty: true
     }
   }
 
+  componentDidMount() {
+
+  }
+
+  componentWillUnmount() {
+
+  }
+
+  borderError = () => {
+    document.querySelector('.StripeElement').style.borderColor = '#ff3860'
+  }
 
   render() {
 
-    const { amount, interval, card, expiration, cvc } = this.state
+    const { amount, interval, cardNumberEmpty, cardExpEmpty, cardCVCEmpty } = this.state
     const { getCheckout: { checkout }, updateCheckout, submit } = this.props
 
     return (
@@ -158,51 +152,44 @@ class Payment extends Component {
               <i className="fab fa-cc-diners-club fa-sm" />
             </div>
           </div>
+          <div className="control has-icons-right">
+            <CardNumberElement
+              {...createOptions()}
+              onChange={e => {
+                const cardNumberErrors = document.querySelector('#card-number-errors')
+                if (e.error) {
+                  cardNumberErrors.textContent = `${e.error.message}`
+                } else {
+                  cardNumberErrors.textContent = ''
+                }
 
-          <CardNumberElement {...createOptions()} />
-
-          {/*<div className="control has-icons-left">
-            <InputMask
-              className={`input ${card.match(regex.card) ? 'is-success':''} ${submit && !card.match(regex.card) ? 'is-danger':''}`}
-              type="text"
-              onChange={async e => {
-                const updatedCard = e.target.value.replace(/\s/g, '')
-                this.setState({ card: updatedCard })
-                try {
-                  if (updatedCard.match(regex.card))
-                    await updateCheckout({ variables: { ...checkout, card: true } })
-                  else
-                    await updateCheckout({ variables: { ...checkout, card: false } })
-                } catch(e) {
-                  console.log(e)
+                const cardNumber = document.querySelector('.StripeElement')
+                if (e.empty) {
+                  this.setState({ cardNumberEmpty: true })
+                  if (submit)
+                    cardNumber.style.borderColor = '#ff3860'
+                } else if (e.complete) {
+                  cardNumber.style.borderColor = '#23d160'
+                } else {
+                  this.setState({ cardNumberEmpty: false })
+                  cardNumber.style.borderColor = ''
                 }
               }}
-              value={card}
-              placeholder="4242 4242 4242 4242"
-              mask="9999 9999 9999 9999"
-              maskChar={null}
             />
-
-            <span className="icon is-small is-left">
+            <span className="icon is-small is-right">
               <i className="fas fa-credit-card" />
             </span>
+            <p id="card-number-errors" className="help is-danger" />
+            {
+              submit && cardNumberEmpty ?
+                <p className="help is-danger">
+                  {this.borderError()}
+                  A card number is required
+                </p>
+                :
+                null
+            }
           </div>
-          {
-            submit && !card ?
-            <p className="help is-danger">
-              A card number is required
-            </p>
-            :
-            null
-          }
-          {
-            submit && !card.match(regex.card) && card ?
-            <p className="help is-danger">
-              This is an invalid card number
-            </p>
-            :
-            null
-          }*/}
         </div>
         <div className="field is-horizontal">
           <div className="field-body">
@@ -210,7 +197,39 @@ class Payment extends Component {
               <label className="label has-text-pineapple">
                 Expiration
               </label>
-              <CardExpiryElement />
+              <CardExpiryElement
+                {...createOptions()}
+                onChange={e => {
+                  const cardExpErrors = document.querySelector('#card-number-errors')
+                  if (e.error) {
+                    cardExpErrors.textContent = `${e.error.message}`
+                  } else {
+                    cardExpErrors.textContent = ''
+                  }
+
+                  const cardExp = document.querySelector('.StripeElement')
+                  if (e.empty) {
+                    this.setState({ cardExpEmpty: true })
+                    if (submit)
+                      cardExp.style.borderColor = '#ff3860'
+                  } else if (e.complete) {
+                    cardExp.style.borderColor = '#23d160'
+                  } else {
+                    this.setState({ cardExpEmpty: false })
+                    cardExp.style.borderColor = ''
+                  }
+                }}
+              />
+              <p id="card-exp-errors" className="help is-danger" />
+              {
+                submit && cardExpEmpty ?
+                  <p className="help is-danger">
+                    {this.borderError()}
+                    An expiration date is required
+                  </p>
+                  :
+                  null
+              }
               {/*<div className="control">
                 <InputMask
                   className={`input ${expiration.match(regex.exp) ? 'is-success':''} ${submit && !expiration.match(regex.exp) ? 'is-danger':''}`}
@@ -249,7 +268,7 @@ class Payment extends Component {
                   <i className="fas fa-question-circle fa-xs info-cvc-icon"/>
                 </span>
               </label>
-              <CardCVCElement />
+              <CardCVCElement {...createOptions()} />
               {/*<div className="control">
                 <InputMask
                   className={`input ${cvc.match(regex.cvc) ? 'is-success':''} ${submit && !cvc.match(regex.cvc) ? 'is-danger':''}`}
