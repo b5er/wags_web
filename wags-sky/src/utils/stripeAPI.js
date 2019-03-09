@@ -1,12 +1,12 @@
-export const charge = (token, amount, interval) => {
+export const charge = (token, amount, interval, email) => {
   if (interval === 'Once') {
-    return chargeOnce(token, amount)
+    return chargeOnce(token, amount, email)
   } else if (interval === 'Monthly') {
-    return chargeMonthly(token, amount)
+    return chargeMonthly(token, amount, email)
   }
 }
 
-const chargeOnce = async (token, amount) => {
+const chargeOnce = async (token, amount, email) => {
   try {
     const charge = await fetch('http://localhost:8000/api/donation/charge', {
                                 method: 'POST',
@@ -14,7 +14,7 @@ const chargeOnce = async (token, amount) => {
                                   'Accept': 'application/json',
                                   'Content-Type': 'application/json'
                                 },
-                                body: JSON.stringify({ stripeToken: token.id, amount })
+                                body: JSON.stringify({ stripeToken: token.id, amount, email })
                               })
     if (!charge.ok)
       console.log('Unable to charge account Once.')
@@ -24,7 +24,7 @@ const chargeOnce = async (token, amount) => {
   }
 }
 
-const chargeMonthly = async (token, amount) => {
+const chargeMonthly = async (token, amount, email) => {
   try {
     const subscription = await fetch('http://localhost:8000/api/donation/createSubscriptionPlan', {
                                 method: 'POST',
@@ -32,11 +32,8 @@ const chargeMonthly = async (token, amount) => {
                                   'Accept': 'application/json',
                                   'Content-Type': 'application/json'
                                 },
-                                body: JSON.stringify({
-                                        stripeToken: token.id,
-                                        amount
-                                })
-                        })
+                                body: JSON.stringify({ stripeToken: token.id, amount, email })
+                              })
     if(!subscription.ok)
       console.error('Unable to charge account Monthly.')
     return subscription.json()

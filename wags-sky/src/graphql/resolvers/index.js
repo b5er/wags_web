@@ -17,7 +17,6 @@ export const defaults = {
 		zip: '',
 		amount: '',
 		complete: false,
-		isLoading: false,
 		__typename: 'checkout'
 	},
 	item: 'home'

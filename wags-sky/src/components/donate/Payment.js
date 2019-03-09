@@ -61,23 +61,22 @@ class Payment extends Component {
     const { cardNumberComplete, cardExpComplete, cardCVCComplete } = complete
     if (cardNumberComplete && cardExpComplete && cardCVCComplete) {
       try {
-        const { checkout: { name, zip } } = await this.props.getCheckout
+        const { checkout, checkout: { name, zip, email } } = await this.props.getCheckout
         const { token, error } = await this.props.stripe.createToken({ name, address_zip: zip })
         if (!token)
           console.log(error)
 
-        document.querySelector('#complete-button').classList.add('is-loading')
-
-        const charged = await charge(token, amount, interval)
+        const completeButton = document.querySelector('#complete-button')
+        completeButton.classList.add('is-loading')
+        const charged = await charge(token, amount, interval, email)
         if (!charged || !charged.success) {
           console.log(charged.message)
           return
         }
-        
-        document.querySelector('#complete-button').classList.remove('is-loading')
+        completeButton.classList.remove('is-loading')
 
-        document.querySelector('#complete-button').removeAttribute('disabled')
-        await this.props.updateCheckout({ variables: { ...this.props.getCheckout.checkout, complete: true } })
+        completeButton.removeAttribute('disabled')
+        await this.props.updateCheckout({ variables: { ...checkout, complete: true } })
       } catch(e) {
         console.log(e)
       }
@@ -201,8 +200,7 @@ class Payment extends Component {
                   this.submit(amount, interval, updatedComplete)
                 } else {
                   const updatedComplete = {...complete, cardNumberComplete: false }
-                  this.setState({ complete: updatedComplete })
-                  this.setState({ cardNumberEmpty: false })
+                  this.setState({ complete: updatedComplete, cardNumberEmpty: false })
                   cardNumber.style.borderColor = ''
                 }
               }}
@@ -251,8 +249,7 @@ class Payment extends Component {
                     this.submit(amount, interval, updatedComplete)
                   } else {
                     const updatedComplete = {...complete, cardExpComplete: false }
-                    this.setState({ complete: updatedComplete })
-                    this.setState({ cardExpEmpty: false })
+                    this.setState({ complete: updatedComplete, cardExpEmpty: false })
                     cardExp.style.borderColor = ''
                   }
                 }}
@@ -298,8 +295,7 @@ class Payment extends Component {
                     this.submit(amount, interval, updatedComplete)
                   } else {
                     const updatedComplete = {...complete, cardCVCComplete: false }
-                    this.setState({ complete: updatedComplete })
-                    this.setState({ cardCVCEmpty: false })
+                    this.setState({ complete: updatedComplete, cardCVCEmpty: false })
                     cardCVC.style.borderColor = ''
                   }
                 }}
