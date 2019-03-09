@@ -116,22 +116,42 @@ class Footer extends Component {
 	                                <h3 className="has-text-ceil">Follow Us</h3>
 	                                <nav className="level is-mobile">
 	                                    <div className="level-left">
-	                                        <a className="level-item" href="https://www.facebook.com/WAGS-Greenbelt-MD-519196931590002/">
-	                                            <span className="icon has-text-blue footer-item">
+	                                        <a
+																						className="level-item"
+																						href="https://www.facebook.com/WAGS-Greenbelt-MD-519196931590002/"
+																						target="_blank"
+																						rel="noopener noreferrer"
+																					>
+	                                            <span className="icon has-text-blue footer-item" target="_blank">
 																								<i className="fab fa-facebook-square fa-lg" />
 																							</span>
 	                                        </a>
-	                                        <a className="level-item" href="https://twitter.com/">
+	                                        <a
+																						className="level-item"
+																						href="https://twitter.com/"
+																						target="_blank"
+																						rel="noopener noreferrer"
+																					>
 	                                            <span className="icon has-text-blue footer-item">
 																								<i className="fab fa-twitter-square fa-lg" />
 																							</span>
 	                                        </a>
-																					<a className="level-item" href="https://github.com/b5er">
+																					<a
+																						className="level-item"
+																						href="https://github.com/love-wags"
+																						target="_blank"
+																						rel="noopener noreferrer"
+																					>
 	                                            <span className="icon has-text-blue footer-item">
 																								<i className="fab fa-github-square fa-lg" />
 																							</span>
 	                                        </a>
-																					<a className="level-item" href="https://dribbble.com/">
+																					<a
+																						className="level-item"
+																						href="https://dribbble.com/"
+																						target="_blank"
+																						rel="noopener noreferrer"
+																					>
 	                                            <span className="icon has-text-blue footer-item">
 																								<i className="fab fa-dribbble-square fa-lg" />
 																							</span>
