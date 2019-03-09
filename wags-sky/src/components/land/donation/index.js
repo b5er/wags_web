@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
-import CheckoutForm from './CheckoutForm'
+import { withRouter } from 'react-router-dom'
 
 // Input Mask
 import InputMask from 'react-input-mask'
+
+// Utils
+import { setStorageItem } from '../../../utils/storage'
 
 
 class Donation extends Component {
@@ -15,10 +18,10 @@ class Donation extends Component {
     }
   }
 
-
   render() {
 
     const { checked, interval, amount } = this.state
+    const { history } = this.props
 
     return (
       <section className="section is-medium is-ceil">
@@ -162,7 +165,20 @@ class Donation extends Component {
 
                   <div className="column is-12" />
                   <div className="column is-12">
-                    <CheckoutForm amount={amount} interval={interval} />
+                    <button
+                      id="checkout-button"
+                      disabled={!amount}
+                      className="button is-rounded is-fullwidth is-medium light-shadow is-green"
+                      onClick={e => {
+                        setStorageItem('amount', amount)
+                        setStorageItem('interval', interval)
+                        history.push('/donate')
+                      }}
+                    >
+                      <h1 className="has-text-pineapple">
+                        <strong>Donate</strong>
+                      </h1>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -174,4 +190,4 @@ class Donation extends Component {
   }
 }
 
-export default Donation
+export default withRouter(Donation)
