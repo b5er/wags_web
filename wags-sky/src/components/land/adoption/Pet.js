@@ -12,11 +12,9 @@ class Pet extends Component {
 		if (item.created) {
 			const createdDate = new Date(item.created)
 			const today = new Date()
-			/*Time is returned in ms in getTime(), so get the difference
-			and divide by 1000 ms to get seconds and 60 twice to get hours*/
-			return ((today.getTime() - createdDate.getTime()) / 1000) / (60 * 60)
+			return ((today.getTime() - createdDate.getTime()) / 1000) / (60 * 60) // seconds
 		}
-		// In case DB error, by default it will not show green notification dot.
+		// If DB error, default no green dot.
 		return 25
 	}
 

@@ -13,6 +13,7 @@ import { CardNumberElement, CardExpiryElement, CardCVCElement, injectStripe } fr
 // Utils
 import { regex } from '../../utils/regex'
 import { getStorageItem, setStorageItem } from '../../utils/storage'
+import { charge } from '../../utils/stripeAPI'
 
 
 const createOptions = (padding: ?string) => {
@@ -43,25 +44,49 @@ class Payment extends Component {
       interval: getStorageItem('interval') ? `${getStorageItem('interval')}`:'Once',
       cardNumberEmpty: true,
       cardExpEmpty: true,
-      cardCVCEmpty: true
+      cardCVCEmpty: true,
+      complete: {
+        cardNumberComplete: false,
+        cardExpComplete: false,
+        cardCVCComplete: false
+      }
     }
   }
 
-  componentDidMount() {
-
+  borderError = element => {
+    document.querySelector(element).style.borderColor = '#ff3860'
   }
 
-  componentWillUnmount() {
+  submit = async (amount, interval, complete) => {
+    const { cardNumberComplete, cardExpComplete, cardCVCComplete } = complete
+    if (cardNumberComplete && cardExpComplete && cardCVCComplete) {
+      try {
+        const { checkout: { name, zip } } = await this.props.getCheckout
+        const { token, error } = await this.props.stripe.createToken({ name, address_zip: zip })
+        if (!token)
+          console.log(error)
 
-  }
+        document.querySelector('#complete-button').classList.add('is-loading')
 
-  borderError = () => {
-    document.querySelector('.StripeElement').style.borderColor = '#ff3860'
+        const charged = await charge(token, amount, interval)
+        if (!charged || !charged.success) {
+          console.log(charged.message)
+          return
+        }
+        
+        document.querySelector('#complete-button').classList.remove('is-loading')
+
+        document.querySelector('#complete-button').removeAttribute('disabled')
+        await this.props.updateCheckout({ variables: { ...this.props.getCheckout.checkout, complete: true } })
+      } catch(e) {
+        console.log(e)
+      }
+    }
   }
 
   render() {
 
-    const { amount, interval, cardNumberEmpty, cardExpEmpty, cardCVCEmpty } = this.state
+    const { amount, interval, cardNumberEmpty, cardExpEmpty, cardCVCEmpty, complete } = this.state
     const { getCheckout: { checkout }, updateCheckout, submit } = this.props
 
     return (
@@ -154,6 +179,7 @@ class Payment extends Component {
           </div>
           <div className="control has-icons-right">
             <CardNumberElement
+              id="card-num-element"
               {...createOptions()}
               onChange={e => {
                 const cardNumberErrors = document.querySelector('#card-number-errors')
@@ -163,14 +189,19 @@ class Payment extends Component {
                   cardNumberErrors.textContent = ''
                 }
 
-                const cardNumber = document.querySelector('.StripeElement')
+                const cardNumber = document.querySelector('#card-num-element')
                 if (e.empty) {
                   this.setState({ cardNumberEmpty: true })
                   if (submit)
                     cardNumber.style.borderColor = '#ff3860'
                 } else if (e.complete) {
+                  const updatedComplete = {...complete, cardNumberComplete: true }
+                  this.setState({ complete: updatedComplete })
                   cardNumber.style.borderColor = '#23d160'
+                  this.submit(amount, interval, updatedComplete)
                 } else {
+                  const updatedComplete = {...complete, cardNumberComplete: false }
+                  this.setState({ complete: updatedComplete })
                   this.setState({ cardNumberEmpty: false })
                   cardNumber.style.borderColor = ''
                 }
@@ -183,7 +214,7 @@ class Payment extends Component {
             {
               submit && cardNumberEmpty ?
                 <p className="help is-danger">
-                  {this.borderError()}
+                  {this.borderError('#card-num-element')}
                   A card number is required
                 </p>
                 :
@@ -198,23 +229,29 @@ class Payment extends Component {
                 Expiration
               </label>
               <CardExpiryElement
+                id="card-exp-element"
                 {...createOptions()}
                 onChange={e => {
-                  const cardExpErrors = document.querySelector('#card-number-errors')
+                  const cardExpErrors = document.querySelector('#card-exp-errors')
                   if (e.error) {
                     cardExpErrors.textContent = `${e.error.message}`
                   } else {
                     cardExpErrors.textContent = ''
                   }
 
-                  const cardExp = document.querySelector('.StripeElement')
+                  const cardExp = document.querySelector('#card-exp-element')
                   if (e.empty) {
                     this.setState({ cardExpEmpty: true })
                     if (submit)
                       cardExp.style.borderColor = '#ff3860'
                   } else if (e.complete) {
+                    const updatedComplete = {...complete, cardExpComplete: true }
+                    this.setState({ complete: updatedComplete })
                     cardExp.style.borderColor = '#23d160'
+                    this.submit(amount, interval, updatedComplete)
                   } else {
+                    const updatedComplete = {...complete, cardExpComplete: false }
+                    this.setState({ complete: updatedComplete })
                     this.setState({ cardExpEmpty: false })
                     cardExp.style.borderColor = ''
                   }
@@ -224,42 +261,12 @@ class Payment extends Component {
               {
                 submit && cardExpEmpty ?
                   <p className="help is-danger">
-                    {this.borderError()}
+                    {this.borderError('#card-exp-element')}
                     An expiration date is required
                   </p>
                   :
                   null
               }
-              {/*<div className="control">
-                <InputMask
-                  className={`input ${expiration.match(regex.exp) ? 'is-success':''} ${submit && !expiration.match(regex.exp) ? 'is-danger':''}`}
-                  type="text"
-                  onChange={async e => {
-                    const updatedExp = e.target.value
-                    this.setState({ expiration: updatedExp })
-                    try {
-                      if (updatedExp.match(regex.exp))
-                        await updateCheckout({ variables: { ...checkout, expiration: true } })
-                      else
-                        await updateCheckout({ variables: { ...checkout, expiration: false } })
-                    } catch(e) {
-                      console.log(e)
-                    }
-                  }}
-                  value={expiration}
-                  placeholder="10/23"
-                  mask="99/99"
-                  maskChar={null}
-                />
-              </div>
-              {
-                submit && !expiration.match(regex.exp) ?
-                <p className="help is-danger">
-                  An expiration date is required
-                </p>
-                :
-                null
-              }*/}
             </div>
             <div className="field">
               <label className="label has-text-pineapple">
@@ -268,37 +275,45 @@ class Payment extends Component {
                   <i className="fas fa-question-circle fa-xs info-cvc-icon"/>
                 </span>
               </label>
-              <CardCVCElement {...createOptions()} />
-              {/*<div className="control">
-                <InputMask
-                  className={`input ${cvc.match(regex.cvc) ? 'is-success':''} ${submit && !cvc.match(regex.cvc) ? 'is-danger':''}`}
-                  type="text"
-                  onChange={async e => {
-                    const updatedCVC = e.target.value
-                    this.setState({ cvc: updatedCVC })
-                    try {
-                      if (updatedCVC.match(regex.cvc))
-                        await updateCheckout({ variables: { ...checkout, cvc: true } })
-                      else
-                        await updateCheckout({ variables: { ...checkout, cvc: false } })
-                    } catch(e) {
-                      console.log(e)
-                    }
-                  }}
-                  value={cvc}
-                  placeholder="123"
-                  mask="9999"
-                  maskChar={null}
-                />
-              </div>
+              <CardCVCElement
+                id="card-cvc-element"
+                {...createOptions()}
+                onChange={e => {
+                  const cardCVCErrors = document.querySelector('#card-cvc-errors')
+                  if (e.error) {
+                    cardCVCErrors.textContent = `${e.error.message}`
+                  } else {
+                    cardCVCErrors.textContent = ''
+                  }
+
+                  const cardCVC = document.querySelector('#card-cvc-element')
+                  if (e.empty) {
+                    this.setState({ cardCVCEmpty: true })
+                    if (submit)
+                      cardCVC.style.borderColor = '#ff3860'
+                  } else if (e.complete) {
+                    const updatedComplete = {...complete, cardCVCComplete: true }
+                    this.setState({ complete: updatedComplete })
+                    cardCVC.style.borderColor = '#23d160'
+                    this.submit(amount, interval, updatedComplete)
+                  } else {
+                    const updatedComplete = {...complete, cardCVCComplete: false }
+                    this.setState({ complete: updatedComplete })
+                    this.setState({ cardCVCEmpty: false })
+                    cardCVC.style.borderColor = ''
+                  }
+                }}
+              />
+              <p id="card-cvc-errors" className="help is-danger" />
               {
-                submit && !cvc.match(regex.cvc) ?
-                <p className="help is-danger">
-                  A security number is required
-                </p>
-                :
-                null
-              }*/}
+                submit && cardCVCEmpty ?
+                  <p className="help is-danger">
+                    {this.borderError('#card-cvc-element')}
+                    An expiration date is required
+                  </p>
+                  :
+                  null
+              }
             </div>
           </div>
         </div>

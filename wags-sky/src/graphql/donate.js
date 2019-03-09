@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
 export const UPDATE_CHECKOUT = gql`
-	mutation updateCheckout($name: String!, $email: String!, $phone: String!, $zip: String!, $amount: String!, $card: Boolean!, $expiration: Boolean!, $cvc: Boolean!) {
-		updateCheckout(name: $name, email: $email, phone: $phone, zip: $zip, amount: $amount, card: $card, expiration: $expiration, cvc: $cvc) @client
+	mutation updateCheckout($name: String!, $email: String!, $phone: String!, $zip: String!, $amount: String!, $complete: Boolean!, $isLoading: Boolean!) {
+		updateCheckout(name: $name, email: $email, phone: $phone, zip: $zip, amount: $amount, complete: $complete, isLoading: $isLoading) @client
 	}
 `
 
@@ -14,9 +14,8 @@ export const GET_CHECKOUT = gql`
       phone,
       zip,
       amount,
-      card,
-      expiration,
-      cvc
+			complete,
+			isLoading
 		}
 	}
 `

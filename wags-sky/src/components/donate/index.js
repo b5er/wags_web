@@ -21,23 +21,19 @@ class Donate extends Component {
     super()
     this.state = {
       active: 'info',
-      completed: 0,
+      step: 0,
       infoSubmit: false,
       paySubmit: false
     }
   }
 
-  submit = e => {
-    console.log(e)
-  }
-
   render() {
 
-    const { active, completed, infoSubmit, paySubmit } = this.state
+    const { active, step, infoSubmit, paySubmit } = this.state
     const { getCheckout: { checkout } } = this.props
 
     return (
-      <StripeProvider apiKey="pk_test_TIPbVScZzYrE42xYFkhDxGsQ">
+      <StripeProvider apiKey="pk_test_6BSbyhfEtRHnrjHDiZMlzb1q">
         <section className="hero is-fullheight is-blue">
           <Head />
   				<div className="hero-body">
@@ -45,7 +41,7 @@ class Donate extends Component {
     					<div className="columns is-centered">
                 <div className="column is-6">
                   <ul className="steps is-medium">
-                    <li className={`step-item ${active === 'info' ? 'is-active':''} ${completed >= 0 ? 'is-completed':''}`}>
+                    <li className={`step-item ${active === 'info' ? 'is-active':''} ${step >= 0 ? 'is-completed':''}`}>
                       <div className="step-marker">
                         <span className="icon">
                           <i className="fa fa-user has-text-isabelline" />
@@ -57,7 +53,7 @@ class Donate extends Component {
                         </p>
                       </div>
                     </li>
-                    <li className={`step-item ${active === 'pay' ? 'is-active':''} ${completed >= 1 ? 'is-completed':''}`}>
+                    <li className={`step-item ${active === 'pay' ? 'is-active':''} ${step >= 1 ? 'is-completed':''}`}>
                       <div className="step-marker">
                         <span className="icon">
                           <i className="fas fa-dollar-sign has-text-isabelline" />
@@ -69,7 +65,7 @@ class Donate extends Component {
                         </p>
                       </div>
                     </li>
-                    <li className={`step-item ${active === 'confirm' ? 'is-active':''} ${completed === 2 ? 'is-completed':''}`}>
+                    <li className={`step-item ${active === 'confirm' ? 'is-active':''} ${step === 2 ? 'is-completed':''}`}>
                       <div className="step-marker">
                         <span className="icon">
                           <i className="fa fa-check has-text-isabelline" />
@@ -105,7 +101,7 @@ class Donate extends Component {
                             <span
                               className="button is-light"
                               onClick={e => {
-                                this.setState({ active: 'info', completed: 0 })
+                                this.setState({ active: 'info', step: 0 })
                               }}
                             >
                               Previous
@@ -127,24 +123,25 @@ class Donate extends Component {
                           :
                           (<div className="steps-action">
                             <span
+                              id="complete-button"
                               className="button is-light"
                               onClick={e => {
                                 switch(active) {
                                   case 'pay':
-                                    const { amount, card, expiration, cvc } = checkout
-                                    if (amount && card && expiration && cvc) {
-                                      this.submit(e)
-                                      this.setState({ active: 'confirm', completed: 2 })
+                                    if (checkout.complete) {
+                                      this.setState({ active: 'confirm', step: 2, paySubmit: true })
                                     } else {
                                       this.setState({ paySubmit: true })
                                     }
                                     break
                                   default:
-                                    // const { name, email, phone, zip } = checkout
-                                    // if (name && email && phone && zip)
-                                      this.setState({ active: 'pay', completed: 1 })
-                                    // else
-                                    //   this.setState({ infoSubmit: true })
+                                    const { name, email, phone, zip } = checkout
+                                    if (name && email && phone && zip) {
+                                      document.querySelector('span#complete-button').setAttribute('disabled', true)
+                                      this.setState({ active: 'pay', step: 1, infoSubmit: true })
+                                    } else {
+                                      this.setState({ infoSubmit: true })
+                                    }
                                     break
                                 }
                               }}

@@ -30,9 +30,8 @@ const typeDefs = `
 		phone: String!,
 		zip: String!,
 		amount: String!,
-		card: Boolean!,
-		expiration: Boolean!,
-		cvc: Boolean!
+		complete: Boolean!,
+		isLoading: Boolean!
 	}
 
 	type Item {
@@ -44,7 +43,7 @@ const typeDefs = `
 		toggleContact(contact: Boolean!): Contact
 		toggleAdopt(adopt: Boolean!): Adopt
 		toggleAuth(auth: Boolean!, type: String!): Auth
-		updateCheckout(name: String!, email: String!, phone: String!, zip: String!, amount: String!, card: Boolean!, expiration: Boolean!, cvc: Boolean!): Checkout
+		updateCheckout(name: String!, email: String!, phone: String!, zip: String!, amount: String!, complete: Boolean!, isLoading: Boolean!): Checkout
 		updateItem(item: String!): Item
 	}
 

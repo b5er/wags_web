@@ -11,7 +11,7 @@ class Confirmation extends Component {
         <CheckoutDog />
         <div className="confirmation-message">
           <h1 className="title is-size-4">
-            Your payment was completed!
+            Your payment is completed!
           </h1>
         </div>
       </div>

@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.post('/charge', (req, res, next) => {
   const token = req.body.stripeToken // Using Express
-  const amount = req.body.amount
+  const amount = !isNaN(req.body.amount) ? (parseInt(req.body.amount) * 100):0
 
   stripe.charges.create({
     amount,
@@ -17,13 +17,12 @@ router.post('/charge', (req, res, next) => {
     if (err) {
       res.send({
         success: false,
-        message: 'Error'
+        message: err.message
       })
     } else {
       res.send({
         success: true,
-        //body: JSON.stringify(plan), - TODO - Send something to front-end to display (Mike)
-        message: 'Success'
+        message: charge
       })
     }
   })
@@ -31,27 +30,25 @@ router.post('/charge', (req, res, next) => {
 
 router.post('/createSubscriptionPlan', (req, res, next) => {
   const token = req.body.stripeToken // Using Express
-  const amount = req.body.amount
-  const interval = req.body.interval
+  const amount = !isNaN(req.body.amount) ? (parseInt(req.body.amount) * 100):0
 
   stripe.plans.create({
     amount,
-    interval,
+    interval: 'month',
     product: {
-      name: "Wags Special"
+      name: 'Wags - Monthly Donation'
     },
     currency: "usd",
   }, (err, plan) => {
     if (err) {
       res.send({
         success: false,
-        message: 'Error'
+        message: err.message
       })
     } else {
       res.send({
         success: true,
-        //body: JSON.stringify(plan), - TODO - Send something to front-end to display (Mike)
-        message: 'Success'
+        message: plan
       })
     }
   })

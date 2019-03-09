@@ -16,9 +16,8 @@ export const defaults = {
 		phone: '',
 		zip: '',
 		amount: '',
-		card: false,
-		expiration: false,
-		cvc: false,
+		complete: false,
+		isLoading: false,
 		__typename: 'checkout'
 	},
 	item: 'home'
