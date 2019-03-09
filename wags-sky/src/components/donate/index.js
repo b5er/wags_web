@@ -113,12 +113,14 @@ class Donate extends Component {
                       {
                         active === 'confirm' ?
                           (<div className="steps-action">
-                            <span
+                            <a
                               className="button receipt-button"
-
+                              href={checkout.receipt}
+                              target="_blank"
+                              rel="noopener noreferrer"
                             >
                               Receipt
-                            </span>
+                            </a>
                           </div>)
                           :
                           (<div className="steps-action">

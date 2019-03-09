@@ -61,22 +61,23 @@ class Payment extends Component {
     const { cardNumberComplete, cardExpComplete, cardCVCComplete } = complete
     if (cardNumberComplete && cardExpComplete && cardCVCComplete) {
       try {
-        const { checkout, checkout: { name, zip, email } } = await this.props.getCheckout
-        const { token, error } = await this.props.stripe.createToken({ name, address_zip: zip })
+        const { getCheckout: { checkout }, updateCheckout } = await this.props
+        const { token, error } = await this.props.stripe.createToken({ name: checkout.name, address_zip: checkout.zip })
         if (!token)
           console.log(error)
 
         const completeButton = document.querySelector('#complete-button')
         completeButton.classList.add('is-loading')
-        const charged = await charge(token, amount, interval, email)
+        const charged = await charge(token, amount, interval, checkout.email)
         if (!charged || !charged.success) {
           console.log(charged.message)
           return
         }
+        
         completeButton.classList.remove('is-loading')
 
         completeButton.removeAttribute('disabled')
-        await this.props.updateCheckout({ variables: { ...checkout, complete: true } })
+        await updateCheckout({ variables: { ...checkout, complete: true, receipt: charged.message.receipt_url } })
       } catch(e) {
         console.log(e)
       }

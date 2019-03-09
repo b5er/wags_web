@@ -16,6 +16,7 @@ export const defaults = {
 		phone: '',
 		zip: '',
 		amount: '',
+		receipt: '',
 		complete: false,
 		__typename: 'checkout'
 	},

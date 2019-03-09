@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.post('/charge', async (req, res, next) => {
   const { stripeToken, email } = req.body
-  const amount = !isNaN(req.body.amount) ? (parseInt(req.body.amount) * 1):0
+  const amount = !isNaN(req.body.amount) ? (parseInt(req.body.amount) * 100):0
 
   try {
     const charge = await stripe.charges.create({
