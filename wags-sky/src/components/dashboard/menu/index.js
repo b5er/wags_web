@@ -21,6 +21,7 @@ class Menu extends Component {
           <ul className="menu-list">
             <li>
               <a
+                href="#home"
                 className={`${getItem.item === 'home' ? 'is-active':'has-text-isabelline-important'}`}
                 onClick={async e => {
                   e.preventDefault()
@@ -38,6 +39,7 @@ class Menu extends Component {
             </li>
             <li>
               <a
+                href="#medical"
                 className={`${getItem.item === 'medical' ? 'is-active':'has-text-isabelline-important'}`}
                 onClick={async e => {
                   e.preventDefault()
@@ -55,6 +57,7 @@ class Menu extends Component {
             </li>
             <li>
               <a
+                href="#appointment"
                 className={`${getItem.item === 'appointment' ? 'is-active':'has-text-isabelline-important'}`}
                 onClick={async e => {
                   e.preventDefault()
@@ -72,6 +75,7 @@ class Menu extends Component {
             </li>
             <li>
               <a
+                href="#orders"
                 className={`menu-item-offset ${getItem.item === 'orders' ? 'is-active':'has-text-isabelline-important'}`}
                 onClick={async e => {
                   e.preventDefault()
@@ -89,6 +93,7 @@ class Menu extends Component {
             </li>
             <li>
               <a
+                href="#community"
                 className={`menu-item-offset ${getItem.item === 'community' ? 'is-active':'has-text-isabelline-important'}`}
                 onClick={async e => {
                   e.preventDefault()

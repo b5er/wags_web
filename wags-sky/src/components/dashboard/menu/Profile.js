@@ -59,7 +59,7 @@ class Profile extends Component {
                 <div className="dropdown-menu click-inside" id="dropdown-menu" role="menu">
                   <div className="dropdown-content click-inside">
                     <a
-                      href="#"
+                      href="#profile"
                       className={`dropdown-item no-highlight click-inside ${item === 'profile' ? 'is-active':''}`}
                       onMouseEnter={e => {
                         this.setState({ item: 'profile' })
@@ -71,7 +71,7 @@ class Profile extends Component {
                       Profile
                     </a>
                     <a
-                      href="#"
+                      href="#update"
                       className={`dropdown-item no-highlight click-inside ${item === 'update' ? 'is-active':''}`}
                       onMouseEnter={e => {
                         this.setState({ item: 'update' })
@@ -84,7 +84,7 @@ class Profile extends Component {
                     </a>
                     <hr className="dropdown-divider click-inside" />
                     <a
-                      href="#"
+                      href="#support"
                       className={`dropdown-item no-highlight click-inside ${item === 'support' ? 'is-active':''}`}
                       onMouseEnter={e => {
                         this.setState({ item: 'support' })

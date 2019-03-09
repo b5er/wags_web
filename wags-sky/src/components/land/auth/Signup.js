@@ -18,10 +18,10 @@ class Signup extends Component {
     const { name, email, password, submit, isLoading } = this.state
     const {
       auth,
-      checkAuth,
-      history,
-      setStorageItem,
-      rmStorageItem
+      // checkAuth,
+      // history,
+      // setStorageItem,
+      // rmStorageItem
     } = this.props
 
     if(!auth)

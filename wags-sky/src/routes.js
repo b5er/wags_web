@@ -1,10 +1,10 @@
 import React from 'react'
-import { Route, Router, Switch, Redirect } from 'react-router-dom'
+import { Route, Router, Switch/*, Redirect*/ } from 'react-router-dom'
 import createHistory from './history'
 
 // Utils
 import withTracker from './utils/withTracker'
-import { checkAuth } from './utils/auth'
+// import { checkAuth } from './utils/auth'
 
 // Google Analytics
 import ReactGA from 'react-ga' // update to 2.5.6
@@ -19,14 +19,14 @@ import DashPage from './containers/DashPage'
 import ErrorPage from './containers/ErrorPage'
 
 
-const AuthRoute = ({ component: Component, ...rest }) => (
-	<Route {...rest} render={props => (
-		checkAuth() ?
-		(<Component {...props} />)
-		:
-		(<Redirect to={{ pathname: '/' }} />)
-	)} />
-)
+// const AuthRoute = ({ component: Component, ...rest }) => (
+// 	<Route {...rest} render={props => (
+// 		checkAuth() ?
+// 		(<Component {...props} />)
+// 		:
+// 		(<Redirect to={{ pathname: '/' }} />)
+// 	)} />
+// )
 
 ReactGA.initialize('UA-132230960-1')
 

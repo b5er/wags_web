@@ -137,7 +137,7 @@ class Information extends Component {
                   className={`input ${phone.match(regex.phone) ? 'is-success':''}  ${submit && !phone ? 'is-danger':''}`}
                   type="text"
                   onChange={async e => {
-                    const updatedPhone = e.target.value.replace(/[\(\)\s-]+/g, '')
+                    const updatedPhone = e.target.value.replace(/[()\s-]+/g, '')
                     this.setState({ phone: updatedPhone })
 
                     try {
