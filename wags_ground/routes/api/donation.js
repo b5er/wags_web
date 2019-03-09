@@ -1,6 +1,5 @@
 const express = require('express')
-const { stripeSK } = require('../../config/dev')
-const stripe = require('stripe')(stripeSK)
+const stripe = require('stripe')(process.env.STRIPE_SK)
 const router = express.Router()
 
 

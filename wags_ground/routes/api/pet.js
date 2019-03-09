@@ -1,18 +1,10 @@
 const express = require('express')
-const PetModel = require('../../models/wags_model')
+const petModel = require('../../models/pet')
 const multer = require('multer')
 const mongoose = require('mongoose')
 
-/* For Future Reference (mainly for Mike),
- * here are some type of expansion calls that one could do:
-
-	 Find One -	Ex: localhost:8000/find?name=pebz
-
-   How to send something back to the front-end
-	 router.get('/:breed', (req, res) => {
-	 	res.send(`You have requested a breed ${req.params.breed}`)
-		})
-*/
+if (process.env.NODE_ENV !== 'production')
+	require('dotenv').load()
 
 //All image files will be stored in uploads/ folder
 const storage = multer.diskStorage({
@@ -44,24 +36,40 @@ const upload = multer({
 
 const router = express.Router()
 
-router.get('/findAll', async (req, res) => {
+router.get('/', async (req, res) => {
 	try {
-		const pets = await PetModel.find({})
-		let petMap = []
-		pets.forEach(pet => petMap.push(pet))
-		res.send(petMap)
+		const pets = await petModel.find().select('_id name gender age breeds description petImage')
+		const response = {
+			count: pets.length,
+			pets: pets.map(pet => {
+				return {
+					_id: pet._id,
+					name: pet.name,
+					gender: pet.gender,
+					age: pet.age,
+					breeds: pet.breeds,
+					description: pet.description,
+					petImage: pet.petImage,
+					request: {
+						type: 'GET',
+						url: `${process.env.HOST}/pets/${pet._id}`
+					}
+				}
+			})
+		}
+		res.send(response)
 	} catch(e) {
 		res.status(500).json(e)
 	}
 })
 
-router.put('/add', upload.single('petImage'), async (req, res, next) => {
+router.put('/', upload.single('petImage'), async (req, res, next) => {
 	if (!req.body)
 		return res.status(400).send('Request body is missing')
 
 	const { body: { name, gender, age, breeds, description }, file: { path } } = req
 
-	const model = new PetModel({
+	const model = new petModel({
 	  _id : new mongoose.Types.ObjectId(),
 	  name,
 	  gender,
@@ -75,14 +83,26 @@ router.put('/add', upload.single('petImage'), async (req, res, next) => {
 		const doc = await model.save()
 		if(!doc || doc.length === 0)
 			return res.status(500).send(doc)
-		res.status(201).send(doc)
+		res.status(201).send({
+			createdPet: {
+				name: doc.name,
+				gender: doc.gender,
+				age: doc.age,
+				breeds: doc.breeds,
+				description: doc.description,
+				request: {
+					type: 'GET',
+					url: `${process.env.HOST}/pets/${doc._id}`
+				}
+			}
+		})
 	} catch(e) {
 		res.status(500).json(e)
 	}
 })
 
-router.delete('/delete', function(req, res) {
-  PetModel.findOneAndRemove({
+router.delete('/', function(req, res) {
+  petModel.findOneAndRemove({
     _id: req.query.id
   }).then(doc => {
     res.json(doc)

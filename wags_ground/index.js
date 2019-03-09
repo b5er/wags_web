@@ -6,15 +6,21 @@ const session = require('express-session')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const errorHandler = require('errorhandler')
-const config = require('./config/dev')
 
-// Configure mongoose's promise to global promise
+if (process.env.NODE_ENV !== 'production')
+	require('dotenv').load()
+
+
+mongoose.connect(
+	`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_SERVER}/${process.env.DB}`,
+	{ useNewUrlParser: true }
+)
+mongoose.set('useCreateIndex', true)
 mongoose.promise = global.Promise
 
-//Process is a global variable that should exist, else it will just choose port 8000
+
 const isProduction = process.env.NODE_ENV === 'production'
 const PORT = process.env.PORT || 8000
-
 const app = express()
 
 app.use(cors())
@@ -27,21 +33,20 @@ app.use(bodyParser.json())
 app.use((req, res, next) => {
 	console.log(`${new Date().toString()} => ${req.originalUrl}`)
 	next()
-});
+})
 
-//Tell express to use MiddleWare
 app.use(express.static(path.join(__dirname, 'public')))
-app.use(session({ secret: config.passportSecret, cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }))
 
-if(!isProduction)
+if (!isProduction)
 	app.use(errorHandler())
 
-// Models & Routes
-require('./models/wags_model')
-//require('./config/passport')
+
+
+require('./models/pet')
+require('./models/user')
 app.use(require('./routes'))
 
-if(!isProduction) {
+if (!isProduction) {
 	app.use(function (err, req, res, next) {
 		console.log(err.message)
 		if(!err.statusCode)
