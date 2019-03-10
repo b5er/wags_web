@@ -10,7 +10,7 @@ if (process.env.NODE_ENV !== 'production')
 
 router.get('/', async (req, res) => {
   try {
-    const donors = await Donor.find()
+    const donors = await Donor.find().select('_id name amount createdAt')
     res.send(donors)
   } catch(e) {
     res.status(500).json(e)
