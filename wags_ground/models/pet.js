@@ -9,7 +9,7 @@ let petSchema = new mongoose.Schema({
   description: { type: String, required: true },
   petImage: { type: String, required: true },
   adopted: { type: Boolean, default: false },
-  createdAt: { type: Date }
+  createdAt: { type: Date, default: Date.now }
 })
 
 module.exports = mongoose.model('Pet', petSchema)

@@ -68,16 +68,16 @@ class Payment extends Component {
 
         const completeButton = document.querySelector('#complete-button')
         completeButton.classList.add('is-loading')
-        const charged = await charge(token, amount, interval, checkout.email)
-        if (!charged || !charged.success) {
-          console.log(charged.message)
+        const { message, stripeError } = await charge(token, amount, interval, checkout)
+        if (stripeError) {
+          console.log(stripeError)
           return
         }
-        
         completeButton.classList.remove('is-loading')
+        const receipt = message.receipt_url ? message.receipt_url:message.hosted_invoice_url
 
+        await updateCheckout({ variables: { ...checkout, complete: true, receipt } })
         completeButton.removeAttribute('disabled')
-        await updateCheckout({ variables: { ...checkout, complete: true, receipt: charged.message.receipt_url } })
       } catch(e) {
         console.log(e)
       }

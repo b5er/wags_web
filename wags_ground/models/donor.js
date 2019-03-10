@@ -7,7 +7,7 @@ let donorSchema = new mongoose.Schema({
   phone: { type: Number, required: true },
   amount: { type: Number, required: true },
   stripeID: { type: String, required: true },
-  createdAt: { type: Date }
+  createdAt: { type: Date, default: Date.now }
 })
 
 

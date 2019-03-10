@@ -1,7 +1,21 @@
 const express = require('express')
 const stripe = require('stripe')(process.env.STRIPE_SK)
+const mongoose = require('mongoose')
+const Donor = require('../../models/donor')
+const Subscription = require('../../models/subscription')
 const router = express.Router()
 
+if (process.env.NODE_ENV !== 'production')
+  require('dotenv').load()
+
+router.get('/', async (req, res) => {
+  try {
+    const donors = await Donor.find()
+    res.send(donors)
+  } catch(e) {
+    res.status(500).json(e)
+  }
+})
 
 router.post('/charge', async (req, res, next) => {
   const { stripeToken, email } = req.body
@@ -15,48 +29,80 @@ router.post('/charge', async (req, res, next) => {
       source: stripeToken,
       receipt_email: email
     })
-    res.send({ success: true, message: charge })
+
+    res.send({ message: charge })
   } catch(e) {
-    res.send({ success: false, message: e.message })
+    res.status(500).send({ message: e.message })
   }
 
 })
 
 router.post('/createSubscriptionPlan', async (req, res, next) => {
-  const { stripeToken, email } = req.body
+  const { stripeToken, name, email } = req.body
+  const phone = !isNaN(req.body.phone) ? parseInt(req.body.phone):-1
   const amount = !isNaN(req.body.amount) ? (parseInt(req.body.amount) * 100):0
 
   try {
-    const product = await stripe.products.create({
-      name: 'Wags - Monthly Donation',
-      type: 'service'
-    })
 
-    // add pricing plan id: 'plan_csfdaf....' and AMOUNT (unique part) to db
-    // to check if we already have such plan already. If so, attach that plan to customer
-    const plan = await stripe.plans.create({
-      product: product.id,
-      currency: 'usd',
-      interval: 'month',
-      amount
-    })
+    const donor = await Donor.find({ email })
+    if (donor.length > 0)
+      return res.send({ message: 'You already have a subscription!' })
 
-    // Add customer in db. Check if user is already in system. Stripe doesn't check.
-    // Once you create the customer, store the id value in your own database
-    // for later reference (presumably with the customer’s email address).
+    const findSubscription = await Subscription.find({ amount })
+    let planId = ''
+    if (findSubscription.length > 0) {
+      planId = findSubscription[0].planId
+    } else {
+      const plan = await stripe.plans.create({
+        product: process.env.PRODUCT_ID,
+        currency: 'usd',
+        interval: 'month',
+        amount
+      })
+
+      planId = plan.id
+
+      const model = new Subscription({
+        _id: new mongoose.Types.ObjectId(),
+        amount,
+        planId
+      })
+
+      const doc = await model.save()
+      if(!doc || doc.length === 0)
+        return res.status(500).send({ sub: doc, planId })
+    }
+
+
     const customer = await stripe.customers.create({
       email,
       source: stripeToken
     })
 
-    const subscription = await stripe.subscriptions.create({
-      customer: customer.id,
-      items: [{ plan: plan.id }]
+    const model = new Donor({
+      _id: new mongoose.Types.ObjectId(),
+      name,
+      email,
+      phone,
+      amount,
+      stripeID: customer.id
     })
 
-    res.send({ success: true, message: subscription })
+    const doc = await model.save()
+    if(!doc || doc.length === 0)
+      return res.status(500).send(doc)
+
+
+    const subscription = await stripe.subscriptions.create({
+      customer: customer.id,
+      items: [{ plan: planId }]
+    })
+
+    const invoice = await stripe.invoices.retrieve(subscription.latest_invoice)
+
+    res.send({ message: invoice })
   } catch(e) {
-    res.send({ success: false, message: e })
+    res.status(500).send(e)
   }
 
 })

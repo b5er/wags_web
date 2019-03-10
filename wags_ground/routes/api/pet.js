@@ -1,5 +1,5 @@
 const express = require('express')
-const petModel = require('../../models/pet')
+const Pet = require('../../models/pet')
 const multer = require('multer')
 const mongoose = require('mongoose')
 
@@ -38,7 +38,7 @@ const router = express.Router()
 
 router.get('/', async (req, res) => {
 	try {
-		const pets = await petModel.find().select('_id name gender age breeds description petImage')
+		const pets = await Pet.find().select('_id name gender age breeds description petImage')
 		const response = {
 			count: pets.length,
 			pets: pets.map(pet => {
@@ -59,7 +59,7 @@ router.get('/', async (req, res) => {
 		}
 		res.send(response)
 	} catch(e) {
-		res.status(500).json(e)
+		res.status(500).send(e)
 	}
 })
 
@@ -69,8 +69,8 @@ router.put('/', upload.single('petImage'), async (req, res, next) => {
 
 	const { body: { name, gender, age, breeds, description }, file: { path } } = req
 
-	const model = new petModel({
-	  _id : new mongoose.Types.ObjectId(),
+	const model = new Pet({
+	  _id: new mongoose.Types.ObjectId(),
 	  name,
 	  gender,
 	  age,
@@ -97,17 +97,17 @@ router.put('/', upload.single('petImage'), async (req, res, next) => {
 			}
 		})
 	} catch(e) {
-		res.status(500).json(e)
+		res.status(500).send(e)
 	}
 })
 
 router.delete('/', function(req, res) {
-  petModel.findOneAndRemove({
+  Pet.findOneAndRemove({
     _id: req.query.id
   }).then(doc => {
     res.json(doc)
   }).catch(err => {
-    res.status(500).json(err)
+    res.status(500).send(err)
   })
 })
 
