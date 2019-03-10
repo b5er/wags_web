@@ -35,7 +35,7 @@ class Hero extends Component {
 										</h1>
 										<button
 											id="hero-button"
-											className="button is-malachite-green is-large is-rounded fadein light-shadow has-text-pineapple"
+											className="button is-malachite-green is-large is-rounded fadein light-shadow has-text-isabelline"
 											onClick={e => {
 												e.preventDefault()
 											}}

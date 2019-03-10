@@ -137,8 +137,8 @@ class Navbar extends Component {
 								pointer
 								button
 								is-rounded
-								${scrollBeyond ? 'donate-fixed':'is-pineapple has-text-malachite-green is-medium'}
-								donate-button
+								${scrollBeyond ? 'landing-donate-fixed':'is-soft-pink has-text-isabelline is-medium'}
+								landing-donate-button
 								v-light-shadow
 							`}
 			  			onMouseEnter={() => this.setState({ item: 'donate' })}

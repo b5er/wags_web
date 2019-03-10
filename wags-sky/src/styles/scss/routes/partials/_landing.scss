@@ -1,16 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700');
 
 // Navbar
-.donate-button {
-  border-color: $pineapple;
+.landing-donate-button {
+  border-color: $soft-pink;
 
   &:hover {
-    color: $columbia-blue;
+    color: $isabelline;
+    border-color: $soft-pink;
   }
 
-  &.donate-fixed {
-    background: $columbia-blue;
-    color: $pineapple;
+  &.landing-donate-fixed {
+    background: $soft-pink;
+    color: $isabelline;
   }
 }
 
@@ -257,9 +258,9 @@
 }
 
 .donation-input {
-  border-bottom-width: 2px;
-  border-color: $pineapple;
+  border: none;
   box-shadow: none;
+  border-bottom: 2px solid;
   border-bottom-color: $v-light-malachite-green;
   border-radius: 0;
   width: 60%;
@@ -276,10 +277,26 @@
 
 .donation-options {
   padding: 1rem;
+  &:active {
+    border-radius: 4px;
+    background-color: $pineapple;
+  }
 }
 
-#checkout-button {
-  border-color: $v-light-malachite-green;
+.interval-selected {
+  &:hover {
+    color: $isabelline;
+  }
+}
+
+.interval-unselected {
+  &:hover {
+    color: $pineapple;
+  }
+}
+
+#landing-checkout-button {
+  border-color: $soft-pink;
 }
 
 // Footer

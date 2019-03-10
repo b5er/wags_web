@@ -48,7 +48,7 @@ class Donation extends Component {
               <div className="card-content">
                 <div className="columns is-multiline">
                   <div className="column is-12">
-                    <div className="card med-heavy-shadow is-small-rounded is-pineapple">
+                    <div className="card is-small-rounded is-pineapple">
                       <div className="card-content no-top-padding">
                         <div className="columns">
                           <div className="column is-1 is-offset-2">
@@ -76,48 +76,11 @@ class Donation extends Component {
                     </div>
                   </div>
 
-                  <div className="column is-9">
-                    <div className="has-text-centered">
-                      <div className="buttons has-addons">
-                        <span
-                          className={`button is-size-7 has-text-pineapple ${interval === 'Monthly' ? 'is-malachite-green is-selected':''}`}
-                          onClick={e => {
-                            e.preventDefault()
-                            this.setState({ interval: 'Monthly' })
-                          }}
-                        >
-                          <strong>Monthly</strong>
-                        </span>
-                        <span
-                          className={`button is-size-7 has-text-pineapple ${interval === 'Once' ? 'is-malachite-green is-selected':''}`}
-                          onClick={e => {
-                            e.preventDefault()
-                            this.setState({ interval: 'Once' })
-                          }}
-                        >
-                          <strong>Once</strong>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="column is-1">
-                    <div className="field">
-                      <input
-                        id="switchDonation"
-                        type="checkbox"
-                        name="switchDonation"
-                        className="switch is-rounded is-link"
-                        checked={checked}
-                        onChange={() => this.setState({ checked: !checked })}
-                      />
-                      <label htmlFor="switchDonation" />
-                    </div>
-                  </div>
+                  <div className="column is-12" />
 
                   <div className="column is-4">
                     <div
-                      className="card pointer light-shadow is-small-rounded is-pineapple"
+                      className="card pointer light-shadow is-small-rounded is-davy-grey"
                       onClick={e => {
                         e.preventDefault()
                         this.setState({ amount: '10' })
@@ -133,7 +96,7 @@ class Donation extends Component {
 
                   <div className="column is-4">
                     <div
-                      className="card pointer light-shadow is-small-rounded is-pineapple"
+                      className="card pointer light-shadow is-small-rounded is-davy-grey"
                       onClick={e => {
                         e.preventDefault()
                         this.setState({ amount: '50' })
@@ -149,7 +112,7 @@ class Donation extends Component {
 
                   <div className="column is-4">
                     <div
-                      className="card pointer light-shadow is-small-rounded is-pineapple"
+                      className="card pointer light-shadow is-small-rounded is-davy-grey"
                       onClick={e => {
                         e.preventDefault()
                         this.setState({ amount: '100' })
@@ -163,19 +126,45 @@ class Donation extends Component {
                     </div>
                   </div>
 
+                  <div className="column is-12">
+                    <div className="has-text-centered">
+                      <div className="buttons has-addons">
+                        <span
+                          className={`button is-halfwidth is-size-6 ${interval === 'Monthly' ? 'is-davy-grey interval-selected has-text-isabelline is-selected':'interval-unselected has-text-pineapple'}`}
+                          onClick={e => {
+                            e.preventDefault()
+                            this.setState({ interval: 'Monthly' })
+                          }}
+                        >
+                          <strong>Monthly</strong>
+                        </span>
+                        <span
+                          className={`button interval-option is-halfwidth is-size-6 ${interval === 'Once' ? 'is-davy-grey interval-selected has-text-isabelline is-selected':'interval-unselected has-text-pineapple'}`}
+                          onClick={e => {
+                            e.preventDefault()
+                            this.setState({ interval: 'Once' })
+                          }}
+                        >
+                          <strong>Once</strong>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="column is-12" />
+
                   <div className="column is-12">
                     <button
-                      id="checkout-button"
+                      id="landing-checkout-button"
                       disabled={!amount}
-                      className="button is-rounded is-fullwidth is-medium light-shadow is-malachite-green"
+                      className="button is-rounded is-fullwidth is-medium light-shadow is-soft-pink"
                       onClick={e => {
                         setStorageItem('amount', amount)
                         setStorageItem('interval', interval)
                         history.push('/donate')
                       }}
                     >
-                      <h1 className="has-text-pineapple">
+                      <h1 className="has-text-isabelline">
                         <strong>Donate</strong>
                       </h1>
                     </button>
