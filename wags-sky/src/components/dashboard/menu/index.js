@@ -33,7 +33,7 @@ class Menu extends Component {
                   }
                 }}
               >
-                <i className="fas fa-home has-right-small-padding has-text-blue" />
+                <i className="fas fa-home has-right-small-padding has-text-columbia-blue" />
                 Home
               </a>
             </li>
@@ -51,7 +51,7 @@ class Menu extends Component {
                   }
                 }}
               >
-                <i className="fas fa-briefcase-medical has-right-small-padding has-text-blue" />
+                <i className="fas fa-briefcase-medical has-right-small-padding has-text-columbia-blue" />
                 Medical
               </a>
             </li>
@@ -69,7 +69,7 @@ class Menu extends Component {
                   }
                 }}
               >
-                <i className="fas fa-calendar-check has-right-small-padding has-text-blue" />
+                <i className="fas fa-calendar-check has-right-small-padding has-text-columbia-blue" />
                 Appointments
               </a>
             </li>
@@ -87,7 +87,7 @@ class Menu extends Component {
                   }
                 }}
               >
-                <i className="fas fa-piggy-bank has-right-small-padding has-text-blue" />
+                <i className="fas fa-piggy-bank has-right-small-padding has-text-columbia-blue" />
                 Orders
               </a>
             </li>
@@ -105,7 +105,7 @@ class Menu extends Component {
                   }
                 }}
               >
-                <i className="fas fa-users has-right-small-padding has-text-blue" />
+                <i className="fas fa-users has-right-small-padding has-text-columbia-blue" />
                 Community
               </a>
             </li>

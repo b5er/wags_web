@@ -70,7 +70,7 @@ class Payment extends Component {
           return
         }
 
-        await updateCheckout({ variables: { ...checkout, complete: true, token: JSON.stringify(token) } })
+        await updateCheckout({ variables: { ...checkout, complete: true, interval: this.state.interval, token: JSON.stringify(token) } })
 
       } catch(e) {
         console.log(e)

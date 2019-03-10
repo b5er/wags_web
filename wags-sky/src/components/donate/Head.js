@@ -19,15 +19,29 @@ class Head extends Component {
     }
   }
 
+  numberWithCommas = x => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  }
+
   render() {
 
     const { getCheckout: { checkout } } = this.props
 
     return (
       <div className="hero-head">
-        <h1 className="title has-text-centered">
-          $ {checkout.amount}
-        </h1>
+        <div className="section is-padding-bottomless">
+          <div className="container">
+            <div className="columns is-centered">
+              <div className="column is-5">
+                <div className="card light-shadow is-small-rounded is-pineapple">
+                  <h1 className="head-title has-text-centered has-text-isabelline">
+                    $ {this.numberWithCommas(checkout.amount)}
+                  </h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

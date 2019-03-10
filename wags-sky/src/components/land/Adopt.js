@@ -30,7 +30,7 @@ class Adopt extends Component {
       for (let key in pet)
         formData.append(key, pet[key])
 
-			const addStatus = await fetch('http://localhost:8000/api/pet/add', {
+			const addStatus = await fetch('http://localhost:8000/api/pet', {
 																	method: 'PUT',
 																  body: formData
 																})

@@ -39,7 +39,7 @@ class Navbar extends Component {
 
 		return (
 			<nav
-				className={`navbar is-spaced ${scrollBeyond ? 'is-fixed-top is-grey':''}`}
+				className={`navbar is-spaced ${scrollBeyond ? 'is-fixed-top is-davy-grey':''}`}
 				role="navigation"
 				aria-label="main navigation"
 			>
@@ -67,7 +67,7 @@ class Navbar extends Component {
 			  <div className={`navbar-menu ${mobile && !scrollBeyond ? 'is-active':''}`}>
 			  	<div className="navbar-end">
 						<div
-							className={`navbar-item is-tab ${scrollBeyond ? 'tab-fixed':''} ${item === 'about' ? 'is-active':''} pointer has-text-grey`}
+							className={`navbar-item is-tab ${scrollBeyond ? 'tab-fixed':''} ${item === 'about' ? 'is-active':''} pointer has-text-davy-grey`}
 							onMouseEnter={() => this.setState({ item: 'about' })}
 							onMouseLeave={() => this.setState({ item: '' })}
 							onClick={async e => {
@@ -83,7 +83,7 @@ class Navbar extends Component {
 							About us
 						</div>
 						<div
-							className={`navbar-item is-tab ${scrollBeyond ? 'tab-fixed':''} ${item === 'contact' ? 'is-active':''} pointer has-text-grey`}
+							className={`navbar-item is-tab ${scrollBeyond ? 'tab-fixed':''} ${item === 'contact' ? 'is-active':''} pointer has-text-davy-grey`}
 							onMouseEnter={() => this.setState({ item: 'contact' })}
 							onMouseLeave={() => this.setState({ item: '' })}
 							onClick={async e => {
@@ -99,7 +99,7 @@ class Navbar extends Component {
 							Contact
 						</div>
 						<div
-							className={`navbar-item is-tab ${scrollBeyond ? 'tab-fixed':''} ${item === 'adopt' ? 'is-active':''} pointer has-text-grey`}
+							className={`navbar-item is-tab ${scrollBeyond ? 'tab-fixed':''} ${item === 'adopt' ? 'is-active':''} pointer has-text-davy-grey`}
 							onMouseEnter={() => this.setState({ item: 'adopt' })}
 							onMouseLeave={() => this.setState({ item: '' })}
 							onClick={async e => {
@@ -115,7 +115,7 @@ class Navbar extends Component {
 							Adopt
 						</div>
 			  		<div
-			  			className={`navbar-item is-tab ${scrollBeyond ? 'tab-fixed':''} ${item === 'signup' ? 'is-active':''} pointer has-text-grey`}
+			  			className={`navbar-item is-tab ${scrollBeyond ? 'tab-fixed':''} ${item === 'signup' ? 'is-active':''} pointer has-text-davy-grey`}
 			  			onMouseEnter={() => this.setState({ item: 'signup' })}
 			  			onMouseLeave={() => this.setState({ item: '' })}
 							onClick={async e => {
@@ -137,7 +137,7 @@ class Navbar extends Component {
 								pointer
 								button
 								is-rounded
-								${scrollBeyond ? 'donate-fixed':'is-pineapple has-text-green is-medium'}
+								${scrollBeyond ? 'donate-fixed':'is-pineapple has-text-malachite-green is-medium'}
 								donate-button
 								v-light-shadow
 							`}

@@ -36,12 +36,12 @@ class Footer extends Component {
 																			}
 																		}}
 																	>
-																		<span className="has-text-blue footer-item pointer">
+																		<span className="has-text-columbia-blue footer-item pointer">
 																			About us
 																		</span>
 																	</li>
 	                                <li>
-																		<Link className="has-text-blue footer-item" to='/'>
+																		<Link className="has-text-columbia-blue footer-item" to='/'>
 																			Adopt
 																		</Link>
 																	</li>
@@ -55,12 +55,12 @@ class Footer extends Component {
 																			}
 																		}}
 																	>
-																		<span className="has-text-blue footer-item pointer">
+																		<span className="has-text-columbia-blue footer-item pointer">
 																			Contact
 																		</span>
 																	</li>
 																	<li>
-																		<Link className="has-text-blue footer-item" to='/donate'>
+																		<Link className="has-text-columbia-blue footer-item" to='/donate'>
 																			Donate
 																		</Link>
 																	</li>
@@ -74,17 +74,17 @@ class Footer extends Component {
 	                            </div>
 	                            <ul className="link-list">
 	                                <li>
-																		<Link className="has-text-blue footer-item" to='/'>
+																		<Link className="has-text-columbia-blue footer-item" to='/'>
 																			Developers
 																		</Link>
 																	</li>
 																	<li>
-																		<Link className="has-text-blue footer-item" to='/'>
+																		<Link className="has-text-columbia-blue footer-item" to='/'>
 																			Request features
 																		</Link>
 																	</li>
 																	<li>
-																		<Link className="has-text-blue footer-item" to='/'>
+																		<Link className="has-text-columbia-blue footer-item" to='/'>
 																			Volunteers
 																		</Link>
 																	</li>
@@ -98,12 +98,12 @@ class Footer extends Component {
 	                            </div>
 	                            <ul className="link-list">
 																	<li>
-																		<Link className="has-text-blue footer-item" to='/'>
+																		<Link className="has-text-columbia-blue footer-item" to='/'>
 																			Blog
 																		</Link>
 																	</li>
 	                                <li>
-																		<Link className="has-text-blue footer-item" to='/'>
+																		<Link className="has-text-columbia-blue footer-item" to='/'>
 																			Events
 																		</Link>
 																	</li>
@@ -122,7 +122,7 @@ class Footer extends Component {
 																						target="_blank"
 																						rel="noopener noreferrer"
 																					>
-	                                            <span className="icon has-text-blue footer-item" target="_blank">
+	                                            <span className="icon has-text-columbia-blue footer-item" target="_blank">
 																								<i className="fab fa-facebook-square fa-lg" />
 																							</span>
 	                                        </a>
@@ -132,7 +132,7 @@ class Footer extends Component {
 																						target="_blank"
 																						rel="noopener noreferrer"
 																					>
-	                                            <span className="icon has-text-blue footer-item">
+	                                            <span className="icon has-text-columbia-blue footer-item">
 																								<i className="fab fa-twitter-square fa-lg" />
 																							</span>
 	                                        </a>
@@ -142,7 +142,7 @@ class Footer extends Component {
 																						target="_blank"
 																						rel="noopener noreferrer"
 																					>
-	                                            <span className="icon has-text-blue footer-item">
+	                                            <span className="icon has-text-columbia-blue footer-item">
 																								<i className="fab fa-github-square fa-lg" />
 																							</span>
 	                                        </a>
@@ -152,7 +152,7 @@ class Footer extends Component {
 																						target="_blank"
 																						rel="noopener noreferrer"
 																					>
-	                                            <span className="icon has-text-blue footer-item">
+	                                            <span className="icon has-text-columbia-blue footer-item">
 																								<i className="fab fa-dribbble-square fa-lg" />
 																							</span>
 	                                        </a>

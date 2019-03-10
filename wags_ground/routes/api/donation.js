@@ -22,6 +22,11 @@ router.post('/charge', async (req, res, next) => {
   const amount = !isNaN(req.body.amount) ? (parseInt(req.body.amount) * 100):0
 
   try {
+
+    const donor = await Donor.find({ email })
+    if (donor.length > 0)
+      return res.status(500).send({ message: 'You already have a subscription!' })
+
     const charge = await stripe.charges.create({
       amount,
       currency: 'usd',
@@ -46,7 +51,7 @@ router.post('/createSubscriptionPlan', async (req, res, next) => {
 
     const donor = await Donor.find({ email })
     if (donor.length > 0)
-      return res.send({ message: 'You already have a subscription!' })
+      return res.status(500).send({ message: 'You already have a subscription!' })
 
     const findSubscription = await Subscription.find({ amount })
     let planId = ''

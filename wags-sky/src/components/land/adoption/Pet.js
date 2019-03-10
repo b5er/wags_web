@@ -52,7 +52,7 @@ class Pet extends Component {
 			            Age: { age }
 			            <br />
 			            Breed: {
-			              (breeds).map((breed, key) => {
+			              breeds.map((breed, key) => {
 			                return (
 			                  <span key={key}>
 			                    { breed.length <= MAX_TEXT_LENGTH - 7 ?

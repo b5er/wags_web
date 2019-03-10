@@ -18,13 +18,13 @@ class Adoption extends Component {
 	getImages = async () => {
 		try {
 			//TODO - Need to change the path in production
-			const images = await fetch('http://localhost:8000/api/pet/findAll')
+			const images = await fetch('http://localhost:8000/api/pet')
 
 	    if(!images.ok)
 	    	console.error('Unable to fetch pet images.')
 
-	    const pets = await images.json()
-	    this.setState({ loading: false, pets })
+	    const { pets } = await images.json()
+			this.setState({ loading: false, pets })
 	  } catch(e) {
       //TODO: add animation or user-friendly error
 	  	console.log(e)

@@ -85,7 +85,7 @@ class Information extends Component {
               className={`input ${email.match(regex.email) ? 'is-success':''}  ${submit && !email ? 'is-danger':''}`}
               type="text"
               onChange={async e => {
-                const updatedEmail = e.target.value
+                const updatedEmail = e.target.value.replace(/[`]+/g, '')
                 this.setState({ email: updatedEmail })
                 try {
                   if (updatedEmail.match(regex.email))

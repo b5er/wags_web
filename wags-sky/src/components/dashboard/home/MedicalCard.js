@@ -6,7 +6,7 @@ class MedicalCard extends Component {
       <div className="column">
         <div className="card is-small-rounded light-shadow is-isabelline">
           <div className="card-content">
-            <div className="heading has-text-grey">
+            <div className="heading has-text-davy-grey">
               Medical
             </div>
             <div className="title">
@@ -39,7 +39,7 @@ class MedicalCard extends Component {
 
                   </div>
                   <div className="title is-5">
-                    
+
                   </div>
                 </div>
               </div>

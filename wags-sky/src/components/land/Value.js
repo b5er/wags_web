@@ -42,7 +42,7 @@ class Value extends Component {
 								</div>
 							</div>
 							<div className="column is-4">
-								<p className="is-size-5 has-text-blue">
+								<p className="is-size-5 has-text-columbia-blue">
 									Make appointment
 								</p>
 								<p className="is-size-7 has-text-isabelline">
@@ -60,7 +60,7 @@ class Value extends Component {
 								</div>
 							</div>
 							<div className="column is-4">
-								<p className="is-size-5 has-text-blue">
+								<p className="is-size-5 has-text-columbia-blue">
 									Simple paperwork
 								</p>
 								<p className="is-size-7 has-text-isabelline">
@@ -78,7 +78,7 @@ class Value extends Component {
 								</div>
 							</div>
 							<div className="column is-4">
-								<p className="is-size-5 has-text-blue">
+								<p className="is-size-5 has-text-columbia-blue">
 									Free vaccines
 								</p>
 								<p className="is-size-7 has-text-isabelline">

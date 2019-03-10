@@ -80,7 +80,7 @@ class Donation extends Component {
                     <div className="has-text-centered">
                       <div className="buttons has-addons">
                         <span
-                          className={`button is-size-7 has-text-pineapple ${interval === 'Monthly' ? 'is-green is-selected':''}`}
+                          className={`button is-size-7 has-text-pineapple ${interval === 'Monthly' ? 'is-malachite-green is-selected':''}`}
                           onClick={e => {
                             e.preventDefault()
                             this.setState({ interval: 'Monthly' })
@@ -89,7 +89,7 @@ class Donation extends Component {
                           <strong>Monthly</strong>
                         </span>
                         <span
-                          className={`button is-size-7 has-text-pineapple ${interval === 'Once' ? 'is-green is-selected':''}`}
+                          className={`button is-size-7 has-text-pineapple ${interval === 'Once' ? 'is-malachite-green is-selected':''}`}
                           onClick={e => {
                             e.preventDefault()
                             this.setState({ interval: 'Once' })
@@ -168,7 +168,7 @@ class Donation extends Component {
                     <button
                       id="checkout-button"
                       disabled={!amount}
-                      className="button is-rounded is-fullwidth is-medium light-shadow is-green"
+                      className="button is-rounded is-fullwidth is-medium light-shadow is-malachite-green"
                       onClick={e => {
                         setStorageItem('amount', amount)
                         setStorageItem('interval', interval)

@@ -5,6 +5,8 @@ export const charge = (token, amount, interval, checkout) => {
   } else if (interval === 'Monthly') {
     return chargeMonthly(token, amount, name, email, phone)
   }
+
+  return { stripeError: 'Invalid interval.' }
 }
 
 const chargeOnce = async (token, amount, email) => {
@@ -21,6 +23,7 @@ const chargeOnce = async (token, amount, email) => {
       const { message } = await charge.json()
       return { stripeError: message }
     }
+
     return charge.json()
   } catch(e) {
     console.log(e)

@@ -39,6 +39,8 @@ class Donate extends Component {
       const { message, stripeError } = await charge(JSON.parse(token), amount, interval, checkout)
       if (stripeError) {
         console.log(stripeError)
+        completeButton.classList.remove('is-loading')
+        completeButton.classList.add('is-no')
         return
       }
       completeButton.classList.remove('is-loading')
@@ -59,9 +61,9 @@ class Donate extends Component {
 
     return (
       <StripeProvider apiKey="pk_test_6BSbyhfEtRHnrjHDiZMlzb1q">
-        <section className="hero is-fullheight is-blue">
+        <section className="hero is-fullheight is-columbia-blue">
           <Head />
-  				<div className="hero-body">
+  				<div className="hero-body is-padding-topless">
             <div className="container">
     					<div className="columns is-centered">
                 <div className="column is-6">
@@ -73,7 +75,7 @@ class Donate extends Component {
                         </span>
                       </div>
                       <div className="step-details">
-                        <p className="step-title is-size-5">
+                        <p className="step-title is-size-5 has-text-davy-grey">
                           Information
                         </p>
                       </div>
@@ -85,7 +87,7 @@ class Donate extends Component {
                         </span>
                       </div>
                       <div className="step-details">
-                        <p className="step-title is-size-5">
+                        <p className="step-title is-size-5 has-text-davy-grey">
                           Payment
                         </p>
                       </div>
@@ -97,7 +99,7 @@ class Donate extends Component {
                         </span>
                       </div>
                       <div className="step-details">
-                        <p className="step-title is-size-5">
+                        <p className="step-title is-size-5 has-text-davy-grey">
                           Confirmation
                         </p>
                       </div>
@@ -119,17 +121,17 @@ class Donate extends Component {
                         </div>
                       </div>
                     </div>
-                    <div className="steps-actions">
+                    <div className={`steps-actions ${active === 'pay' ? 'payment-form-step':''}`}>
                       {
                         active === 'pay' ?
                           (<div className="steps-action">
                             <span
-                              className="button is-light"
+                              className="button payment-back-button v-light-shadow is-isabelline"
                               onClick={e => {
                                 this.setState({ active: 'info', step: 0 })
                               }}
                             >
-                              Previous
+                              <i className="fas fa-arrow-left fa-lg has-text-pineapple" />
                             </span>
                           </div>)
                           :
@@ -139,7 +141,7 @@ class Donate extends Component {
                         active === 'confirm' ?
                           (<div className="steps-action">
                             <a
-                              className="button receipt-button"
+                              className="button v-light-shadow receipt-button is-pineapple has-text-isabelline"
                               href={checkout.receipt}
                               target="_blank"
                               rel="noopener noreferrer"
@@ -151,7 +153,7 @@ class Donate extends Component {
                           (<div className="steps-action">
                             <span
                               id="complete-button"
-                              className="button is-light"
+                              className="button v-light-shadow payment-button is-pineapple has-text-isabelline"
                               onClick={e => {
                                 switch(active) {
                                   case 'pay':
@@ -173,7 +175,7 @@ class Donate extends Component {
                                 }
                               }}
                             >
-                              Next
+                              {`${active === 'info' ? 'Continue':'Complete'}`}
                             </span>
                           </div>)
                       }

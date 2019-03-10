@@ -29,7 +29,7 @@ class Navbar extends Component {
         <div className={`navbar-menu`}>
           <div className="navbar-end">
             <div
-              className={`navbar-item navbar-message pointer has-text-grey`}
+              className={`navbar-item navbar-message pointer has-text-davy-grey`}
             >
               <i
                 className="fas fa-envelope badge is-badge-info is-badge-small has-text-isabelline"
@@ -37,7 +37,7 @@ class Navbar extends Component {
               />
             </div>
             <div
-              className={`navbar-item navbar-notification pointer has-text-grey`}
+              className={`navbar-item navbar-notification pointer has-text-davy-grey`}
             >
               <i
                 className="fas fa-bell badge is-badge-info is-badge-small has-text-isabelline"
@@ -45,7 +45,7 @@ class Navbar extends Component {
               />
             </div>
             <div
-              className={`navbar-item pointer turn-off has-text-grey`}
+              className={`navbar-item pointer turn-off has-text-davy-grey`}
             >
               <i className="fas fa-power-off" />
             </div>

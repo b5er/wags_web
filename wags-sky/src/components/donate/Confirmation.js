@@ -10,8 +10,8 @@ class Confirmation extends Component {
       <div className="section is-paddingless">
         <CheckoutDog />
         <div className="confirmation-message">
-          <h1 className="title is-size-4">
-            Your payment is completed!
+          <h1 className="title is-size-4 has-text-davy-grey">
+            Your payment is complete!
           </h1>
         </div>
       </div>

@@ -52,7 +52,7 @@ class Profile extends Component {
                         this.setState({ dropdown: !dropdown })
                       }}
                     >
-                      <i className="fas fa-sort-down pointer click-inside has-text-green" />
+                      <i className="fas fa-sort-down pointer click-inside has-text-malachite-green" />
                     </span>
                   </div>
                 </div>

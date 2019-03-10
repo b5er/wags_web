@@ -17,7 +17,7 @@ class Social extends Component {
 				<div className="columns is-centered">
 					<div className="column is-2">
 						<div className="box is-isabelline">
-							<i className="fas fa-quote-left has-text-green" />
+							<i className="fas fa-quote-left has-text-malachite-green" />
 							<p className="has-text-pineapple">
 								{/*https://www.rocketdogrescue.org/success-story/sydney-fka-posey/*/}
 								Just wanted to let you all now
@@ -43,7 +43,7 @@ class Social extends Component {
 					<div className="column is-1" />
 					<div className="column is-2">
 						<div className="box is-isabelline">
-							<i className="fas fa-quote-left has-text-green" />
+							<i className="fas fa-quote-left has-text-malachite-green" />
 							<p className="is-size-6 has-text-pineapple">
 								{/*https://www.rocketdogrescue.org/success-story/kermit/*/}
 								In March of 2014, I met Herbie
@@ -68,7 +68,7 @@ class Social extends Component {
 					<div className="column is-1" />
 					<div className="column is-2">
 						<div className="box is-isabelline">
-							<i className="fas fa-quote-left has-text-green" />
+							<i className="fas fa-quote-left has-text-malachite-green" />
 							<p className="has-text-pineapple">
 								{/*https://www.rocketdogrescue.org/success-story/chuck/*/}
 								Just wanted to write you a quick

@@ -11,7 +11,7 @@ class Hero extends Component {
 
 	render() {
 		return (
-			<section className="hero is-fullheight is-blue">
+			<section className="hero is-fullheight is-columbia-blue">
 				<div className="hero-head">
 					<Navbar />
 				</div>
@@ -35,7 +35,7 @@ class Hero extends Component {
 										</h1>
 										<button
 											id="hero-button"
-											className="button is-green is-large is-rounded fadein light-shadow has-text-pineapple"
+											className="button is-malachite-green is-large is-rounded fadein light-shadow has-text-pineapple"
 											onClick={e => {
 												e.preventDefault()
 											}}
