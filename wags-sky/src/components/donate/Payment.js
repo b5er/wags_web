@@ -13,7 +13,6 @@ import { CardNumberElement, CardExpiryElement, CardCVCElement, injectStripe } fr
 // Utils
 import { regex } from '../../utils/regex'
 import { getStorageItem, setStorageItem } from '../../utils/storage'
-import { charge } from '../../utils/stripeAPI'
 
 
 const createOptions = (padding: ?string) => {
@@ -49,7 +48,8 @@ class Payment extends Component {
         cardNumberComplete: false,
         cardExpComplete: false,
         cardCVCComplete: false
-      }
+      },
+      token: null
     }
   }
 
@@ -57,27 +57,21 @@ class Payment extends Component {
     document.querySelector(element).style.borderColor = '#ff3860'
   }
 
-  submit = async (amount, interval, complete) => {
+  submit = async (amount, complete) => {
     const { cardNumberComplete, cardExpComplete, cardCVCComplete } = complete
     if (cardNumberComplete && cardExpComplete && cardCVCComplete) {
       try {
+
         const { getCheckout: { checkout }, updateCheckout } = await this.props
         const { token, error } = await this.props.stripe.createToken({ name: checkout.name, address_zip: checkout.zip })
-        if (!token)
-          console.log(error)
 
-        const completeButton = document.querySelector('#complete-button')
-        completeButton.classList.add('is-loading')
-        const { message, stripeError } = await charge(token, amount, interval, checkout)
-        if (stripeError) {
-          console.log(stripeError)
+        if (error) {
+          console.log(error)
           return
         }
-        completeButton.classList.remove('is-loading')
-        const receipt = message.receipt_url ? message.receipt_url:message.hosted_invoice_url
 
-        await updateCheckout({ variables: { ...checkout, complete: true, receipt } })
-        completeButton.removeAttribute('disabled')
+        await updateCheckout({ variables: { ...checkout, complete: true, token: JSON.stringify(token) } })
+
       } catch(e) {
         console.log(e)
       }
@@ -127,10 +121,15 @@ class Payment extends Component {
             <div className="control">
               <span className={`select is-hovered ${amount.match(regex.amount) ? 'is-success':''} ${submit && !amount.match(regex.amount) ? 'is-danger':''}`}>
                 <select
-                  onChange={e => {
+                  onChange={async e => {
                     const updatedInterval = e.target.value
                     this.setState({ interval: updatedInterval })
                     setStorageItem('interval', updatedInterval)
+                    try {
+                      await updateCheckout({ variables: { ...checkout, interval: updatedInterval } })
+                    } catch(e) {
+                      console.log(e)
+                    }
                   }}
                   value={interval}
                 >
@@ -198,7 +197,7 @@ class Payment extends Component {
                   const updatedComplete = {...complete, cardNumberComplete: true }
                   this.setState({ complete: updatedComplete })
                   cardNumber.style.borderColor = '#23d160'
-                  this.submit(amount, interval, updatedComplete)
+                  this.submit(amount, updatedComplete)
                 } else {
                   const updatedComplete = {...complete, cardNumberComplete: false }
                   this.setState({ complete: updatedComplete, cardNumberEmpty: false })
@@ -247,7 +246,7 @@ class Payment extends Component {
                     const updatedComplete = {...complete, cardExpComplete: true }
                     this.setState({ complete: updatedComplete })
                     cardExp.style.borderColor = '#23d160'
-                    this.submit(amount, interval, updatedComplete)
+                    this.submit(amount, updatedComplete)
                   } else {
                     const updatedComplete = {...complete, cardExpComplete: false }
                     this.setState({ complete: updatedComplete, cardExpEmpty: false })
@@ -293,7 +292,7 @@ class Payment extends Component {
                     const updatedComplete = {...complete, cardCVCComplete: true }
                     this.setState({ complete: updatedComplete })
                     cardCVC.style.borderColor = '#23d160'
-                    this.submit(amount, interval, updatedComplete)
+                    this.submit(amount, updatedComplete)
                   } else {
                     const updatedComplete = {...complete, cardCVCComplete: false }
                     this.setState({ complete: updatedComplete, cardCVCEmpty: false })

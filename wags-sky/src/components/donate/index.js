@@ -9,10 +9,13 @@ import Foot from './Foot'
 
 // Apollo
 import { compose, graphql } from 'react-apollo'
-import { GET_CHECKOUT } from '../../graphql/donate'
+import { GET_CHECKOUT, UPDATE_CHECKOUT } from '../../graphql/donate'
 
 // Stripe
 import { Elements, StripeProvider } from 'react-stripe-elements'
+
+// Utils
+import { charge } from '../../utils/stripeAPI'
 
 
 class Donate extends Component {
@@ -24,6 +27,28 @@ class Donate extends Component {
       step: 0,
       infoSubmit: false,
       paySubmit: false
+    }
+  }
+
+  completePayment = async (token, amount, interval) => {
+    try {
+
+      const { getCheckout: { checkout }, updateCheckout } = await this.props
+      const completeButton = document.querySelector('#complete-button')
+      completeButton.classList.add('is-loading')
+      const { message, stripeError } = await charge(JSON.parse(token), amount, interval, checkout)
+      if (stripeError) {
+        console.log(stripeError)
+        return
+      }
+      completeButton.classList.remove('is-loading')
+      const receipt = message.receipt_url ? message.receipt_url:message.hosted_invoice_url
+
+      await updateCheckout({ variables: { ...checkout, receipt } })
+      this.setState({ active: 'confirm', step: 2, paySubmit: true })
+
+    } catch(e) {
+      console.log(e)
     }
   }
 
@@ -130,8 +155,9 @@ class Donate extends Component {
                               onClick={e => {
                                 switch(active) {
                                   case 'pay':
-                                    if (checkout.complete) {
-                                      this.setState({ active: 'confirm', step: 2, paySubmit: true })
+                                    const { complete, token, amount, interval } = checkout
+                                    if (complete && token) {
+                                      this.completePayment(token, amount, interval)
                                     } else {
                                       this.setState({ paySubmit: true })
                                     }
@@ -139,7 +165,6 @@ class Donate extends Component {
                                   default:
                                     const { name, email, phone, zip } = checkout
                                     if (name && email && phone && zip) {
-                                      document.querySelector('span#complete-button').setAttribute('disabled', true)
                                       this.setState({ active: 'pay', step: 1, infoSubmit: true })
                                     } else {
                                       this.setState({ infoSubmit: true })
@@ -166,5 +191,6 @@ class Donate extends Component {
 }
 
 export default compose(
-  graphql(GET_CHECKOUT, { name: 'getCheckout' })
+  graphql(GET_CHECKOUT, { name: 'getCheckout' }),
+  graphql(UPDATE_CHECKOUT, { name: 'updateCheckout' })
 )(Donate)

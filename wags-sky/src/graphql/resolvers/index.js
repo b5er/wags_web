@@ -16,8 +16,10 @@ export const defaults = {
 		phone: '',
 		zip: '',
 		amount: '',
-		receipt: '',
+		interval: '',
+		token: '',
 		complete: false,
+		receipt: '',
 		__typename: 'checkout'
 	},
 	item: 'home'
