@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 // Apollo
 import { compose, graphql } from 'react-apollo'
 import { GET_CHECKOUT, UPDATE_CHECKOUT } from '../../graphql/donate'
+
+// Assets
+import WagsLogo from '../../assets/images/wagsLogo.svg'
 
 // Utils
 import { getStorageItem } from '../../utils/storage'
@@ -32,13 +36,19 @@ class Head extends Component {
         <div className="section is-padding-bottomless">
           <div className="container">
             <div className="columns is-centered">
-              <div className="column is-5">
+              <div className="column">
+                <Link to={'/'}>
+                  <img alt="Wags logo." className="wags-logo-pineapple" width={25} src={WagsLogo} />
+                </Link>
+              </div>
+              <div className="column is-6">
                 <div className="card light-shadow is-small-rounded is-pineapple">
                   <h1 className="head-title has-text-centered has-text-isabelline">
                     $ {this.numberWithCommas(checkout.amount)}
                   </h1>
                 </div>
               </div>
+              <div className="column is-3" />
             </div>
           </div>
         </div>

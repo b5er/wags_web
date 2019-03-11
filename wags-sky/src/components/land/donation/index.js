@@ -12,7 +12,6 @@ class Donation extends Component {
   constructor() {
     super()
     this.state = {
-      checked: true,
       interval: 'Once',
       amount: ''
     }
@@ -20,7 +19,7 @@ class Donation extends Component {
 
   render() {
 
-    const { checked, interval, amount } = this.state
+    const { interval, amount } = this.state
     const { history } = this.props
 
     return (

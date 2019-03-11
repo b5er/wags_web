@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom'
 import { compose, graphql } from 'react-apollo'
 import { SHOW_ABOUT, SHOW_CONTACT } from '../../graphql/land'
 
+// Assets
+import WagsLogo from '../../assets/images/wagsLogo.svg'
+
 
 class Footer extends Component {
 	render() {
@@ -16,14 +19,11 @@ class Footer extends Component {
 	            <div className="container">
 	                <div className="columns">
 	                    <div className="column">
-	                        <div className="footer-logo">
-	                            {/*<img src={Logo} alt="footer-logo" />*/}
-	                        </div>
-	                    </div>
-	                    <div className="column">
 	                        <div className="footer-column">
 	                            <div className="footer-header">
-	                                <h3 className="has-text-ceil">Organization</h3>
+	                                <h3 className="has-text-ceil">
+																		Organization
+																	</h3>
 	                            </div>
 	                            <ul className="link-list">
 																	<li
@@ -40,10 +40,57 @@ class Footer extends Component {
 																			About us
 																		</span>
 																	</li>
+																	<li>
+																		<Link className="has-text-columbia-blue footer-item" to='/'>
+																			Volunteers
+																		</Link>
+																	</li>
 	                                <li>
 																		<Link className="has-text-columbia-blue footer-item" to='/'>
 																			Adopt
 																		</Link>
+																	</li>
+	                            </ul>
+	                        </div>
+	                    </div>
+	                    <div className="column">
+	                        <div className="footer-column">
+	                            <div className="footer-header">
+	                                <h3 className="has-text-ceil">
+																		Developers
+																	</h3>
+	                            </div>
+	                            <ul className="link-list">
+	                                <li>
+																		<Link className="has-text-columbia-blue footer-item" to='/'>
+																			Team
+																		</Link>
+																	</li>
+																	<li>
+																		<Link className="has-text-columbia-blue footer-item" to='/'>
+																			Request features
+																		</Link>
+																	</li>
+	                            </ul>
+	                        </div>
+	                    </div>
+											<div className="column">
+	                        <div className="footer-column">
+	                            <div className="footer-header">
+	                                <h3 className="has-text-ceil">
+																		Resources
+																	</h3>
+	                            </div>
+	                            <ul className="link-list">
+																	<li>
+																		<a
+																			className="has-text-columbia-blue footer-item"
+																			href="https://app.termly.io/document/privacy-policy/6aedf1c0-b262-42d8-a507-72abe96e6ec5"
+											                target="_blank"
+											                rel="noopener noreferrer"
+																		>
+																			Privacy Policy
+																		</a>
 																	</li>
 																	<li
 																		onClick={async e => {
@@ -70,31 +117,9 @@ class Footer extends Component {
 	                    <div className="column">
 	                        <div className="footer-column">
 	                            <div className="footer-header">
-	                                <h3 className="has-text-ceil">Team</h3>
-	                            </div>
-	                            <ul className="link-list">
-	                                <li>
-																		<Link className="has-text-columbia-blue footer-item" to='/'>
-																			Developers
-																		</Link>
-																	</li>
-																	<li>
-																		<Link className="has-text-columbia-blue footer-item" to='/'>
-																			Request features
-																		</Link>
-																	</li>
-																	<li>
-																		<Link className="has-text-columbia-blue footer-item" to='/'>
-																			Volunteers
-																		</Link>
-																	</li>
-	                            </ul>
-	                        </div>
-	                    </div>
-	                    <div className="column">
-	                        <div className="footer-column">
-	                            <div className="footer-header">
-	                                <h3 className="has-text-ceil">Media</h3>
+	                                <h3 className="has-text-ceil">
+																		Media
+																	</h3>
 	                            </div>
 	                            <ul className="link-list">
 																	<li>
@@ -113,7 +138,9 @@ class Footer extends Component {
 	                    <div className="column">
 	                        <div className="footer-column">
 	                            <div className="footer-header">
-	                                <h3 className="has-text-ceil">Follow Us</h3>
+	                                <h3 className="has-text-ceil">
+																		Follow Us
+																	</h3>
 	                                <nav className="level is-mobile">
 	                                    <div className="level-left">
 	                                        <a
@@ -158,6 +185,9 @@ class Footer extends Component {
 	                                        </a>
 	                                    </div>
 	                                </nav>
+																	<p className="has-text-columbia-blue">
+																		<img alt="Wags logo." className="wags-logo-isabelline wags-logo-footer" width={40} src={WagsLogo} /> &copy; Wags
+																	</p>
 	                            </div>
 	                        </div>
 	                    </div>

@@ -5,6 +5,9 @@ import { withRouter } from 'react-router-dom'
 import { compose, graphql } from 'react-apollo'
 import { SHOW_ABOUT, SHOW_CONTACT, SHOW_ADOPT, SHOW_AUTH } from '../../../graphql/land'
 
+// Assets
+import WagsLogo from '../../../assets/images/wagsLogo.svg'
+
 
 class Navbar extends Component {
 	constructor() {
@@ -45,7 +48,8 @@ class Navbar extends Component {
 			>
 			  <div className="navbar-brand">
 			    <div className="navbar-item pointer">
-			      <h1 className={`title ${scrollBeyond ? 'has-text-isabelline':'has-text-pineapple'}`}>
+						<img alt="Wags logo." className={`wags-logo ${scrollBeyond ? 'wags-logo-isabelline':'wags-logo-pineapple'}`} width={50} src={WagsLogo} />
+			      <h1 className={`title landing-navbar-title ${scrollBeyond ? 'has-text-isabelline':'has-text-pineapple'}`}>
 			      	Wags
 			      </h1>
 			    </div>

@@ -1,6 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700');
 
 // Navbar
+.landing-navbar-title {
+  font-size: 2rem;
+}
+
+.wags-logo {
+  max-height: 2rem;
+  margin-bottom: .15rem;
+}
+
 .landing-donate-button {
   border-color: $soft-pink;
 
@@ -304,4 +313,8 @@
   &:hover {
     color: $v-light-malachite-green;
   }
+}
+
+.wags-logo-footer {
+  margin-right: 2rem;
 }
