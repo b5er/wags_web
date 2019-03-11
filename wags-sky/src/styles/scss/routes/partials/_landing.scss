@@ -149,7 +149,16 @@
 }
 
 #hero-button {
-  border-color: $v-light-malachite-green;
+  border-color: $davy-grey;
+  &:hover {
+    color: $isabelline;
+  }
+  &:active {
+    color: $isabelline;
+  }
+  &:focus {
+    color: $isabelline;
+  }
 }
 
 // Value

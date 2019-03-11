@@ -28,26 +28,39 @@ import ErrorPage from './containers/ErrorPage'
 // 	)} />
 // )
 
-ReactGA.initialize('UA-132230960-1')
+if (process.env.NODE_ENV === 'production')
+	ReactGA.initialize('UA-132230960-1')
 
 const Routes = () => (
 	<Router history={createHistory}>
 		<Switch>
 			<Route exact path="/" render={props => {
-				const GATrackedLand = withTracker(LandPage)
-				return <GATrackedLand {...props} />
+				if (process.env.NODE_ENV === 'production') {
+					const GATrackedLand = withTracker(LandPage)
+					return <GATrackedLand {...props} />
+				}
+				return <LandPage {...props} />
 			}} />
 			<Route exact path="/adopt" render={props => {
-				const GATrackedAdopt = withTracker(AdoptPage)
-				return <GATrackedAdopt {...props} />
+				if (process.env.NODE_ENV === 'production') {
+					const GATrackedAdopt = withTracker(AdoptPage)
+					return <GATrackedAdopt {...props} />
+				}
+				return <AdoptPage {...props} />
 			}} />
 			<Route exact path="/donate" render={props => {
-				const GATrackedDonate = withTracker(DonatePage)
-				return <GATrackedDonate {...props} />
+				if (process.env.NODE_ENV === 'production') {
+					const GATrackedDonate = withTracker(DonatePage)
+					return <GATrackedDonate {...props} />
+				}
+				return <DonatePage {...props} />
 			}} />
 			<Route exact path="/dashboard" render={props => {
-				const GATrackedDash = withTracker(DashPage)
-				return <GATrackedDash {...props} />
+				if (process.env.NODE_ENV === 'production') {
+					const GATrackedDash = withTracker(DashPage)
+					return <GATrackedDash {...props} />
+				}
+				return <DashPage {...props} />
 			}} />
 			<Route exact path="/*" render={props => {
 				return <ErrorPage {...props} />

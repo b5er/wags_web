@@ -18,7 +18,7 @@ class Land extends Component {
 	render() {
 		return (
 			<div className="is-ceil">
-
+			
 				<Hero />
 				<Value />
 				<Social />

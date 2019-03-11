@@ -68,7 +68,7 @@ class Footer extends Component {
 																	</li>
 																	<li>
 																		<Link className="has-text-columbia-blue footer-item" to='/'>
-																			Request features
+																			Request feature
 																		</Link>
 																	</li>
 	                            </ul>
@@ -89,7 +89,7 @@ class Footer extends Component {
 											                target="_blank"
 											                rel="noopener noreferrer"
 																		>
-																			Privacy Policy
+																			Privacy policy
 																		</a>
 																	</li>
 																	<li

@@ -60,7 +60,7 @@ class Donate extends Component {
     const { getCheckout: { checkout } } = this.props
 
     return (
-      <StripeProvider apiKey="pk_test_6BSbyhfEtRHnrjHDiZMlzb1q">
+      <StripeProvider apiKey={process.env.REACT_APP_STRIPE_PK}>
         <section className="hero is-fullheight is-columbia-blue">
           <Head />
   				<div className="hero-body is-padding-topless">

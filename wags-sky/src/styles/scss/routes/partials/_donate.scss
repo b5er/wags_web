@@ -118,7 +118,13 @@
   }
 
   &:active {
+    color: $isabelline;
     border-color: $columbia-blue;
+  }
+
+  &:focus {
+    color: $isabelline;
+    border-color: $pineapple;
   }
 }
 

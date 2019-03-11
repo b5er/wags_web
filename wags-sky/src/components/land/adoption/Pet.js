@@ -80,7 +80,7 @@ class Pet extends Component {
 			      }
 			      <figure className="image is-4by3">
 			        <img
-			          src={`http://localhost:8000/${ petImage }`}
+			          src={`${process.env.REACT_APP_BACKEND_URL}/${petImage}`}
 			          className={`is-small-rounded ${ hoverPicture ? 'is-medium-blur':'' }`}
 			          alt="Pets for adoption."
 			        />

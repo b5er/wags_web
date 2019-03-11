@@ -11,7 +11,7 @@ export const charge = (token, amount, interval, checkout) => {
 
 const chargeOnce = async (token, amount, email) => {
   try {
-    const charge = await fetch('http://localhost:8000/api/donation/charge', {
+    const charge = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/donation/charge`, {
                                 method: 'POST',
                                 headers: {
                                   'Accept': 'application/json',
@@ -32,7 +32,7 @@ const chargeOnce = async (token, amount, email) => {
 
 const chargeMonthly = async (token, amount, name, email, phone) => {
   try {
-    const subscription = await fetch('http://localhost:8000/api/donation/createSubscriptionPlan', {
+    const subscription = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/donation/createSubscriptionPlan`, {
                                 method: 'POST',
                                 headers: {
                                   'Accept': 'application/json',

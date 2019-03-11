@@ -30,7 +30,7 @@ class Adopt extends Component {
       for (let key in pet)
         formData.append(key, pet[key])
 
-			const addStatus = await fetch('http://localhost:8000/api/pet', {
+			const addStatus = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/pet`, {
 																	method: 'PUT',
 																  body: formData
 																})

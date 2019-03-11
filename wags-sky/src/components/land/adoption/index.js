@@ -18,7 +18,7 @@ class Adoption extends Component {
 	getImages = async () => {
 		try {
 			//TODO - Need to change the path in production
-			const images = await fetch('http://localhost:8000/api/pet')
+			const images = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/pet`)
 
 	    if(!images.ok)
 	    	console.error('Unable to fetch pet images.')

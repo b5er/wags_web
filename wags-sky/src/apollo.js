@@ -61,7 +61,7 @@ const typeDefs = `
 `
 
 const httpLink = new HttpLink({
-	uri: 'http://localhost:8000'
+	uri: `${process.env.REACT_APP_BACKEND_URL}`
 })
 
 const cache = new InMemoryCache()
