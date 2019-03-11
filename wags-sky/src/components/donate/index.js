@@ -16,6 +16,7 @@ import { Elements, StripeProvider } from 'react-stripe-elements'
 
 // Utils
 import { charge } from '../../utils/stripeAPI'
+import { Mixpanel } from '../../utils/mixpanel'
 
 
 class Donate extends Component {
@@ -29,6 +30,11 @@ class Donate extends Component {
       paySubmit: false
     }
   }
+
+  componentDidMount() {
+    Mixpanel.track('Donation funnel mounted.')
+  }
+
 
   completePayment = async (token, amount, interval) => {
     try {
@@ -49,6 +55,11 @@ class Donate extends Component {
       await updateCheckout({ variables: { ...checkout, receipt } })
       this.setState({ active: 'confirm', step: 2, paySubmit: true })
 
+      Mixpanel.track('Donation Funnel: step 2 complete.')
+      Mixpanel.people.set({
+        amount,
+        interval
+      })
     } catch(e) {
       console.log(e)
     }
@@ -145,6 +156,9 @@ class Donate extends Component {
                               href={checkout.receipt}
                               target="_blank"
                               rel="noopener noreferrer"
+                              onClick={e => {
+                                Mixpanel.track('Clicked receipt.')
+                              }}
                             >
                               Receipt
                             </a>
@@ -168,6 +182,12 @@ class Donate extends Component {
                                     const { name, email, phone, zip } = checkout
                                     if (name && email && phone && zip) {
                                       this.setState({ active: 'pay', step: 1, infoSubmit: true })
+                                      Mixpanel.track('Donation Funnel: step 1 complete.')
+                                      Mixpanel.identify(email)
+                                      Mixpanel.people.set({
+                                        "$email": email,
+                                        "$last_login": new Date()
+                                      })
                                     } else {
                                       this.setState({ infoSubmit: true })
                                     }

@@ -29,7 +29,7 @@ import ErrorPage from './containers/ErrorPage'
 // )
 
 if (process.env.NODE_ENV === 'production')
-	ReactGA.initialize('UA-132230960-1')
+	ReactGA.initialize(process.env.REACT_APP_GA_TOKEN)
 
 const Routes = () => (
 	<Router history={createHistory}>
