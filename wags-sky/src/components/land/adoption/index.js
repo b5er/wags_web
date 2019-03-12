@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
+
+// Components
 import Pet from './Pet'
+import Cat from './Cat'
+
 
 class Adoption extends Component {
 	constructor() {
 		super()
 		this.state = {
-			//get
-			pets: [],
-			loading: true,
+			pets: []
 		}
 	}
 
@@ -33,7 +35,7 @@ class Adoption extends Component {
 
 	render() {
 
-		const { pets, loading } = this.state
+		const { pets } = this.state
 
 		return (
 			<section className="section is-ceil">
@@ -61,17 +63,28 @@ class Adoption extends Component {
 					<div className="columns is-centered">
 					<div className="column is-10">
 							<div className="box is-ceil">
-								<div className="columns is-multiline">
-									{!loading ?
-										pets.map((petImg, key) => {
-											return (
-												<div key={key} className="column is-3">
-													<Pet source={petImg} />
-												</div>
-											)
-										})
-										:
-										null // TODO: Make cards blurry with no dogs (i.e. slack when loading)
+								<div className={`columns is-multiline ${pets.length === 0 ? 'is-centered':''}`}>
+									{ pets.length === 0 ?
+											(<div className="column is-6 has-text-centered">
+												<Cat />
+												<p className="is-size-5 has-text-pineapple">
+													Well, that's embarassing...
+												</p>
+												<p className="has-text-pineapple">
+													I don't have pets to show you, right now!
+												</p>
+												<p className="has-text-pineapple">
+													Check back later.
+												</p>
+											</div>)
+											:
+											(pets.map((petImage, key) => {
+												return (
+													<div key={key} className="column is-3">
+														<Pet source={petImage} />
+													</div>
+												)
+											}))
 									}
 								</div>
 							</div>
