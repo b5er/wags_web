@@ -139,7 +139,7 @@ class Footer extends Component {
 	                        <div className="footer-column">
 	                            <div className="footer-header">
 	                                <h3 className="has-text-ceil">
-																		Follow Us
+																		Follow us
 																	</h3>
 	                                <nav className="level is-mobile">
 	                                    <div className="level-left">
