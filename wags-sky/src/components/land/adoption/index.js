@@ -31,9 +31,12 @@ class Adoption extends Component {
 			}
 
 	    const { pets } = await images.json()
-			this.setState({ loading: false, pets })
+			const stop = 12
+			let previewPets = []
+			for (let i = 0; i < stop; i++)
+				previewPets.push(pets[i])
+			this.setState({ loading: false, pets: previewPets })
 	  } catch(e) {
-      //TODO: add animation or user-friendly error
 	  	console.log(e)
 	  }
 	}
