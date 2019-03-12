@@ -46,7 +46,7 @@ class Footer extends Component {
 																		</Link>
 																	</li>
 	                                <li>
-																		<Link className="has-text-columbia-blue footer-item" to='/'>
+																		<Link className="has-text-columbia-blue footer-item" to='/adopt'>
 																			Adopt
 																		</Link>
 																	</li>

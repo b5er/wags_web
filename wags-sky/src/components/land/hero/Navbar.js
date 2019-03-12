@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 // Apollo
 import { compose, graphql } from 'react-apollo'
-import { SHOW_ABOUT, SHOW_CONTACT, SHOW_ADOPT, SHOW_AUTH } from '../../../graphql/land'
+import { SHOW_ABOUT, SHOW_CONTACT, SHOW_AUTH } from '../../../graphql/land'
 
 // Assets
 import WagsLogo from '../../../assets/images/wagsLogo.svg'
@@ -38,7 +38,7 @@ class Navbar extends Component {
 	render() {
 
 		const { item, mobile, scrollBeyond } = this.state
-		const { showAbout, showContact, showAdopt, showAuth, history } = this.props
+		const { showAbout, showContact, showAuth, history } = this.props
 
 		return (
 			<nav
@@ -108,12 +108,7 @@ class Navbar extends Component {
 							onMouseLeave={() => this.setState({ item: '' })}
 							onClick={async e => {
 								e.preventDefault()
-								try {
-									await showAdopt({ variables: { adopt: true } })
-								} catch(e) {
-						      //TODO: add animation or user-friendly error
-									console.log(e)
-								}
+								history.push('/adopt')
 							}}
 						>
 							Adopt
@@ -165,6 +160,5 @@ class Navbar extends Component {
 export default compose(
 	graphql(SHOW_ABOUT, { name: 'showAbout' }),
 	graphql(SHOW_CONTACT, { name: 'showContact' }),
-	graphql(SHOW_ADOPT, { name : 'showAdopt'}),
 	graphql(SHOW_AUTH, { name: 'showAuth' })
 )(withRouter(Navbar))

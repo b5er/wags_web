@@ -1,8 +1,8 @@
 import React from 'react'
 
-// Components (TODO: create right path)
-import Adopt from '../components/dashboard'
+// Components
+import Adopt from '../components/adopt'
 
-const AdoptPage = landProps => <Adopt />
+const AdoptPage = adoptProps => <Adopt />
 
 export default AdoptPage

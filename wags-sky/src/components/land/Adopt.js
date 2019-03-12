@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 
-import { compose, graphql } from 'react-apollo'
-import { GET_ADOPT, SHOW_ADOPT } from '../../graphql/land'
 
 class Adopt extends Component {
 
@@ -48,20 +46,13 @@ class Adopt extends Component {
   render() {
 
     const { pet, pet: { name, gender, age, breeds, description, petImage }, submit } = this.state
-    const { getAdopt, showAdopt } = this.props
 
     return (
-      <div className={`modal ${getAdopt.adopt ? 'is-active': ''}`}>
+      <div className={`modal ${false ? 'is-active': ''}`}>
         <div
           className="modal-background"
           onClick={async e => {
             e.preventDefault()
-            try {
-              await showAdopt({ variables: { adopt: false } })
-            } catch(e) {
-              //TODO: add animation or user-friendly error
-              console.log(e)
-            }
             this.setState({ submit: false })
           }}
         />
@@ -253,12 +244,6 @@ class Adopt extends Component {
           className="modal-close is-large" aria-label="close"
           onClick={async e => {
             e.preventDefault()
-            try {
-              await showAdopt({ variables: { adopt: false } })
-            } catch(e) {
-              //TODO: add animation or user-friendly error
-              console.log(e)
-            }
           }}
         />
       </div>
@@ -266,7 +251,4 @@ class Adopt extends Component {
   }
 }
 
-export default compose(
-  graphql(SHOW_ADOPT, { name: 'showAdopt' }),
-  graphql(GET_ADOPT, { name: 'getAdopt' })
-)(Adopt)
+export default Adopt

@@ -4,7 +4,6 @@
 export const defaults = {
 	about: false,
 	contact: false,
-	adopt: false,
 	auth: {
 		show: false,
 		type: 'login',
@@ -33,10 +32,6 @@ export const resolvers = {
 		},
 		toggleContact: (_, { contact }, { cache }) => {
 			cache.writeData({ data: { contact } })
-			return null
-		},
-		toggleAdopt: (_, { adopt }, { cache })  => {
-			cache.writeData({ data: { adopt } })
 			return null
 		},
 		toggleAuth: (_, showAuth, { cache }) => {
