@@ -17,13 +17,18 @@ class Adoption extends Component {
 		window.addEventListener('load', this.getImages())
 	}
 
+	componentWillUnmount() {
+		window.removeEventListener('load', this.getImages())
+	}
+
 	getImages = async () => {
 		try {
-			//TODO - Need to change the path in production
 			const images = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/pet`)
 
-	    if(!images.ok)
+	    if(!images.ok) {
 	    	console.error('Unable to fetch pet images.')
+				return
+			}
 
 	    const { pets } = await images.json()
 			this.setState({ loading: false, pets })

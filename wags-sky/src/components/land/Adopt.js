@@ -10,16 +10,47 @@ class Adopt extends Component {
   			name: '',
   			gender: 'Male',
   			age: 1,
-  			breeds: [''],
+  			breeds: ['Poodle'],
   			description: '',
   			petImage: null
       },
-      submit: false
+      submit: false,
+      complete: false
     }
   }
 
+  isRightType = file => {
+    const type = file ? file.type:null
+    if (!type)
+      return false
 
-	addImage = async () => {
+    const fileTypes = {
+      j: ['j', 'p', 'e', 'g'],
+      p: ['p', 'n', 'g'],
+      g: ['g', 'i', 'f']
+    }
+
+    let typePtr = 0
+    while (typePtr < type.length - 1) {
+      if (typePtr > 0 && type[typePtr - 1] === '/')
+        break
+      typePtr++
+    }
+
+    if (!(type[typePtr] in fileTypes))
+      return false
+
+    const startMatch = type[typePtr]
+    for (let i = 0; i < fileTypes[startMatch].length; i++) {
+      if (fileTypes[startMatch][i] === type[typePtr])
+        typePtr++
+    }
+
+    return typePtr === type.length
+  }
+
+
+	addImage = async submitButton => {
 		try {
 
       const formData = new FormData()
@@ -34,18 +65,29 @@ class Adopt extends Component {
 																})
 
 
-			if (!addStatus.ok)
+			if (!addStatus.ok) {
 				console.error('Could not create a pet in the database. You are missing some fields.')
-			  //TODO: add animation or user-friendly error
-		} catch(e) {
-      //TODO: add animation or user-friendly error
+        submitButton.classList.remove('is-loading')
+        submitButton.classList.add('is-no')
+        setTimeout(() => submitButton.classList.remove('is-no'), 400)
+      }
+
+      setTimeout(() => {
+        submitButton.classList.remove('is-loading')
+        this.setState({ complete: true })
+      }, 500)
+
+    } catch(e) {
+      submitButton.classList.remove('is-loading')
+      submitButton.classList.add('is-no')
+      setTimeout(() => submitButton.classList.remove('is-no'), 400)
 			console.log(e)
 		}
 	}
 
   render() {
 
-    const { pet, pet: { name, gender, age, breeds, description, petImage }, submit } = this.state
+    const { pet, pet: { name, gender, age, breeds, description, petImage }, submit, complete } = this.state
 
     return (
       <div className={`modal ${false ? 'is-active': ''}`}>
@@ -72,10 +114,17 @@ class Adopt extends Component {
                         onSubmit={e => {
                           e.preventDefault()
                           this.setState({ submit: true })
+                          const submitButton = document.querySelector('#adopt-submit-button')
 
-                          if(!name || !age || !description || !petImage)
-                            return // TODO: animation letting user know that it did't go through
-                          this.addImage()
+                          submitButton.classList.add('is-loading')
+                          if(!name || !age || !description || !petImage) {
+                            submitButton.classList.remove('is-loading')
+                            submitButton.classList.add('is-no')
+                            setTimeout(() => submitButton.classList.remove('is-no'), 400)
+                            return
+                          }
+
+                          this.addImage(submitButton)
                         }}
                       >
 
@@ -193,14 +242,27 @@ class Adopt extends Component {
                         </div>
 
                         <div className="field">
-                          <div className="file is-primary">
+                          <div className={`file is-info ${petImage && petImage.name ? 'has-name':''}`}>
                             <label className="file-label">
                               <input
                                 className="file-input"
                                 type="file"
                                 name="Pet Image"
                                 onChange={e => {
-                                  // TODO: Check if file is .jpg, .png or .gif. Don't update petImage state if not right file.
+                                  const pictureButton = document.querySelector('.file')
+                                  if (!this.isRightType(e.target.files[0])) {
+                                    pictureButton.classList.add('is-danger')
+                                    pictureButton.classList.remove('is-info')
+                                    pictureButton.classList.add('is-no')
+                                    setTimeout(() => pictureButton.classList.remove('is-no'), 400)
+                                    return
+                                  }
+
+                                  if (pictureButton.classList.contains('is-danger')) {
+                                    pictureButton.classList.add('is-info')
+                                    pictureButton.classList.remove('is-danger')
+                                  }
+
                                   this.setState({ pet: { ...pet, petImage: e.target.files[0] } })
                                 }}
                                />
@@ -209,9 +271,16 @@ class Adopt extends Component {
                                   <i className="fas fa-upload" />
                                 </span>
                                 <span className="file-label">
-                                  Pet Image
+                                  Picture
                                 </span>
                               </span>
+                              { petImage && petImage.name ?
+                                  <span className="file-name is-isabelline has-text-pineapple">
+                                    {petImage.name}
+                                  </span>
+                                  :
+                                  null
+                              }
                             </label>
                           </div>
                           {
@@ -226,8 +295,15 @@ class Adopt extends Component {
 
                         <div className="field">
                           <div className="control">
-                            <button className={`button is-link`}>
-                              Submit
+                            <button
+                              id="adopt-submit-button"
+                              className={`button is-link ${complete ? 'is-info':''}`}
+                            >
+                              { complete ?
+                                  <i className="fas fa-check" />
+                                  :
+                                  'Submit'
+                              }
                             </button>
                           </div>
                         </div>
