@@ -7,7 +7,8 @@ let petSchema = new mongoose.Schema({
   age: { type: Number, required: true },
   breeds: { type: [mongoose.Schema.Types.Mixed], required: true },
   description: { type: String, required: true },
-  petImage: { type: String, required: true },
+  cloudStorageObject: { type: String, required: true },
+  cloudStoragePublicUrl: { type: String, required: true },
   adopted: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now }
 })

@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 
+// Assets
+import FallbackPic from '../../../assets/images/fallbackPic.jpg'
+
+
 class Pet extends Component {
 	constructor() {
 		super()
@@ -8,29 +12,28 @@ class Pet extends Component {
 		}
 	}
 
-	checkTimeHrs = item => {
-		if (item.created) {
-			const createdDate = new Date(item.created)
-			const today = new Date()
-			return ((today.getTime() - createdDate.getTime()) / 1000) / (60 * 60) // seconds
-		}
-		// If DB error, default no green dot.
-		return 25
+	checkTimeHrs = source => {
+		if (!source || !source.createAt)
+			return false
+		const createdDate = new Date(source.createdAt)
+		const today = new Date()
+		const hours = (((today.getTime() - createdDate.getTime()) / 1000) / 3600)
+
+		return hours <= 24
 	}
 
 	render() {
 
     const { hoverPicture } = this.state
-    const { source, source: { name, age, breeds, description, petImage } } = this.props
-		const MAX_TEXT_LENGTH = 30
+    const { source, source: { name, age, breeds, description, petImage }, MAX_TEXT_LENGTH } = this.props
 
     return (
 			<div
-				className={`${ !hoverPicture && this.checkTimeHrs(source) <= 24 && this.checkTimeHrs(source) > 0 ? 'badge is-badge-info is-badge-small':'is-overflow-hidden' }`}
+				className={`${ !hoverPicture && this.checkTimeHrs(source) ? 'badge is-badge-info is-badge-small':'is-overflow-hidden' }`}
 				data-badge=""
 			>
 		    <div
-		      className="card is-small-rounded pointer v-light-shadow"
+		      className="card is-small-rounded pointer light-shadow"
 		      onMouseEnter={() => {
 		        this.setState({ hoverPicture: true })
 		      }}
@@ -80,9 +83,13 @@ class Pet extends Component {
 			      }
 			      <figure className="image is-4by3">
 			        <img
-			          src={`${process.env.REACT_APP_BACKEND_URL}/${petImage}`}
+								id={name}
+			          src={`https://storage.googleapis.com/${process.env.REACT_APP_GOOGLE_BUCKET_NAME}/${petImage}`}
 			          className={`is-small-rounded ${ hoverPicture ? 'is-medium-blur':'' }`}
 			          alt="Pets for adoption."
+								onError={e => {
+									e.target.src = FallbackPic
+								}}
 			        />
 			      </figure>
 		      </div>

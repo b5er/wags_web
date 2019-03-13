@@ -1,44 +1,15 @@
 const express = require('express')
 const Pet = require('../../models/pet')
-const multer = require('multer')
 const mongoose = require('mongoose')
-
-if (process.env.NODE_ENV !== 'production')
-	require('dotenv').load()
-
-//All image files will be stored in uploads/ folder
-const storage = multer.diskStorage({
-	destination: function(req, file, cb) {
-		cb(null, './uploads')
-	},
-	filename: function(req, file, cb) {
-		cb(null, `${Date.now()}${file.originalname}`)
-	}
-})
-
-const fileFilter = (req, file, cb) => {
-	if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'
-		|| file.mimetype === 'image/gif') {
-		cb(null, true)
-	} else {
-		// rejects a file
-		cb(null, false)
-	}
-}
-
-const upload = multer({
-	storage,
-	limits: {
-		fileSize: 1024 * 1024 * 10 // 10 MB
-  },
-	fileFilter
-})
-
+const images = require('../../utils/images')
 const router = express.Router()
+
 
 router.get('/', async (req, res) => {
 	try {
-		const pets = await Pet.find().select('_id name gender age breeds description petImage')
+
+		const pets = await Pet.find().select('_id name gender age breeds description cloudStorageObject createdAt')
+
 		const response = {
 			count: pets.length,
 			pets: pets.map(pet => {
@@ -49,7 +20,8 @@ router.get('/', async (req, res) => {
 					age: pet.age,
 					breeds: pet.breeds,
 					description: pet.description,
-					petImage: pet.petImage,
+					petImage: pet.cloudStorageObject,
+					createdAt: pet.createdAt,
 					request: {
 						type: 'GET',
 						url: `${process.env.HOST}/pets/${pet._id}`
@@ -57,17 +29,25 @@ router.get('/', async (req, res) => {
 				}
 			})
 		}
+
 		res.send(response)
+
 	} catch(e) {
 		res.status(500).send(e)
 	}
 })
 
-router.put('/', upload.single('petImage'), async (req, res, next) => {
+router.put('/', images.upload.single('petImage'), images.uploadToGCS, async (req, res, next) => {
 	if (!req.body)
-		return res.status(400).send('Request body is missing')
+		return res.status(500).send('Request body is missing.')
 
-	const { body: { name, gender, age, breeds, description }, file: { path } } = req
+	if (!req.file || !req.file.cloudStoragePublicUrl)
+		return res.status(500).send('Image field required.')
+
+	const {
+		body: { name, gender, age, breeds, description },
+		file: { cloudStorageObject, cloudStoragePublicUrl }
+	} = req
 
 	const model = new Pet({
 	  _id: new mongoose.Types.ObjectId(),
@@ -76,10 +56,13 @@ router.put('/', upload.single('petImage'), async (req, res, next) => {
 	  age,
 	  breeds,
 	  description,
-	  petImage: path
+	  cloudStorageObject,
+		cloudStoragePublicUrl
 	})
 
+
 	try {
+
 		const doc = await model.save()
 		if(!doc || doc.length === 0)
 			return res.status(500).send(doc)
@@ -96,6 +79,7 @@ router.put('/', upload.single('petImage'), async (req, res, next) => {
 				}
 			}
 		})
+
 	} catch(e) {
 		res.status(500).send(e)
 	}

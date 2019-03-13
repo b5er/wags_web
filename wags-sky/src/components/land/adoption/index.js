@@ -33,8 +33,9 @@ class Adoption extends Component {
 	    const { pets } = await images.json()
 			const stop = 12
 			let previewPets = []
-			for (let i = 0; i < stop; i++)
+			for (let i = 0; ((i < stop) && (i < pets.length)); i++)
 				previewPets.push(pets[i])
+
 			this.setState({ loading: false, pets: previewPets })
 	  } catch(e) {
 	  	console.log(e)
@@ -89,7 +90,7 @@ class Adoption extends Component {
 											(pets.map((petImage, key) => {
 												return (
 													<div key={key} className="column is-3">
-														<Pet source={petImage} />
+														<Pet MAX_TEXT_LENGTH={30} source={petImage} />
 													</div>
 												)
 											}))
