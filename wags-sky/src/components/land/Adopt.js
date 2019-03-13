@@ -60,16 +60,22 @@ class Adopt extends Component {
         formData.append(key, pet[key])
 
 			const addStatus = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/pet`, {
-																	method: 'PUT',
+																	method: 'POST',
 																  body: formData
 																})
 
 
 			if (!addStatus.ok) {
-				console.error('Could not create a pet in the database. You are missing some fields.')
+        const { message } = await addStatus.json()
+        if (message) {
+            console.log(message)
+        } else {
+            console.error('Could not create a pet in the database. You are missing some fields.')
+        }
         submitButton.classList.remove('is-loading')
         submitButton.classList.add('is-no')
         setTimeout(() => submitButton.classList.remove('is-no'), 400)
+        return
       }
 
       setTimeout(() => {
@@ -295,16 +301,21 @@ class Adopt extends Component {
 
                         <div className="field">
                           <div className="control">
-                            <button
-                              id="adopt-submit-button"
-                              className={`button is-link ${complete ? 'is-info':''}`}
-                            >
-                              { complete ?
-                                  <i className="fas fa-check" />
-                                  :
-                                  'Submit'
-                              }
-                            </button>
+                            { complete ?
+                              (<span
+                                 id="adopt-complete-notification"
+                                 className="is-malachite-green is-small-rounded"
+                               >
+                                <i className="fas fa-check has-text-isabelline" />
+                              </span>)
+                              :
+                              (<button
+                                id="adopt-submit-button"
+                                className="button is-link"
+                              >
+                                Submit
+                              </button>)
+                            }
                           </div>
                         </div>
 
@@ -314,8 +325,6 @@ class Adopt extends Component {
             </div>
           </div>
         </div>
-
-
         <button
           className="modal-close is-large" aria-label="close"
           onClick={async e => {

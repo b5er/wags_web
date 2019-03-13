@@ -38,7 +38,7 @@ router.get('/', async (req, res) => {
 	}
 })
 
-router.put('/', images.upload.single('petImage'), images.uploadToGCS, async (req, res, next) => {
+router.post('/', images.upload.single('petImage'), images.uploadToGCS, async (req, res, next) => {
 	if (!req.body)
 		return res.status(500).send('Request body is missing.')
 
@@ -47,8 +47,9 @@ router.put('/', images.upload.single('petImage'), images.uploadToGCS, async (req
 
 	const {
 		body: { name, gender, age, breeds, description },
-		file: { cloudStorageObject, cloudStoragePublicUrl }
+		file: { originalname, cloudStorageObject, cloudStoragePublicUrl }
 	} = req
+
 
 	const model = new Pet({
 	  _id: new mongoose.Types.ObjectId(),
@@ -57,6 +58,7 @@ router.put('/', images.upload.single('petImage'), images.uploadToGCS, async (req
 	  age,
 	  breeds,
 	  description,
+		originalname,
 	  cloudStorageObject,
 		cloudStoragePublicUrl
 	})
@@ -65,8 +67,10 @@ router.put('/', images.upload.single('petImage'), images.uploadToGCS, async (req
 	try {
 
 		const doc = await model.save()
+
 		if(!doc || doc.length === 0)
 			return res.status(500).send(doc)
+
 		res.status(201).send({
 			createdPet: {
 				name: doc.name,
@@ -82,7 +86,7 @@ router.put('/', images.upload.single('petImage'), images.uploadToGCS, async (req
 		})
 
 	} catch(e) {
-		res.status(500).send(e)
+		res.status(500).send({ message: e })
 	}
 })
 

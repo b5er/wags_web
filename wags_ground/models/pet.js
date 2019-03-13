@@ -8,6 +8,7 @@ let petSchema = new mongoose.Schema({
   breeds: { type: [mongoose.Schema.Types.Mixed], required: true },
   description: { type: String, required: true },
   location: { type: String, default: 'Greenbelt' },
+  originalname: { type: String, required: true },
   cloudStorageObject: { type: String, required: true },
   cloudStoragePublicUrl: { type: String, required: true },
   adopted: { type: Boolean, default: false },

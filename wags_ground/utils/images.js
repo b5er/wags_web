@@ -1,4 +1,5 @@
 const { Storage } = require('@google-cloud/storage')
+const Pet = require('../models/pet')
 
 
 const getPublicUrl = filename => {
@@ -9,11 +10,24 @@ const uploadToGCS = async (req, res, next) => {
   if (!req.file)
     return next()
 
+  const { file: { originalname } } = req
+
+  try {
+
+		const pet = await Pet.find({ originalname })
+
+		if (pet.length > 0)
+			return res.status(500).send({ message: 'Already have pet in the system! Try deleting the duplicate pet.' })
+
+	} catch(e) {
+		res.status(500).send({ message: e })
+	}
+
   const storage = new Storage()
 
   try {
     const bucket = await storage.bucket(`${process.env.GOOGLE_BUCKET_NAME}`)
-    const gcs = Date.now() + req.file.originalname
+    const gcs = Date.now() + originalname
     const file = bucket.file(gcs)
 
     const stream = file.createWriteStream({
