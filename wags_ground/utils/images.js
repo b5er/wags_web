@@ -10,22 +10,17 @@ const uploadToGCS = async (req, res, next) => {
   if (!req.file)
     return next()
 
-  const { file: { originalname } } = req
-
   try {
 
-		const pet = await Pet.find({ originalname })
+    const { file: { originalname } } = req
+    const pet = await Pet.find({ originalname })
 
 		if (pet.length > 0)
 			return res.status(500).send({ message: 'Already have pet in the system! Try deleting the duplicate pet.' })
 
-	} catch(e) {
-		res.status(500).send({ message: e })
-	}
 
-  const storage = new Storage()
+    const storage = new Storage()
 
-  try {
     const bucket = await storage.bucket(`${process.env.GOOGLE_BUCKET_NAME}`)
     const gcs = Date.now() + originalname
     const file = bucket.file(gcs)
@@ -61,6 +56,33 @@ const uploadToGCS = async (req, res, next) => {
 
 }
 
+const deleteFromGCS = async (req, res, next) => {
+  if (!req.params)
+    return next()
+
+  const { params: { petID } } = req
+
+  try {
+
+		const pet = await Pet.find({ _id: petID })
+
+		if (pet.length === 0)
+			return res.status(500).send({ message: 'No such pet exist!' })
+
+    const storage = new Storage()
+
+    const bucket = await storage.bucket(`${process.env.GOOGLE_BUCKET_NAME}`)
+    const file = bucket.file(pet[0].cloudStorageObject)
+
+    await file.delete()
+    next()
+
+	} catch(e) {
+		res.status(500).send({ message: e })
+	}
+  
+}
+
 const Multer = require('multer')
 const upload = Multer({
   storage: Multer.MemoryStorage,
@@ -72,5 +94,6 @@ const upload = Multer({
 module.exports = {
   getPublicUrl,
   uploadToGCS,
+  deleteFromGCS,
   upload
 }

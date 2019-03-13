@@ -38,7 +38,7 @@ router.get('/', async (req, res) => {
 	}
 })
 
-router.post('/', images.upload.single('petImage'), images.uploadToGCS, async (req, res, next) => {
+router.post('/', images.upload.single('petImage'), images.uploadToGCS, async (req, res) => {
 	if (!req.body)
 		return res.status(500).send('Request body is missing.')
 
@@ -90,14 +90,35 @@ router.post('/', images.upload.single('petImage'), images.uploadToGCS, async (re
 	}
 })
 
-router.delete('/', function(req, res) {
-  Pet.findOneAndRemove({
-    _id: req.query.id
-  }).then(doc => {
-    res.json(doc)
-  }).catch(err => {
-    res.status(500).send(err)
-  })
+router.delete('/:petID', images.deleteFromGCS, async (req, res) => {
+	const { params: { petID } } = req
+
+	try {
+		const pet = await Pet.deleteOne({ _id: petID })
+		res.send({
+			message: 'Pet deleted.',
+			request: {
+				type: 'POST',
+				url: `${process.env.HOST}/pets`,
+				body: {
+					name: 'String',
+					gender: 'String',
+					age: 'Number',
+					breeds: '[String]',
+					description: 'String',
+					location: 'String',
+					originalname: 'String',
+					cloudStorageObject: 'String',
+					cloudStoragePublicUrl: 'String',
+					adopted: 'Boolean',
+					createdAt: 'Date'
+				}
+			}
+		})
+	} catch(e) {
+		console.log(e)
+		res.status(500).send({ message: e })
+	}
 })
 
 module.exports = router
