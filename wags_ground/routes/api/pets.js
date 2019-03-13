@@ -25,7 +25,8 @@ router.get('/', async (req, res) => {
 					createdAt: pet.createdAt,
 					request: {
 						type: 'GET',
-						url: `${process.env.HOST}/pet/${pet._id}`
+						description: 'Retrieve one pet.',
+						url: `${process.env.HOST}/api/pets/${pet._id}`
 					}
 				}
 			})
@@ -34,8 +35,35 @@ router.get('/', async (req, res) => {
 		res.send(response)
 
 	} catch(e) {
-		res.status(500).send(e)
+		res.status(500).send({ message: `${e}` })
 	}
+})
+
+router.get('/:petID', async (req, res) => {
+	const { params: { petID } } = req
+
+	try {
+
+		const pet = await Pet.findById(petID).select('_id name gender age breeds description cloudStorageObject location adopted createdAt')
+
+		if (!pet)
+			return res.status(404).send({ message: 'Pet could not be found.' })
+
+		const response = {
+			pet,
+			request: {
+				type: 'GET',
+				description: 'Retrieve all pets.',
+				url: `${process.env.HOST}/api/pets`
+			}
+		}
+
+		res.send(response)
+
+	} catch(e) {
+		res.status(500).send({ message: `${e}` })
+	}
+
 })
 
 router.post('/', images.upload, images.uploadToGCS, async (req, res) => {
@@ -81,13 +109,14 @@ router.post('/', images.upload, images.uploadToGCS, async (req, res) => {
 				description: doc.description,
 				request: {
 					type: 'GET',
-					url: `${process.env.HOST}/pet/${doc._id}`
+					description: 'Retrieve one pet.',
+					url: `${process.env.HOST}/api/pets/${doc._id}`
 				}
 			}
 		})
 
 	} catch(e) {
-		res.status(500).send({ message: e })
+		res.status(500).send({ message: `${e}` })
 	}
 })
 
@@ -95,12 +124,14 @@ router.delete('/:petID', images.deleteFromGCS, async (req, res) => {
 	const { params: { petID } } = req
 
 	try {
+
 		const pet = await Pet.deleteOne({ _id: petID })
 		res.send({
 			message: 'Pet deleted.',
 			request: {
 				type: 'POST',
-				url: `${process.env.HOST}/pet`,
+				description: 'Create a pet.',
+				url: `${process.env.HOST}/api/pets`,
 				body: {
 					name: 'String',
 					gender: 'String',
@@ -116,8 +147,9 @@ router.delete('/:petID', images.deleteFromGCS, async (req, res) => {
 				}
 			}
 		})
+
 	} catch(e) {
-		res.status(500).send({ message: e })
+		res.status(500).send({ message: `${e}` })
 	}
 })
 

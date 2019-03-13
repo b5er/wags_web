@@ -26,7 +26,7 @@ class Hero extends Component {
 								<div className="columns is-multiline">
 									<div className="column is-12">
                     <figure className="image">
-                      <img src={Couch} alt="couch" />
+                      <img src={Couch} alt="Hero couch." />
                     </figure>
 									</div>
 									<div className="column is-12 has-text-centered">

@@ -31,7 +31,7 @@ class Social extends Component {
 							</p>
 							<div className="social-img">
 								<figure className="image is-128x128">
-									<img className="is-rounded" src={personOne} alt="" />
+									<img className="is-rounded" src={personOne} alt="Person one avatar." />
 								</figure>
 							</div>
 							<div className="has-text-pineapple has-text-centered">
@@ -56,7 +56,7 @@ class Social extends Component {
 							</p>
 							<div className="social-img">
 								<figure className="image is-128x128">
-									<img className="is-rounded" src={personTwo} alt="" />
+									<img className="is-rounded" src={personTwo} alt="Person two avatar." />
 								</figure>
 							</div>
 							<div className="has-text-centered has-text-pineapple">
@@ -81,7 +81,7 @@ class Social extends Component {
 							</p>
 							<div className="social-img">
 								<figure className="image is-128x128">
-									<img className="is-rounded" src={personThree} alt="" />
+									<img className="is-rounded" src={personThree} alt="Person three avatar." />
 								</figure>
 							</div>
 							<div className="has-text-centered has-text-pineapple">

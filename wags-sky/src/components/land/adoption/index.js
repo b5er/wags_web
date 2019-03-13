@@ -6,6 +6,8 @@ import Cat from './Cat'
 
 
 class Adoption extends Component {
+	_isMounted = false
+
 	constructor() {
 		super()
 		this.state = {
@@ -14,16 +16,18 @@ class Adoption extends Component {
 	}
 
 	componentDidMount() {
-		window.addEventListener('load', this.getImages())
+		this._isMounted = true
+		document.addEventListener('load', this.getImages())
 	}
 
 	componentWillUnmount() {
-		window.removeEventListener('load', this.getImages())
+		this._isMounted = false
+		document.removeEventListener('load', this.getImages())
 	}
 
 	getImages = async () => {
 		try {
-			const images = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/pet`)
+			const images = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/pets`)
 
 	    if(!images.ok) {
 	    	console.error('Unable to fetch pet images.')
@@ -36,7 +40,8 @@ class Adoption extends Component {
 			for (let i = 0; ((i < stop) && (i < pets.length)); i++)
 				previewPets.push(pets[i])
 
-			this.setState({ loading: false, pets: previewPets })
+			if (this._isMounted)
+				this.setState({ loading: false, pets: previewPets })
 	  } catch(e) {
 	  	console.log(e)
 	  }

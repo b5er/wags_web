@@ -33,7 +33,7 @@ class Profile extends Component {
     return (
       <section className="section is-paddingless">
         <figure className="image menu-profile-img">
-          <img className="is-large-rounded light-shadow pointer profile-img-size" src={Dog7} alt="Dog avatar" />
+          <img className="is-large-rounded light-shadow pointer profile-img-size" src={Dog7} alt="Dog avatar." />
         </figure>
         <span className="profile-name">
           <div className="columns">
