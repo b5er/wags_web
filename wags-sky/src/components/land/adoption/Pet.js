@@ -25,7 +25,7 @@ class Pet extends Component {
 	render() {
 
     const { hoverPicture } = this.state
-    const { source, source: { name, age, breeds, description, petImage }, MAX_TEXT_LENGTH } = this.props
+    const { source, source: { name, age, breeds, description, location, petImage }, MAX_TEXT_LENGTH } = this.props
 
     return (
 			<div
@@ -75,7 +75,11 @@ class Pet extends Component {
 									}
 			            <br />
 									<br />
-			            Found: {`Greenbelt, MD`}
+			            I was found in { location.length <= MAX_TEXT_LENGTH ?
+											location
+											:
+											`${location.substring(0, MAX_TEXT_LENGTH)}...`
+									}
 			          </p>
 			        </div>
 			        :

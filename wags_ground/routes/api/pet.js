@@ -8,7 +8,7 @@ const router = express.Router()
 router.get('/', async (req, res) => {
 	try {
 
-		const pets = await Pet.find().select('_id name gender age breeds description cloudStorageObject createdAt')
+		const pets = await Pet.find().select('_id name gender age breeds description cloudStorageObject location createdAt')
 
 		const response = {
 			count: pets.length,
@@ -21,6 +21,7 @@ router.get('/', async (req, res) => {
 					breeds: pet.breeds,
 					description: pet.description,
 					petImage: pet.cloudStorageObject,
+					location: pet.location,
 					createdAt: pet.createdAt,
 					request: {
 						type: 'GET',
