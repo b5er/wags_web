@@ -8,7 +8,7 @@ const getPublicUrl = filename => {
 
 const uploadToGCS = async (req, res, next) => {
   if (!req.file)
-    return next()
+    return res.status(500).send({ message: 'Unable to access file.' })
 
   try {
 
@@ -80,16 +80,32 @@ const deleteFromGCS = async (req, res, next) => {
 	} catch(e) {
 		res.status(500).send({ message: e })
 	}
-  
+
 }
 
 const Multer = require('multer')
-const upload = Multer({
+const multer = Multer({
   storage: Multer.MemoryStorage,
   limits: {
     fileSize: 1024 * 1024 * 10 // 10mb max
+  },
+  fileFilter: (req, file, next) => {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/gif') {
+      next(null, true)
+    } else {
+      return next(new Error('Incorrect file type.'))
+    }
   }
-})
+}).single('petImage')
+
+const upload = async (req, res, next) => {
+  multer(req, res, err => {
+    if (err)
+      return res.status(500).send({ message: err.message })
+    next()
+  })
+}
+
 
 module.exports = {
   getPublicUrl,

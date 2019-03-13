@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
 					createdAt: pet.createdAt,
 					request: {
 						type: 'GET',
-						url: `${process.env.HOST}/pets/${pet._id}`
+						url: `${process.env.HOST}/pet/${pet._id}`
 					}
 				}
 			})
@@ -38,7 +38,8 @@ router.get('/', async (req, res) => {
 	}
 })
 
-router.post('/', images.upload.single('petImage'), images.uploadToGCS, async (req, res) => {
+router.post('/', images.upload, images.uploadToGCS, async (req, res) => {
+
 	if (!req.body)
 		return res.status(500).send('Request body is missing.')
 
@@ -80,7 +81,7 @@ router.post('/', images.upload.single('petImage'), images.uploadToGCS, async (re
 				description: doc.description,
 				request: {
 					type: 'GET',
-					url: `${process.env.HOST}/pets/${doc._id}`
+					url: `${process.env.HOST}/pet/${doc._id}`
 				}
 			}
 		})
@@ -99,7 +100,7 @@ router.delete('/:petID', images.deleteFromGCS, async (req, res) => {
 			message: 'Pet deleted.',
 			request: {
 				type: 'POST',
-				url: `${process.env.HOST}/pets`,
+				url: `${process.env.HOST}/pet`,
 				body: {
 					name: 'String',
 					gender: 'String',
@@ -116,7 +117,6 @@ router.delete('/:petID', images.deleteFromGCS, async (req, res) => {
 			}
 		})
 	} catch(e) {
-		console.log(e)
 		res.status(500).send({ message: e })
 	}
 })
