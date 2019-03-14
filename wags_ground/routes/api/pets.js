@@ -6,6 +6,7 @@ const router = express.Router()
 
 
 router.get('/', async (req, res) => {
+
 	try {
 
 		const pets = await Pet.find().select('_id name gender age breeds description cloudStorageObject location createdAt')
@@ -37,6 +38,7 @@ router.get('/', async (req, res) => {
 	} catch(e) {
 		res.status(500).send({ message: `${e}` })
 	}
+
 })
 
 router.get('/:petID', async (req, res) => {
@@ -68,11 +70,11 @@ router.get('/:petID', async (req, res) => {
 
 router.post('/', images.upload, images.uploadToGCS, async (req, res) => {
 
-	if (!req.body)
-		return res.status(500).send('Request body is missing.')
-
 	if (!req.file || !req.file.cloudStoragePublicUrl)
-		return res.status(500).send('Image field required.')
+		return res.status(500).send({ message: 'Image field required.' })
+
+	if (req.file.cloudStorageError)
+		return res.status(500).send({ message: req.file.cloudStorageError })
 
 	const {
 		body: { name, gender, age, breeds, description },
@@ -118,11 +120,51 @@ router.post('/', images.upload, images.uploadToGCS, async (req, res) => {
 	} catch(e) {
 		res.status(500).send({ message: `${e}` })
 	}
+
+})
+
+router.patch('/:petID', images.upload, images.updateGCS, async (req, res) => {
+	
+	if (req.file.cloudStorageError)
+		return res.status(500).send({ message: req.file.cloudStorageError })
+
+	const { params: { petID }, body, file } = req
+	const updateOps = {}
+
+	try {
+
+		if (file) {
+			const { originalname, cloudStorageObject, cloudStoragePublicUrl } = file
+			if (originalname && cloudStorageObject && cloudStoragePublicUrl) {
+				updateOps['originalname'] = originalname,
+				updateOps['cloudStorageObject'] = cloudStorageObject,
+				updateOps['cloudStoragePublicUrl'] = cloudStoragePublicUrl
+			}
+		} else {
+			for (const ops of body)
+				updateOps[ops.propName] = ops.value
+		}
+
+		const pet = await Pet.updateOne({ _id: petID }, { $set: updateOps })
+		res.send({
+			message: 'Pet updated.',
+			request: {
+				type: 'GET',
+				description: 'Retrieve one pet.',
+				url: `${process.env.HOST}/api/pets/${pet._id}`
+			}
+		})
+
+	} catch(e) {
+		res.status(500).send({ message: `${e}` })
+	}
+
 })
 
 router.delete('/:petID', images.deleteFromGCS, async (req, res) => {
-	const { params: { petID } } = req
 
+	const { params: { petID } } = req
+	console.log(petID)
 	try {
 
 		const pet = await Pet.deleteOne({ _id: petID })
@@ -151,6 +193,7 @@ router.delete('/:petID', images.deleteFromGCS, async (req, res) => {
 	} catch(e) {
 		res.status(500).send({ message: `${e}` })
 	}
+
 })
 
 module.exports = router

@@ -22,8 +22,8 @@ const uploadToGCS = async (req, res, next) => {
     const storage = new Storage()
 
     const bucket = await storage.bucket(`${process.env.GOOGLE_BUCKET_NAME}`)
-    const gcs = Date.now() + originalname
-    const file = bucket.file(gcs)
+    const fileName = Date.now() + originalname
+    const file = bucket.file(fileName)
 
     const stream = file.createWriteStream({
       metadata: {
@@ -38,25 +38,84 @@ const uploadToGCS = async (req, res, next) => {
     })
 
     stream.on('finish', async () => {
-      req.file.cloudStorageObject = gcs
+      req.file.cloudStorageObject = fileName
       try {
         const publicFile = await file.makePublic()
-        req.file.cloudStoragePublicUrl = getPublicUrl(gcs)
-        next()
+        req.file.cloudStoragePublicUrl = getPublicUrl(fileName)
       } catch(e) {
-        console.log(e)
+        req.file.cloudStorageError = e
       }
+      next()
     })
 
     stream.end(req.file.buffer)
 
   } catch(e) {
-    console.log(e)
+    res.status(500).send({ message: `${e}` })
+  }
+
+}
+
+const updateGCS = async (req, res, next) => {
+
+  if (!req.file)
+    return next()
+
+  const { params: { petID }, file: { originalname } } = req
+
+  try {
+
+    const petImage = await Pet.find({ originalname })
+    const pet = await Pet.find({ _id: petID })
+
+    if (petImage.length > 0 || pet.length === 0)
+      return next() // petImage already exists or there isn't a pet with the specified id
+
+    const storage = new Storage()
+
+    const bucket = await storage.bucket(`${process.env.GOOGLE_BUCKET_NAME}`)
+    const fileName = pet[0].cloudStorageObject
+    const file = bucket.file(fileName)
+    const newFileName = Date.now() + originalname
+    const newFile = bucket.file(newFileName)
+
+    await file.delete()
+
+    const stream = newFile.createWriteStream({
+      metadata: {
+        contentType: req.file.mimetype
+      },
+      resumable: false
+    })
+
+    stream.on('error', err => {
+      req.file.cloudStorageError = err
+      next(err)
+    })
+
+    stream.on('finish', async () => {
+      req.file.cloudStorageObject = newFileName
+      try {
+
+        const publicFile = await newFile.makePublic()
+        req.file.cloudStoragePublicUrl = getPublicUrl(newFileName)
+
+      } catch(e) {
+        req.file.cloudStorageError = e
+      }
+      next()
+    })
+
+    stream.end(req.file.buffer)
+
+  } catch(e) {
+    res.status(500).send({ message: `${e}` })
   }
 
 }
 
 const deleteFromGCS = async (req, res, next) => {
+
   if (!req.params)
     return next()
 
@@ -78,7 +137,7 @@ const deleteFromGCS = async (req, res, next) => {
     next()
 
 	} catch(e) {
-		res.status(500).send({ message: e })
+		res.status(500).send({ message: `${e}` })
 	}
 
 }
@@ -110,6 +169,7 @@ const upload = async (req, res, next) => {
 module.exports = {
   getPublicUrl,
   uploadToGCS,
+  updateGCS,
   deleteFromGCS,
   upload
 }
