@@ -42,6 +42,7 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/:petID', async (req, res) => {
+
 	const { params: { petID } } = req
 
 	try {
@@ -124,7 +125,7 @@ router.post('/', images.upload, images.uploadToGCS, async (req, res) => {
 })
 
 router.patch('/:petID', images.upload, images.updateGCS, async (req, res) => {
-	
+
 	if (req.file.cloudStorageError)
 		return res.status(500).send({ message: req.file.cloudStorageError })
 
@@ -164,7 +165,7 @@ router.patch('/:petID', images.upload, images.updateGCS, async (req, res) => {
 router.delete('/:petID', images.deleteFromGCS, async (req, res) => {
 
 	const { params: { petID } } = req
-	console.log(petID)
+	
 	try {
 
 		const pet = await Pet.deleteOne({ _id: petID })
