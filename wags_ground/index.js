@@ -29,12 +29,18 @@ app.use((req, res, next) => {
 	next()
 })
 
+const whitelist = (`${process.env.WHITELIST_ORIGINS}`).split(',')
 const corsOptions = {
-	'origin': '*',
-	'methods': 'HEAD, GET, POST, PATCH, DELETE',
-	'optionSuccessStatus': 204
+	origin: (origin, next) => {
+		if (whitelist.indexOf(origin) !== -1) {
+			next(null, true)
+		} else {
+			return next(new Error('Not allowed, CORS.'))
+		}
+	},
+	methods: 'HEAD, GET, POST, PATCH, DELETE',
+	optionSuccessStatus: 204
 }
-
 app.use(cors(corsOptions))
 
 app.use(require('./routes'))
