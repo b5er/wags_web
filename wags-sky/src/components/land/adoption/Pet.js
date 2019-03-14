@@ -13,7 +13,7 @@ class Pet extends Component {
 	}
 
 	checkTimeHrs = source => {
-		if (!source || !source.createAt)
+		if (!source || !source.createdAt)
 			return false
 		const createdDate = new Date(source.createdAt)
 		const today = new Date()
@@ -46,39 +46,41 @@ class Pet extends Component {
 			        <div>
 			          <div className="card is-small-rounded adopt-img-overlay adopt-img-fadein" />
 			          <p className="has-text-pineapple is-size-7 adopt-description">
-									Name: { name.length <= MAX_TEXT_LENGTH - 6 ?
+									Name: { name && name.length <= MAX_TEXT_LENGTH - 6 ?
 											name
 											:
-											`${name.substring(0, MAX_TEXT_LENGTH - 6)}...`
+											`${name ? name.substring(0, MAX_TEXT_LENGTH - 6):''}...`
 									}
 			            <br />
 			            Age: { age }
 			            <br />
-			            Breed: {
-			              breeds.map((breed, key) => {
-			                return (
-			                  <span key={key}>
-			                    { breed.length <= MAX_TEXT_LENGTH - 7 ?
-															breed
-															:
-															`${breed.substring(0, MAX_TEXT_LENGTH - 7)}...`
-													}
-			                  </span>
-			                )
-			              })
+			            Breed: { breeds ?
+				              breeds.map((breed, key) => {
+				                return (
+				                  <span key={key}>
+				                    { breed && breed.length <= MAX_TEXT_LENGTH - 7 ?
+																breed
+																:
+																`${breed ? breed.substring(0, MAX_TEXT_LENGTH - 7):''}...`
+														}
+				                  </span>
+				                )
+				              })
+											:
+											'...'
 			            }
 									<br />
-			            About me: { description.length <= MAX_TEXT_LENGTH - 10 ?
+			            About me: { description && description.length <= MAX_TEXT_LENGTH - 10 ?
 											description
 											:
-											`${description.substring(0, MAX_TEXT_LENGTH - 10)}...`
+											`${description ? description.substring(0, MAX_TEXT_LENGTH - 10):''}...`
 									}
 			            <br />
 									<br />
-			            I was found in { location.length <= MAX_TEXT_LENGTH ?
+			            I was found in { location && location.length <= MAX_TEXT_LENGTH ?
 											location
 											:
-											`${location.substring(0, MAX_TEXT_LENGTH)}...`
+											`${location ? location.substring(0, MAX_TEXT_LENGTH):''}...`
 									}
 			          </p>
 			        </div>

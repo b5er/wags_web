@@ -92,10 +92,13 @@ class Adoption extends Component {
 												</p>
 											</div>)
 											:
-											(pets.map((petImage, key) => {
+											(pets.map((source, key) => {
+												if (!source)
+													return null
+
 												return (
 													<div key={key} className="column is-3">
-														<Pet MAX_TEXT_LENGTH={30} source={petImage} />
+														<Pet MAX_TEXT_LENGTH={30} source={source} />
 													</div>
 												)
 											}))
