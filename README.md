@@ -1,4 +1,4 @@
-# Wags Website (WIP)
+# Wags Website
 
 Wags non-profit website.
 
