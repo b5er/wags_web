@@ -13,7 +13,8 @@ class PetList extends Component {
   constructor() {
     super()
     this.state = {
-      pets: []
+      pets: [],
+      search: ''
     }
   }
 
@@ -36,22 +37,27 @@ class PetList extends Component {
 
   render() {
 
-    const { pets } = this.state
+    const { pets, search } = this.state
 
     return (
       <div>
         <div className="section">
           <div className="box is-columbia-blue light-shadow">
-              <div className="field has-addons">
-                  <div className="control is-expanded">
-                      <input className="input has-text-centered" placeholder="e.g. Pebbles" />
-                  </div>
-                  <div className="control">
-                      <span className="button is-link">
-                        Search
-                      </span>
-                  </div>
+            <div className="field has-addons">
+              <div className="control is-expanded">
+                <input
+                  className="input has-text-centered"
+                  placeholder="e.g. Pebbles"
+                  onChange={e => this.setState({ search: e.target.value.substr(0, 20) })}
+                  value={search}
+                />
               </div>
+              <div className="control">
+                <span className="button is-link">
+                  Search
+                </span>
+              </div>
+            </div>
           </div>
         </div>
         <div className="columns">
@@ -72,15 +78,17 @@ class PetList extends Component {
                     </p>
                   </div>)
                   :
-                  (pets.map((source, key) => {
-                    if (!source)
-                      return null
+                  (pets
+                    .filter(pet => pet.name.toLowerCase().indexOf(search.toLowerCase()) !== -1)
+                    .map((source, key) => {
+                      if (!source)
+                        return null
 
-                    return (
-                      <div key={key} className="column is-4">
-                        <Pet MAX_TEXT_LENGTH={30} source={source} />
-                      </div>
-                    )
+                      return (
+                        <div key={key} className="column is-4">
+                          <Pet MAX_TEXT_LENGTH={30} source={source} />
+                        </div>
+                      )
                   }))
               }
             </div>
