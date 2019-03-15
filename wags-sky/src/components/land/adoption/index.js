@@ -4,9 +4,11 @@ import React, { Component } from 'react'
 import Pet from './Pet'
 import Cat from './Cat'
 
+// utils
+import { fetchPets } from '../../../utils/petAPI'
+
 
 class Adoption extends Component {
-	_isMounted = false
 
 	constructor() {
 		super()
@@ -16,35 +18,21 @@ class Adoption extends Component {
 	}
 
 	componentDidMount() {
-		this._isMounted = true
 		document.addEventListener('load', this.getImages())
 	}
 
 	componentWillUnmount() {
-		this._isMounted = false
-		document.removeEventListener('load', this.getImages())
+		document.removeEventListener('load', this.getImages)
 	}
 
 	getImages = async () => {
 		try {
-			const images = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/pets`)
-
-	    if(!images.ok) {
-	    	console.error('Unable to fetch pet images.')
-				return
-			}
-
-	    const { pets } = await images.json()
 			const stop = 12
-			let previewPets = []
-			for (let i = 0; ((i < stop) && (i < pets.length)); i++)
-				previewPets.push(pets[i])
-
-			if (this._isMounted)
-				this.setState({ loading: false, pets: previewPets })
-	  } catch(e) {
-	  	console.log(e)
-	  }
+			const pets = await fetchPets(stop)
+			this.setState({ loading: false, pets })
+		} catch(e) {
+			console.log(e)
+		}
 	}
 
 	render() {
@@ -77,8 +65,8 @@ class Adoption extends Component {
 					<div className="columns is-centered">
 					<div className="column is-10">
 							<div className="box is-ceil">
-								<div className={`columns is-multiline ${pets.length === 0 ? 'is-centered':''}`}>
-									{ pets.length === 0 ?
+								<div className={`columns is-multiline ${!pets || pets.length === 0 ? 'is-centered':''}`}>
+									{ !pets || pets.length === 0 ?
 											(<div className="column is-6 has-text-centered">
 												<Cat />
 												<p className="is-size-5 has-text-pineapple">

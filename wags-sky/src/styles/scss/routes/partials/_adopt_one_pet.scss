@@ -1,0 +1,21 @@
+#adopt-schedule-button {
+  border-color: $v-light-malachite-green;
+
+  &:hover {
+    color: $isabelline;
+    border-color: $v-light-malachite-green;
+  }
+}
+
+.is-divider-vertical[data-content]::after, .is-divider[data-content]::after {
+  background: transparent !important;
+}
+
+.adopt-back-button {
+  border-color: $pineapple;
+  border-radius: 100%;
+  height: 2.8rem;
+  &:hover {
+    border-color: $pineapple;
+  }
+}

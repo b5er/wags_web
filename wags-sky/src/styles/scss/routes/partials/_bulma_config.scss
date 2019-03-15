@@ -5,7 +5,7 @@ $columbia-blue: #c4d4e7;
 $v-light-malachite-green: #35E064; // #61e786 (prev)
 $davy-grey: #5a5766;
 $isabelline: #f1f7ed;
-$pineapple: #48435c;
+$pineapple: #48435c; 
 $ceil: #9792e3;
 
 // Call to action buttons
@@ -36,5 +36,6 @@ $switch-paddle-background: $isabelline;
 @import 'node_modules/bulma-extensions/bulma-switch/src/sass/index';
 @import 'node_modules/bulma-extensions/bulma-tooltip/src/sass/index';
 @import 'node_modules/bulma-extensions/bulma-steps/src/sass/index';
+@import 'node_modules/bulma-extensions/bulma-divider/src/sass/index';
 // @import 'node_modules/bulma-extensions/bulma-pricingtable/src/sass/index';
 // @import 'node_modules/bulma-extensions/bulma-pageloader/dist/bulma-pageloader';

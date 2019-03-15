@@ -48,7 +48,12 @@ class Navbar extends Component {
 			>
 			  <div className="navbar-brand">
 			    <div className="navbar-item pointer">
-						<img alt="Wags logo." className={`wags-logo ${scrollBeyond ? 'wags-logo-isabelline':'wags-logo-pineapple'}`} width={50} src={WagsLogo} />
+						<img
+							alt="Wags logo."
+							className={`wags-logo ${scrollBeyond ? 'wags-logo-isabelline':'wags-logo-pineapple'}`}
+							width={50}
+							src={WagsLogo}
+						/>
 			      <h1 className={`title landing-navbar-title ${scrollBeyond ? 'has-text-isabelline':'has-text-pineapple'}`}>
 			      	Wags
 			      </h1>

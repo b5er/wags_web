@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 // Assets
 import FallbackPic from '../../../assets/images/fallbackPic.jpg'
@@ -25,7 +26,7 @@ class Pet extends Component {
 	render() {
 
     const { hoverPicture } = this.state
-    const { source, source: { name, age, breeds, description, location, petImage }, MAX_TEXT_LENGTH } = this.props
+    const { source, source: { _id, name, age, breeds, description, location, petImage }, MAX_TEXT_LENGTH } = this.props
 
     return (
 			<div
@@ -43,9 +44,9 @@ class Pet extends Component {
 		    >
 			    <div className="card-image">
 			      { hoverPicture ?
-			        <div>
+			        <Link to={`/adopt/${_id}`}>
 			          <div className="card is-small-rounded adopt-img-overlay adopt-img-fadein" />
-								<div className="content adopt-description">
+			          <div className="content adopt-description">
 									<p className="has-text-pineapple is-size-7 is-marginless">
 										Name: { name && name.length <= MAX_TEXT_LENGTH - 6 ?
 												name
@@ -88,7 +89,7 @@ class Pet extends Component {
 										}
 									</p>
 			          </div>
-			        </div>
+			        </Link>
 			        :
 			        null
 			      }

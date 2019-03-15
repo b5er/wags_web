@@ -48,6 +48,13 @@ const Routes = () => (
 				}
 				return <AdoptPage {...props} />
 			}} />
+			<Route path="/adopt/:petID" render={props => {
+				if (process.env.NODE_ENV === 'production') {
+					const GATrackedAdopt = withTracker(AdoptPage)
+					return <GATrackedAdopt {...props} />
+				}
+				return <AdoptPage {...props} />
+			}} />
 			<Route exact path="/donate" render={props => {
 				if (process.env.NODE_ENV === 'production') {
 					const GATrackedDonate = withTracker(DonatePage)

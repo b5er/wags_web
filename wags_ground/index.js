@@ -32,7 +32,8 @@ app.use((req, res, next) => {
 const whitelist = (`${process.env.WHITELIST_ORIGINS}`).split(',')
 const corsOptions = {
 	origin: (origin, next) => {
-		if (whitelist.indexOf(origin) !== -1) {
+		// If typeof origin is undefined, it's not a browser and most likely a dev tool (only in Dev)
+		if ((typeof origin) === 'undefined' || whitelist.indexOf(origin) !== -1) {
 			next(null, true)
 		} else {
 			return next(new Error('Not allowed, CORS.'))
