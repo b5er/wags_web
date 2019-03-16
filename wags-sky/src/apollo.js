@@ -36,12 +36,17 @@ const typeDefs = `
 		item: String!
 	}
 
+	type Schedule {
+		schedule: Boolean!
+	}
+
 	type Mutation {
 		toggleAbout(about: Boolean!): About
 		toggleContact(contact: Boolean!): Contact
 		toggleAuth(auth: Boolean!, type: String!): Auth
 		updateCheckout(name: String!, email: String!, phone: String!, zip: String!, amount: String!, interval: String!, token: String!, complete: Boolean!, receipt: String!): Checkout
 		updateItem(item: String!): Item
+		toggleSchedule(schedule: Boolean!): Schedule
 	}
 
 	type Query {
@@ -50,6 +55,7 @@ const typeDefs = `
 		auth: Auth
 		checkout: Checkout
 		item: Item
+		schedule: Schedule
 	}
 
 `

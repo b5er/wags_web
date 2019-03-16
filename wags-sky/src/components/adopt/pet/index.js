@@ -1,5 +1,12 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+
+// Components
+import ScheduleForm from './ScheduleForm'
+
+// Apollo
+import { compose, graphql } from 'react-apollo'
+import { SHOW_SCHEDULE } from '../../../graphql/adopt'
 
 // utils
 import { fetchOnePet } from '../../../utils/petAPI'
@@ -34,7 +41,7 @@ class Pet extends Component {
   render() {
 
     const { pet } = this.state
-    const { history } = this.props
+    const { showSchedule } = this.props
 
     return (
       <section className="section is-small" style={{ paddingBottom: '0' }}>
@@ -55,14 +62,12 @@ class Pet extends Component {
           <div className="column is-5 is-offset-1">
             <div className="columns is-multiline">
               <div className="column is-12 is-padding-topless">
-                <span
+                <Link
+                  to={'/adopt'}
                   className="button adopt-back-button v-light-shadow is-pineapple"
-                  onClick={e => {
-                    history.push('/adopt')
-                  }}
                 >
                   <i className="fas fa-arrow-left fa-lg has-text-isabelline" />
-                </span>
+                </Link>
               </div>
               <div className="column is-12" />
               <div className="column is-4">
@@ -147,6 +152,14 @@ class Pet extends Component {
                       <button
                         id="adopt-schedule-button"
                         className="button is-rounded has-text-isabelline is-medium v-light-shadow is-malachite-green"
+                        onClick={async e => {
+                          e.preventDefault()
+                          try {
+                            await showSchedule({ variables: { schedule: true } })
+                          } catch(e) {
+                            console.log(e)
+                          }
+                        }}
                       >
                         Schedule
                       </button>
@@ -155,9 +168,12 @@ class Pet extends Component {
             </div>
           </div>
         </div>
+        <ScheduleForm />
       </section>
     )
   }
 }
 
-export default withRouter(Pet)
+export default compose(
+  graphql(SHOW_SCHEDULE, { name: 'showSchedule' })
+)(Pet)

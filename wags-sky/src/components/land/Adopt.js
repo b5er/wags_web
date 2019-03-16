@@ -303,7 +303,7 @@ class Adopt extends Component {
                           <div className="control">
                             { complete ?
                               (<span
-                                 id="adopt-complete-notification"
+                                 id="complete-notification"
                                  className="is-malachite-green is-small-rounded"
                                >
                                 <i className="fas fa-check has-text-isabelline" />

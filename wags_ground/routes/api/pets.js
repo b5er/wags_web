@@ -101,7 +101,7 @@ router.post('/', images.upload, images.uploadToGCS, async (req, res) => {
 		const doc = await model.save()
 
 		if(!doc || doc.length === 0)
-			return res.status(500).send(doc)
+			return res.status(500).send({ message: 'Unable to save pet.' })
 
 		res.status(201).send({
 			createdPet: {
@@ -165,7 +165,7 @@ router.patch('/:petID', images.upload, images.updateGCS, async (req, res) => {
 router.delete('/:petID', images.deleteFromGCS, async (req, res) => {
 
 	const { params: { petID } } = req
-	
+
 	try {
 
 		const pet = await Pet.deleteOne({ _id: petID })

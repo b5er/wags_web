@@ -10,15 +10,20 @@ if (process.env.NODE_ENV !== 'production')
   require('dotenv').load()
 
 router.get('/', async (req, res) => {
+
   try {
+
     const donors = await Donor.find().select('_id name amount createdAt')
     res.send(donors)
+
   } catch(e) {
     res.status(500).json(e)
   }
+
 })
 
 router.post('/charge', async (req, res, next) => {
+
   const { stripeToken, email } = req.body
   const amount = !isNaN(req.body.amount) ? (parseInt(req.body.amount) * 100):0
 
@@ -37,6 +42,7 @@ router.post('/charge', async (req, res, next) => {
     })
 
     res.send({ message: charge })
+
   } catch(e) {
     res.status(500).send({ message: e.message })
   }
@@ -44,6 +50,7 @@ router.post('/charge', async (req, res, next) => {
 })
 
 router.post('/createSubscriptionPlan', async (req, res, next) => {
+
   const { stripeToken, name, email } = req.body
   const phone = !isNaN(req.body.phone) ? parseInt(req.body.phone):-1
   const amount = !isNaN(req.body.amount) ? (parseInt(req.body.amount) * 100):0
@@ -107,6 +114,7 @@ router.post('/createSubscriptionPlan', async (req, res, next) => {
     const invoice = await stripe.invoices.retrieve(subscription.latest_invoice)
 
     res.send({ message: invoice })
+
   } catch(e) {
     res.status(500).send(e)
   }

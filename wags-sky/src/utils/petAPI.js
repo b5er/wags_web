@@ -5,7 +5,7 @@ export const fetchPets = async stop => {
   try {
     const petList = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/pets`)
 
-    if(!petList.ok) {
+    if (!petList.ok) {
       console.log('Unable to fetch pet images.')
       return previewPets
     }

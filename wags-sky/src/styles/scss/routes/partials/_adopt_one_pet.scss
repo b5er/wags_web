@@ -19,3 +19,27 @@
     border-color: $pineapple;
   }
 }
+
+.react-calendar, .react-calendar *, .react-calendar *:before, .react-calendar *:after {
+  color: $pineapple;
+  font-family: 'Lato';
+}
+
+.react-calendar, .react-calendar *, .react-calendar :after, .react-calendar :before {
+  font-family: 'Lato';
+}
+
+.react-calendar__tile--active {
+  border-radius: 2px;
+  background: $ceil;
+  font-weight: bold;
+}
+
+.react-calendar__tile--active:enabled:hover, .react-calendar__tile--active:enabled:focus {
+  background: $ceil;
+  font-weight: bold;
+}
+
+#complete-notification {
+  padding: .3rem 1rem;
+}

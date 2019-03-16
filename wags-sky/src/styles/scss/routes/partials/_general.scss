@@ -144,3 +144,7 @@
 .wags-logo-pineapple {
   filter: invert(24%) sepia(20%) saturate(651%) hue-rotate(211deg) brightness(98%) contrast(89%);
 }
+
+abbr[title], acronym[title] {
+  text-decoration: none;
+}

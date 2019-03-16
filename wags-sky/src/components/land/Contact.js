@@ -4,6 +4,9 @@ import React, { Component } from 'react'
 import { compose, graphql } from 'react-apollo'
 import { GET_CONTACT, SHOW_CONTACT } from '../../graphql/land'
 
+// utils
+import { regex } from '../../utils/regex'
+
 
 class Contact extends Component {
 
@@ -87,7 +90,7 @@ class Contact extends Component {
                         </label>
                         <div className="control has-icons-left has-icons-right">
                           <input
-                            className={`input ${email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/) ? 'is-success':''} ${submit && !email ? 'is-danger':''}`}
+                            className={`input ${email.match(regex.email) ? 'is-success':''} ${submit && !email ? 'is-danger':''}`}
                             type="email"
                             placeholder="john@gmail.com"
                             onChange={e => this.setState({ email: e.target.value })}
@@ -97,7 +100,7 @@ class Contact extends Component {
                             <i className="fas fa-envelope" />
                           </span>
                           {
-                            submit && (!email || !email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) ?
+                            submit && (!email || !email.match(regex.email)) ?
                             <span className="icon is-small is-right">
                               <i className="fas fa-exclamation-triangle has-text-danger" />
                             </span>
@@ -114,7 +117,7 @@ class Contact extends Component {
                           null
                         }
                         {
-                          submit && !email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/) && email.length > 0 ?
+                          submit && !email.match(regex.email) && email.length > 0 ?
                           <p className="help is-danger">
                             This email is invalid
                           </p>

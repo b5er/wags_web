@@ -21,7 +21,9 @@ export const defaults = {
 		receipt: '',
 		__typename: 'checkout'
 	},
-	item: 'home'
+	item: 'home',
+
+	schedule: false
 }
 
 export const resolvers = {
@@ -52,6 +54,10 @@ export const resolvers = {
 		},
 		updateItem: (_, { item }, { cache }) => {
 			cache.writeData({ data: { item } })
+			return null
+		},
+		toggleSchedule: (_, { schedule }, { cache }) => {
+			cache.writeData({ data: { schedule } })
 			return null
 		}
 	}

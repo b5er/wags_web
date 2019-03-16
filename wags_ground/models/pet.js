@@ -11,8 +11,7 @@ let petSchema = new mongoose.Schema({
   originalname: { type: String, required: true },
   cloudStorageObject: { type: String, required: true },
   cloudStoragePublicUrl: { type: String, required: true },
-  adopted: { type: Boolean, default: false },
-  createdAt: { type: Date, default: Date.now }
-})
+  adopted: { type: Boolean, default: false }
+}, { timestamps: true })
 
 module.exports = mongoose.model('Pet', petSchema)
