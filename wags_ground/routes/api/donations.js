@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
     res.send(donors)
 
   } catch(e) {
-    res.status(500).json(e)
+    res.status(500).send({ message: `${e}` })
   }
 
 })
@@ -116,7 +116,7 @@ router.post('/createSubscriptionPlan', async (req, res, next) => {
     res.send({ message: invoice })
 
   } catch(e) {
-    res.status(500).send(e)
+    res.status(500).send({ message: `${e}` })
   }
 
 })

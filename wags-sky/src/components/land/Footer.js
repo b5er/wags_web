@@ -41,7 +41,7 @@ class Footer extends Component {
 										</span>
 									</li>
 									<li>
-										<Link className="has-text-columbia-blue footer-item" to='/'>
+										<Link className="has-text-columbia-blue footer-item tooltip" to='/' data-tooltip="Coming soon.">
 											Volunteers
 										</Link>
 									</li>
@@ -62,12 +62,12 @@ class Footer extends Component {
                 </div>
                 <ul className="link-list">
                   <li>
-										<Link className="has-text-columbia-blue footer-item" to='/'>
+										<Link className="has-text-columbia-blue footer-item tooltip" to='/' data-tooltip="Coming soon.">
 											Team
 										</Link>
 									</li>
 									<li>
-										<Link className="has-text-columbia-blue footer-item" to='/'>
+										<Link className="has-text-columbia-blue footer-item tooltip" to='/' data-tooltip="Coming soon.">
 											Request feature
 										</Link>
 									</li>
@@ -123,12 +123,12 @@ class Footer extends Component {
                 </div>
                 <ul className="link-list">
 									<li>
-										<Link className="has-text-columbia-blue footer-item" to='/'>
+										<Link className="has-text-columbia-blue footer-item tooltip" to='/' data-tooltip="Coming soon.">
 											Blog
 										</Link>
 									</li>
                   <li>
-										<Link className="has-text-columbia-blue footer-item" to='/'>
+										<Link className="has-text-columbia-blue footer-item tooltip" to='/' data-tooltip="Coming soon.">
 											Events
 										</Link>
 									</li>
@@ -153,7 +153,7 @@ class Footer extends Component {
 													<i className="fab fa-facebook-square fa-lg" />
 												</span>
                       </a>
-                      <a
+                      {/*<a
 												className="level-item"
 												href="https://twitter.com/"
 												target="_blank"
@@ -162,7 +162,7 @@ class Footer extends Component {
                         <span className="icon has-text-columbia-blue footer-item">
 													<i className="fab fa-twitter-square fa-lg" />
 												</span>
-                      </a>
+                      </a>*/}
 											<a
 												className="level-item"
 												href="https://github.com/love-wags"
@@ -173,7 +173,7 @@ class Footer extends Component {
 													<i className="fab fa-github-square fa-lg" />
 												</span>
                       </a>
-											<a
+											{/*<a
 												className="level-item"
 												href="https://dribbble.com/"
 												target="_blank"
@@ -182,7 +182,7 @@ class Footer extends Component {
                         <span className="icon has-text-columbia-blue footer-item">
 													<i className="fab fa-dribbble-square fa-lg" />
 												</span>
-                      </a>
+                      </a>*/}
                     </div>
                   </nav>
 									<p className="has-text-columbia-blue">
