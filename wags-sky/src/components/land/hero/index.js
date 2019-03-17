@@ -4,12 +4,17 @@ import React, { Component } from 'react'
 import Navbar from './Navbar'
 import Dog from './Dog'
 
+// React Scroll
+import { Link } from 'react-scroll'
+
+// Assets
 import Couch from '../../../assets/images/couch.svg'
 
 
 class Hero extends Component {
 
 	render() {
+
 		return (
 			<section className="hero is-fullheight is-columbia-blue">
 				<div className="hero-head">
@@ -33,15 +38,18 @@ class Hero extends Component {
 										<h1 className="title is-size-1 fadein has-text-pineapple">
 											Where furry friends are made.
 										</h1>
-										<button
+										<Link
 											id="hero-button"
+											to="value-prop"
 											className="button is-davy-grey is-large is-rounded fadein v-light-shadow has-text-isabelline"
 											onClick={e => {
 												e.preventDefault()
 											}}
+											smooth={true}
+											duration={500}
 										>
 											<p>Get started</p>
-										</button>
+										</Link>
 									</div>
 								</div>
 							</div>

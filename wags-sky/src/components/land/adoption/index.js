@@ -76,7 +76,7 @@ class Adoption extends Component {
 													I don't have pets to show you, right now!
 												</p>
 												<p className="has-text-pineapple">
-													Check back later.
+													Try checking back later.
 												</p>
 											</div>)
 											:
